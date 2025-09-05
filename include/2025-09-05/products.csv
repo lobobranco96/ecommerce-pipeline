@@ -1,0 +1,1051 @@
+product_id,name,category,price,stock
+0bea8810-2d86-45ba-a3d4-c11869d6313a,Romance 431,livros,79.18,105
+73a5a5d8-ef79-430b-aa99-77890567e491,Romance 313,livros,48.79,101
+a5767fec-c0ea-40b5-b3e1-74953bd60ecf,Mochila 889,esportes,176.27,40
+2ff0934b-9683-44ec-95c6-142e77cbdd06,Skate 140,esportes,543.02,38
+35df8e60-ae05-40b5-bd25-52de4d0d773b,Autoajuda 100,livros,83.91,128
+c9717842-3c8a-4648-ac5e-372e78e45934,Sofá 785,casa,2843.71,72
+5927a0f6-0b01-46f3-9e16-7faa2407bd25,Tênis de Corrida 731,esportes,552.68,109
+3bc6c892-b984-4f45-83f0-89a36223134a,Romance 304,livros,,94
+7d3eabd3-ab6d-46a7-be78-518de2614136,Smartphone 683,eletrônicos,4817.15,133
+2b5d05a8-734e-4930-8007-33507033c753,Bola 174,esportes,,122
+16576fe2-7ec4-4086-b182-99f000c57cf8,Caixa de Som 880,eletrônicos,316.18,55
+61e5b2b4-156c-470c-8385-019539f3621a,Livro Técnico 361,livros,154.0,142
+5c378105-eaa5-49dc-891c-76d951f01dc0,História 926,livros,64.25,80
+cfe9a071-64f8-4e0e-9c26-c55ce1c32134,Bola 975,esportes,95.34,52
+7443a8dd-3cc8-448b-a8bc-987ba56588c0,Bola 457,esportes,172.7,28
+4c4cc8d6-3989-48ff-b948-d50c42427768,Cadeira 772,casa,500.44,8
+e7212a0e-c195-43b8-a756-7b2c3c073526,Tênis 212,moda,280.87,30
+da163f09-76d1-4cbe-9a01-285d983e45d7,Bola 129,esportes,191.37,147
+c67d86a4-628c-45f6-b3a7-ff6b97bfb696,Cadeira 308,casa,537.57,150
+fb073cc1-c5ad-4660-b735-439ae546b32a,Lâmpada 995,casa,,10
+226f291b-97cb-49dc-96d4-2af9cf6f3bdf,Smart TV 676,eletrônicos,1733.73,79
+9293cbfc-5f21-4327-9c84-d94e2f005b56,História 561,livros,111.39,132
+6d98d10b-0ec5-4321-8e56-4876da7249a6,Cadeira 432,casa,531.18,108
+b3e20610-9957-4a6c-ab54-f5fca75aec20,Caixa de Som 397,eletrônicos,636.01,64
+f5799835-ec21-43f3-8b75-b01aadc39a54,Romance 459,livros,62.86,86
+2eda8020-ef0c-403e-93f6-8879662b4478,Smart TV 460,eletrônicos,1458.42,52
+610cac48-99a8-4a7c-8752-7cb1be35f9df,Bicicleta 936,esportes,846.11,87
+f17f27b1-0c2a-4b61-af12-04f0d7bb41f2,Autoajuda 239,livros,35.19,40
+17a52e7d-9c71-469b-8254-5b030e9c9364,Livro Técnico 176,livros,155.97,47
+2f729aae-243b-4f82-b7d9-56302bc1071d,Infantil 505,livros,29.81,8
+66350d4e-1679-40a6-b6b6-569e51fcae38,Sofá 418,casa,2585.34,45
+e0375c4c-2b76-4256-8498-6c5d01f5cda5,Notebook 450,eletrônicos,,12
+07bab668-7d6e-47c4-98ab-0b60cc27bcf7,Calça Jeans 208,moda,235.64,26
+2c43895e-d780-4e03-96b1-14b972181f13,Panela 278,casa,159.4,42
+518ac305-7c26-43d8-a120-07d4cdd2f43a,Bola 346,esportes,,109
+ce90ec9f-6510-4d43-9757-209924a7446c,Smartphone 164,eletrônicos,3698.64,65
+f653a332-8d86-461a-80b7-965452c50f74,História 820,livros,67.35,118
+567d6429-b15c-4bf7-ac53-b03cf99b01c9,Lâmpada 518,casa,,98
+162a6a6a-8385-456d-b584-c8576005a569,Bola 696,esportes,176.72,19
+bd9b3dcf-0a4a-4f78-ab3f-896541cbd524,Tênis de Corrida 211,esportes,328.49,39
+116bd1e9-5359-4a84-a4b9-cede6fb84fd3,Romance 960,livros,67.22,64
+08f9bf8b-f485-4207-8f3d-7234a3b1f43f,Notebook 586,eletrônicos,2120.63,24
+61a0bb70-6727-4df8-8aa2-2016ef2d5c75,Lâmpada 611,casa,54.24,125
+7aea7c96-50f7-43ef-9a17-719a16cbdce8,Cadeira 232,casa,120.19,107
+80a93bc3-b391-43a6-a4bc-efa13feadefa,Sofá 109,casa,1357.88,30
+9632e240-3e8f-430a-b3d7-976cff3ebf37,Cadeira 394,casa,512.97,123
+d32bb976-89b2-461f-b60c-288bed7dbd54,Autoajuda 735,livros,56.73,51
+42c7ccc1-9d2a-457f-bb8f-a260892478da,Liquidificador 678,casa,308.27,136
+fc85d860-2aaa-4a9c-851c-a4cb6720b82d,Lâmpada 760,casa,57.78,145
+3a3325f1-8bb6-44d2-a467-246875774454,Calça Jeans 673,moda,243.06,123
+677dce13-1975-4379-8025-b6cafea7d73b,Infantil 720,livros,20.47,117
+d700fd23-c3d6-4c96-9a69-12645cafbd11,Caixa de Som 913,eletrônicos,894.39,129
+48cc20d3-7b7b-45e0-a29a-fe035a866813,Smartphone 840,eletrônicos,-4959.74,106
+b854edb8-6f3f-4618-8c9f-7111e94d0601,Bola 823,esportes,192.83,44
+6d5097c6-2afe-4b74-b76b-5f4fa7ef2d8a,Mochila 190,esportes,200.92,26
+c05b672e-98c1-46ab-84ec-9381201c566f,Sofá 710,casa,1493.8,32
+d6345470-11c8-41d4-9116-b0264e852b76,Liquidificador 201,casa,370.67,59
+a7544a5f-f7e5-4f0b-b36f-be900c8510dd,Calça Jeans 781,moda,219.36,70
+7653d072-97e2-4b30-ac11-eaff050acbda,Smartphone 626,eletrônicos,4373.21,35
+a4fa3b66-7e11-4b8c-9e4f-8ab34c12e471,Bicicleta 926,esportes,1669.65,96
+b958dbc8-e387-44f6-bc01-5e86e908306f,Notebook 388,eletrônicos,3216.41,85
+a81e6b8d-7be2-4a57-a03d-f628612e5990,Sofá 735,casa,2606.46,94
+078e827b-1835-4994-8209-d72ff373ba2c,Smart TV 116,eletrônicos,2128.88,143
+09a0ee69-5c33-49f1-b8dd-c2b3ea4879b4,Caixa de Som 648,eletrônicos,593.66,102
+f5f9af6e-7aa5-44af-a3ef-3873ef58fc7d,Tênis de Corrida 310,esportes,257.15,69
+c7417b47-35b2-475a-8ac2-ea0f9f399c62,Smartphone 603,eletrônicos,-3515.19,4
+411f79a6-500d-4ad0-aaf9-d5c6c707febc,Bicicleta 403,esportes,1151.5,111
+22645f87-fdb7-4307-825c-95458ec99845,História 972,livros,91.44,14
+cee72552-25f2-4cb8-b10f-361519c06441,Fone Bluetooth 412,eletrônicos,616.0,48
+ba8e7497-fdc8-4668-a0af-12a366696d76,Jaqueta 853,moda,248.61,132
+6ffafbab-12b2-4487-b1e1-7e8ff03eb68f,Bola 833,esportes,,64
+6570e4eb-e470-4c43-a604-4928b6d0773e,Skate 711,esportes,459.48,81
+ea48df56-df80-4c2c-9f5a-f651794290df,Fone Bluetooth 706,eletrônicos,601.59,146
+237f6b75-a317-4a60-a030-2fb34ec972fa,Camiseta 130,moda,99.04,81
+08d965d7-3321-46a7-a5f3-4b9ff12b0848,Boné 548,moda,76.86,25
+12582eb0-3a9c-42c2-b4c1-e65b3fe462a9,Camiseta 833,moda,107.45,9
+14482b1b-e68a-44f1-afe7-8a4512261ee4,Lâmpada 152,casa,44.1,115
+1e998401-e6a4-4320-9e26-054ebc761706,Liquidificador 896,casa,169.43,118
+0ee5b91d-2d1f-4d1f-bd33-a7e592df2e31,Bicicleta 875,esportes,2198.06,53
+508f59cf-2274-4d33-b5a0-82d9deaa67b1,Bicicleta 278,esportes,2242.68,58
+7023e785-334d-49fd-a1d6-bd2d4ad48ebf,Panela 587,casa,195.32,13
+cc9fcad8-d75e-4e4d-b24a-1de47b4b01b7,Boné 794,moda,63.97,90
+0d9eecfa-77a5-4df1-871d-8e7e1ef06b60,Mochila 727,esportes,164.34,14
+fc9536c3-fb06-4313-9024-e36bbbcef40d,Lâmpada 721,casa,19.74,130
+1138a0c4-0ae1-478d-a27d-d515c8a1b0cd,Notebook 305,eletrônicos,3715.28,149
+d66d4ca2-76ba-4858-a3fe-b1505b2e88c9,História 703,livros,49.6,102
+1cf6f635-02e2-4791-8f1e-e387c7580d00,Tênis 245,moda,475.48,92
+f09958d3-0c63-4774-aaae-70f62480a9ee,Liquidificador 752,casa,184.67,32
+0ca2471c-095c-41e4-82c1-2d77d9a9a755,Autoajuda 354,livros,74.23,66
+d7a445d5-73d0-47a8-96e9-fec68055731e,Autoajuda 114,livros,72.33,65
+91072970-b338-4cb3-b766-43866224b969,Caixa de Som 879,eletrônicos,532.17,76
+9a9af768-282d-4690-ab94-8163bd3af183,Skate 386,esportes,786.54,111
+94780d59-024c-44a2-a543-536fd43a7c4c,Fone Bluetooth 106,eletrônicos,770.66,91
+a42096f8-8633-48c7-9325-ef117d0d0e3d,Liquidificador 449,casa,369.59,40
+702ffeb9-84bf-475a-841a-8815254e1c1d,Liquidificador 157,casa,376.58,94
+3c7aa1ce-342b-4151-aac2-748b59d4621d,Smartphone 290,eletrônicos,3335.3,99
+503da8a9-ad09-4497-b151-6eb887c93597,Jaqueta 757,moda,-342.23,137
+892d9d92-b4e8-46e0-96bf-2b67a519fabd,Camiseta 706,moda,76.8,83
+cfec1fd6-a858-47de-9261-66500555b338,Infantil 439,livros,27.31,66
+04a81680-4327-4112-a93d-c968474fcf05,Tênis de Corrida 834,esportes,223.59,84
+1f41735e-4f1c-4050-afb7-588efd3259ba,Caixa de Som 861,eletrônicos,886.04,77
+d900c2e5-2d5c-4c60-a4de-e2ce9c49ac70,Notebook 802,eletrônicos,4769.65,117
+a4ea39dd-30b1-47af-9b91-d8f4c7d7df26,Smart TV 141,eletrônicos,3326.05,17
+41220758-a448-449b-af9c-854ad247bce7,Bola 354,esportes,79.11,119
+1dbd2e97-7da2-41ed-b05e-8acc640fc905,Liquidificador 707,casa,257.55,46
+b3a5a516-9e87-416c-89db-b828ccedd3ff,Lâmpada 336,casa,30.26,106
+78889834-7ff3-45db-92c3-5f83a808d3f5,Fone Bluetooth 952,eletrônicos,,39
+d11df91c-49fc-4852-b9af-f1a3f81b0d20,Cadeira 380,casa,380.44,4
+853b6a74-8fae-4800-b490-6cc57028f7de,Cadeira 383,casa,124.72,19
+9a8f4a0f-425e-40e2-b805-7f3b1f8839bf,Mochila 668,esportes,171.78,64
+630a7629-cf91-4cad-9c39-028263796cd7,Infantil 765,livros,25.76,101
+2f24118a-14f5-4ef3-99bb-fbc47ce58ff4,História 318,livros,114.73,96
+e1490dd8-091b-4bb4-ae6e-743fb5d96e41,Tênis de Corrida 992,esportes,582.27,111
+956c6414-8e63-4f75-9f83-04710c396c0d,Skate 228,esportes,397.88,128
+4b064bba-e883-4be7-b1d3-ad8b1af6804e,Caixa de Som 829,eletrônicos,324.73,60
+0789b0c9-eff6-444d-8f72-a4321ecb5626,Infantil 836,livros,42.26,98
+ca196714-efbd-487c-869d-fc033e24d183,Camiseta 220,moda,47.02,126
+8f8a24a1-35f8-4887-bb39-b58319b04e1e,Caixa de Som 788,eletrônicos,678.87,16
+854e4fa2-cfd0-4cbb-ab7a-9aed11f3c971,Mochila 340,esportes,111.37,26
+831d72fe-1563-4212-b064-223cc5753ee6,Jaqueta 922,moda,341.1,108
+e99761d4-37ef-4fe4-854d-f298cf642647,Fone Bluetooth 949,eletrônicos,661.7,128
+f514ba00-a3ed-44ff-bb56-f915de0d129c,História 507,livros,52.2,1
+2273a819-be15-4f27-9920-a2680312edf0,Cadeira 859,casa,149.15,48
+0dc10e03-7e5e-4b9a-b837-28162d6326fe,Fone Bluetooth 356,eletrônicos,485.72,121
+12b02edd-2b4c-4854-bb86-b07956254a47,Jaqueta 319,moda,224.51,109
+7b592eeb-77be-484b-b4ec-f5237cebefca,Romance 262,livros,79.13,50
+66e45635-bb5e-49eb-9be4-b76cd1266a6d,Infantil 538,livros,20.86,96
+a790c6e2-5da5-48d3-a08c-b6930afb0bc1,Skate 887,esportes,350.16,144
+25b8617c-f0f6-4ce4-82bf-83551e36b63f,Liquidificador 148,casa,253.6,59
+79b892ec-bb9d-4388-a355-5d35ff8db738,Notebook 778,eletrônicos,6900.86,48
+9660b0b0-5283-4c12-aac8-c7863be57a3a,Camiseta 862,moda,52.0,98
+7be7c334-654f-4e33-8798-3a53b13f7e79,Sofá 698,casa,1463.55,36
+3d73198d-8e51-4c45-ac3e-5c8497b90ee5,Caixa de Som 257,eletrônicos,-734.25,11
+f47471eb-53d4-42ec-b6b6-dd8fb73fcc38,Notebook 643,eletrônicos,2158.13,95
+7773d8a8-eb94-4a5e-8f2e-ead9535e8c61,Romance 771,livros,,49
+78ec8615-76d8-4811-a1c0-abc318d1eb4b,Notebook 365,eletrônicos,5708.84,5
+f4ef581b-8d3f-455e-9827-291b2994a180,Tênis de Corrida 410,esportes,,19
+4c827ee0-6e98-40ce-8415-b20865eab65d,Livro Técnico 168,livros,141.42,113
+2f771a32-89cc-4a7d-a208-2a1fd9b7bea8,Caixa de Som 410,eletrônicos,699.67,21
+bc5f5d73-977a-4b68-8ba7-1f3e84b6e0f3,Notebook 210,eletrônicos,4950.37,89
+a62ef3ad-7352-40ad-ba99-7da0412ff41d,Caixa de Som 103,eletrônicos,785.07,67
+a8c5ce8b-2f22-4574-9c8e-e8805e0def22,Infantil 277,livros,51.98,117
+2c77841a-7233-4096-826a-6d58f484b848,Infantil 222,livros,21.66,96
+cb9ed02f-b51f-4672-84ca-17382b8dba2e,Liquidificador 553,casa,349.22,21
+275846e2-9f0e-455c-b10b-a6be4b54fc91,Jaqueta 181,moda,267.91,114
+c08a715f-924f-45e1-bc53-123d86df3b0d,Caixa de Som 258,eletrônicos,364.61,129
+40ff7f25-a857-4b70-9dd0-b399cde4a0d1,Tênis 526,moda,277.44,70
+1045bfaa-d3a5-4318-9a14-fa9458f3ca6f,Smart TV 716,eletrônicos,1882.54,106
+30d20f0a-e7ff-4f1a-9261-f618b3e315a9,Fone Bluetooth 982,eletrônicos,480.05,147
+31cc69c6-23ae-45eb-9381-ca742b36490a,Camiseta 200,moda,96.03,92
+08d52827-7296-4b8c-9cb9-5363735596af,Smart TV 261,eletrônicos,4584.62,97
+2dc2bbd9-f301-4d85-84fb-e8d207bf611c,Mochila 362,esportes,173.85,56
+9689944b-d5f3-49c2-9038-ffb0e2ce5877,Sofá 780,casa,1336.23,134
+2832abbc-57a1-404b-b620-de3039c85434,Smart TV 342,eletrônicos,3696.77,107
+4f57bde9-474b-4437-bd65-a350b0e8e025,Tênis 819,moda,198.06,144
+c4179dc3-fbc7-471f-ace5-114e69538cbf,História 773,livros,50.62,20
+7493e0ce-6ea5-4125-9ace-1541d23425d2,Smartphone 129,eletrônicos,1773.66,8
+d3d2dbbb-c210-4d3a-8631-58e76f374f6b,Skate 228,esportes,517.21,52
+5a4506dd-254a-461b-9404-5c1d5381b41c,Autoajuda 227,livros,89.65,68
+584725c9-91b6-46c7-9864-3a581c95516b,Panela 547,casa,162.5,97
+8768634f-da94-4e43-b516-0d857eda9176,Tênis 414,moda,163.45,94
+832e8b6c-b1d0-4a93-873e-7e0015db83cd,Calça Jeans 714,moda,80.78,101
+ab8db86b-2fa8-47f6-b02c-9a62f7dd021e,Lâmpada 426,casa,34.55,142
+8a2c6adc-3d56-45ef-8ca0-b2b4f4f5f49e,Bola 145,esportes,106.69,93
+13bde8b5-5706-4051-aa0f-4946332c23a7,Smart TV 356,eletrônicos,1359.07,110
+ef9b0f1a-d405-4ffe-9ef1-12af09f4d228,Fone Bluetooth 677,eletrônicos,203.97,70
+6efd66b9-c3d0-4962-a299-e40fda4c97c4,Liquidificador 789,casa,181.65,116
+88d33f14-3654-43dc-b4ac-e62449233203,Notebook 688,eletrônicos,4086.37,78
+86830303-272b-4b43-a983-5f9300900c1b,Cadeira 930,casa,509.87,106
+498aec22-1f2a-44f7-aa65-ed8c8924749b,História 363,livros,40.41,92
+38cb2846-0559-43ad-a6e1-8a9387ede3da,Bola 646,esportes,115.14,108
+2ac48286-d5f0-472b-a261-6bdb227e4e85,Camiseta 165,moda,77.62,52
+60fadd20-cf2a-42c7-89d0-db4cb30691c3,Tênis de Corrida 485,esportes,377.5,0
+d789d2da-eceb-44c2-ac03-37fbc5b5fc41,Skate 129,esportes,717.29,3
+b55e7fab-3df8-4dc5-ac4a-8fff7d02be7e,Smart TV 919,eletrônicos,4976.32,95
+75471534-aeee-4018-9179-1f265a0102e9,História 535,livros,65.53,141
+3a221ccc-fa2b-4113-9fc8-8242c6c7094f,Mochila 324,esportes,,133
+02d3576a-a165-490e-a37c-a1ed304dd216,Bicicleta 358,esportes,1424.15,99
+40a417f0-4f3a-4677-bc23-67069992a809,História 378,livros,-110.84,12
+62354f1c-1dbd-450a-8d14-9468f5a036d9,Romance 856,livros,51.95,100
+1ac388b0-0e63-4a8d-a253-0d21d26e746b,Romance 978,livros,50.0,18
+33a02a1a-8db8-45f0-8b2e-e6d9f95c5b74,Infantil 524,livros,41.0,94
+52aee4ca-3800-4b07-9b45-9c7bd57073a6,Livro Técnico 679,livros,143.32,52
+ae69afe2-5f46-4471-a1aa-3ab79d3c8604,Calça Jeans 437,moda,96.11,61
+2e0e48cf-906a-4c57-b958-e90483bf3c4e,Boné 888,moda,72.21,41
+29427dd9-ec0d-4bb0-80ac-f0965587cfa6,Smartphone 902,eletrônicos,4377.18,23
+69530df3-48ed-4352-b98b-574028f0c590,Panela 956,casa,185.46,126
+b46f4bb7-767f-40bd-8f69-109887b0e734,Autoajuda 995,livros,88.0,26
+7be45723-70b8-4435-b8fd-3119302410c2,Skate 214,esportes,590.11,21
+e059d691-3378-4cdb-9338-915352d17fa4,História 630,livros,62.19,1
+e14f6ae0-ea49-47bd-abf4-fdaac7d14999,Notebook 214,eletrônicos,2111.96,122
+34dab453-fe83-43cd-9bf1-ef56ffa1052c,Boné 128,moda,47.57,13
+3db0227f-efea-44b1-9d2b-e889d44d5bf4,Notebook 628,eletrônicos,4531.93,112
+b9bf4f88-6ca3-45f8-b1ef-bbed3bba2afe,Notebook 727,eletrônicos,2248.55,115
+84314adc-5d8d-49fa-a542-0b71c58ccac2,Bola 466,esportes,194.41,39
+b62bb829-8471-4345-ab61-57ad1824227e,Notebook 957,eletrônicos,4685.18,83
+90e762b7-ecb7-436b-ac26-3b9efc1fdd22,História 717,livros,116.51,57
+16db18c1-8f79-4bca-b190-2c2b05f3be0c,Bola 710,esportes,93.7,140
+d9b7d51e-ef11-46dd-9418-6b7e2427d2b3,Camiseta 579,moda,80.81,110
+f7b7a0bb-3a13-4490-9773-3a4e94a90be4,Liquidificador 249,casa,362.07,26
+356d43a0-c899-4b12-87bf-deb608030ba6,Livro Técnico 841,livros,76.6,123
+43d028df-9b56-4585-b5b7-6961a5c89f3a,Boné 497,moda,75.95,6
+59946a76-e1cc-4c49-a220-efd4e4acde1b,Panela 318,casa,276.94,36
+43d1b9d0-187a-46ed-a3d7-026e9bcf5a4e,Sofá 201,casa,2880.97,18
+f97616a9-03f2-48ba-b8b5-28294e3ccfae,Tênis de Corrida 257,esportes,499.21,23
+cc6d858b-88b7-4f0e-8bca-18105f138503,Panela 365,casa,83.72,140
+b82349e9-d571-43ca-9557-c811965d9e0c,Livro Técnico 743,livros,95.75,43
+575724b4-3125-4da1-aa19-90e7f1fe937c,Liquidificador 784,casa,239.95,114
+7cd8239e-2d1e-45a6-b686-a2e5a51f854e,Lâmpada 937,casa,61.03,64
+049ba44a-8c75-49a2-8b9a-1a071cfeb61e,Boné 254,moda,73.2,1
+2a369e72-8af0-454e-a568-8ace6097c9f1,Notebook 262,eletrônicos,3405.18,94
+2795cec4-6e7c-45b1-9324-b1c89d74fc9e,Smartphone 428,eletrônicos,1007.22,25
+c698ef4a-96ab-4b4b-a13d-91eb802e02a4,Fone Bluetooth 487,eletrônicos,796.68,135
+5ce1c783-c90b-4db0-b031-be5173fce425,Fone Bluetooth 936,eletrônicos,379.84,101
+118aecf2-cf82-420b-8c08-2e6b952ca70b,Mochila 389,esportes,263.23,38
+e5d29bf4-44d5-4c64-944b-4330ba6e8c70,Calça Jeans 500,moda,143.17,135
+3d54a250-8514-42d6-87e8-087d7a12a4f4,Skate 571,esportes,254.49,123
+fb54e79f-4819-4873-b1b7-84860443393c,Mochila 523,esportes,213.37,0
+0568c53b-bfa0-4f2b-84d6-eb330c2b0dfb,Liquidificador 855,casa,303.12,51
+fed3ce55-8134-4678-8c6b-0cf842b054ee,Lâmpada 860,casa,42.39,24
+e831dcca-6870-4b13-b40d-1ce7bbdd1e17,Tênis 465,moda,309.08,130
+92356baa-7ca8-4bd4-89ce-22e0bdbc64e7,Mochila 299,esportes,174.48,95
+969338a6-5928-4a4f-a986-f306036dda09,Caixa de Som 702,eletrônicos,675.07,15
+e3592f1d-6856-4731-943e-f9216de8debe,Calça Jeans 434,moda,108.84,42
+065d81d8-ad15-4abf-bd19-5db7f36df4bf,Bicicleta 138,esportes,1775.19,47
+7770a342-4a7e-4f2c-9667-d450b09f6706,Panela 315,casa,280.41,141
+f5ad74ab-deb5-4dc3-a3b9-d0b925f226b2,Cadeira 496,casa,467.88,93
+7630df14-aaeb-4066-b872-590de4249b83,Panela 362,casa,230.94,81
+38586d25-e42c-4dfb-ad5d-0dd9621f5adc,Caixa de Som 222,eletrônicos,481.28,67
+c809c740-0f9b-42a1-ae4c-9ea057fe61a5,Boné 795,moda,76.12,127
+17c78729-42d2-42cd-9b25-b58c58ffd2a4,Bicicleta 270,esportes,1010.61,5
+fe43b137-7b9a-41b7-ac65-f544332e7b94,Sofá 500,casa,2692.6,85
+931e63a1-14b6-4b3d-9abb-3da98677653a,Romance 109,livros,63.58,121
+87013273-ca8e-452a-94f7-b81d67eac2e8,Calça Jeans 443,moda,226.15,134
+3005616e-00b6-4569-81a2-9970583f548b,História 387,livros,62.2,89
+da6ee7c9-2a1e-4bb2-a8b8-f57e818213e3,Lâmpada 775,casa,68.34,105
+e9f0f65e-897c-451a-be94-7c1fe24d8d6d,Lâmpada 385,casa,49.09,98
+d5d9fb0d-8d65-4fcb-83a6-b24071162ab6,Calça Jeans 130,moda,119.87,103
+c3f56db4-d3e7-4dcd-80d3-6b4b7a2b1984,Autoajuda 486,livros,99.02,80
+6c9607f8-9743-47fa-a284-5113c7370078,História 894,livros,,43
+0742e898-93ad-4cfa-bc3e-307535af42ca,Tênis 576,moda,153.13,63
+714af5c5-0780-4726-8e46-9be5030e98aa,Infantil 371,livros,33.01,52
+a4d21700-ee37-4d34-afe7-fb7dc68631f7,Livro Técnico 351,livros,67.95,42
+323af30a-e195-4d8a-b41c-e49a3a533524,Smartphone 429,eletrônicos,2809.84,128
+51459cdf-0ae3-4317-bd26-68a56ecbc034,Bicicleta 460,esportes,-1373.98,140
+c78d30d4-12bb-408a-996b-3dc403b23c46,Mochila 459,esportes,270.91,12
+35106678-71e3-4a5f-8e40-686d5be993d3,Notebook 439,eletrônicos,5023.21,138
+09a767dc-8f83-410d-afe7-042fae2fc8d7,Liquidificador 167,casa,303.47,42
+cff9fd09-b89d-4e87-8d95-6c791b67d21b,Livro Técnico 770,livros,169.6,52
+4bd7add3-63be-4103-b7dc-53520f97bbe5,Lâmpada 968,casa,57.98,19
+bc64ca6a-17fe-4eeb-abc6-442265715b85,Liquidificador 750,casa,180.74,88
+4c711153-67fa-4963-bfd8-156908241c66,Skate 560,esportes,514.74,120
+a1140808-39cb-43ac-8085-dcb0ba75aead,Panela 567,casa,177.26,146
+638c3ec3-d4b2-416b-8ff4-1b6469a58917,Tênis 849,moda,316.45,127
+800d1a93-66e9-4e48-93d8-75f301f8434d,Bicicleta 126,esportes,2432.68,2
+b8e09dd1-1062-4e84-9b68-6d2f46ff3776,Cadeira 473,casa,201.33,98
+07cccc4a-7c9f-4f70-a694-8194cc392d9b,Autoajuda 698,livros,45.64,89
+f6a03aa7-8c14-492f-9c30-0b8d265e6d66,Romance 185,livros,,35
+ae126b1d-4bda-4b29-aec4-1118143426fa,Tênis de Corrida 746,esportes,501.54,25
+6e80e59b-41e3-46dd-82b5-a5977d78434b,Mochila 683,esportes,197.03,79
+1913804f-f2de-4976-80c9-7ebdaa0e6de8,Autoajuda 985,livros,32.54,25
+84bd48a6-a108-473b-9e2f-67d2b775d7a7,Lâmpada 533,casa,48.51,85
+556aa751-c618-4794-9fb5-59835acef5c9,Smart TV 362,eletrônicos,1931.98,25
+81305c92-349f-4f23-95c1-632cb2989cad,História 859,livros,72.37,126
+3a2be66c-64c8-41b6-8040-4d2bcb87bd44,Mochila 207,esportes,,19
+37625d23-e692-4673-9756-6560f77c8494,Infantil 624,livros,50.8,5
+f0f1ca75-e986-4475-8cba-d9e8c465267b,Tênis de Corrida 776,esportes,538.38,15
+180ce264-5f6a-4173-9ea0-83842ce8a4de,Livro Técnico 203,livros,79.14,71
+03ceb6fd-6aa7-491a-99bb-1642f9554aec,Caixa de Som 802,eletrônicos,291.7,8
+cbf20993-a81b-498a-9b1a-326aabc9e459,Tênis 653,moda,433.69,20
+02f549b1-89b4-4176-a2f2-52d81b52a180,Smartphone 559,eletrônicos,1525.18,124
+f444c3bf-375a-458e-b31d-b240a175e037,Infantil 408,livros,,41
+c1571009-4683-4a19-80bb-060d3a881fe6,Camiseta 939,moda,,81
+53725996-54e2-4d91-8d27-4d41506f9c39,Tênis de Corrida 138,esportes,595.94,26
+d47570d4-b5d8-4b48-b6d2-4dfa13e7074b,Fone Bluetooth 834,eletrônicos,323.65,63
+f81d3a6e-1f5e-40e7-aec9-f64fc2beaae4,Livro Técnico 156,livros,169.49,64
+22be425f-de16-41c2-9079-985ac84169a9,Infantil 756,livros,25.34,7
+6ea2b4b4-728c-4ba6-a9eb-180f840256b6,Livro Técnico 363,livros,88.7,72
+a14aa3e6-ad0c-45c2-9375-9ad19e373d12,Lâmpada 937,casa,53.49,129
+060a32d5-fc20-4db3-9162-f76a0ea26dc6,Bola 568,esportes,134.05,40
+5183a3a4-9ba1-4e60-a2a5-0cc77bdf15f2,Livro Técnico 155,livros,61.79,64
+6a094a50-c57b-4576-b98d-bb83c2f51e7a,Lâmpada 284,casa,62.8,116
+c08acabe-e61f-4b07-9fe8-8958fdd29a87,Boné 123,moda,33.79,44
+574db7e8-17e5-4cb1-9eff-eedee9b015d0,Caixa de Som 127,eletrônicos,346.02,64
+804ffe5a-2e2a-481a-8f1f-4d33a9b69745,Panela 563,casa,78.58,54
+890300a0-bca9-48aa-8e56-9d4fe2fcab17,Cadeira 874,casa,496.27,120
+0124f854-4790-480f-90a3-777c48b21d6c,Boné 759,moda,70.52,145
+550f38e0-a73a-41a5-8196-1fc1575127f6,Calça Jeans 643,moda,188.07,66
+f69e0abf-555e-4fd4-bad4-f4a8205bbfb7,Boné 111,moda,50.73,68
+104fa7ed-bd42-4400-9575-891a7b01ea14,Liquidificador 753,casa,-149.39,82
+18a82a64-84f9-4301-bfb1-46a02a52b3e4,Bola 339,esportes,88.13,50
+05e7f51a-b330-4623-a27e-9f4d66f8e4e7,Lâmpada 912,casa,51.27,28
+ceb8a269-f56a-4dfc-a640-e160eefe6f56,Tênis de Corrida 120,esportes,,42
+9c22a4d4-d5ca-4da1-9ba7-18688d513051,Lâmpada 775,casa,39.17,140
+401989c8-c0f7-44b2-8e43-0f93c001e105,Camiseta 798,moda,71.59,114
+1464d6e4-90d8-487f-a8db-1314382b60a4,Calça Jeans 573,moda,115.18,13
+795f8a4e-ff3b-41e4-8c4f-016ada78c251,Infantil 840,livros,49.96,7
+d540d1a1-fea7-4e6c-be36-c9424dba777a,Liquidificador 312,casa,224.97,147
+98e5a1af-e02c-4166-873d-cb32b482f6ed,Panela 552,casa,,92
+0e31b18e-4db9-41f4-93c6-85b7daefa764,Bola 857,esportes,149.6,50
+d600af07-5723-48be-91ad-57504521cc67,Sofá 137,casa,1789.73,141
+93873287-b6bb-4a97-ab37-25647d372270,Autoajuda 904,livros,68.25,112
+281b7510-9ba9-4dd1-98fe-e55a51887fda,Fone Bluetooth 943,eletrônicos,617.6,18
+a838fb01-d936-4539-8ca5-054b725cf537,Sofá 899,casa,-2904.51,18
+ba231611-1e38-429a-81b8-31b7d436966c,Tênis de Corrida 504,esportes,230.91,49
+88edd4ef-ccf8-478c-b606-9c40e749fe03,Mochila 860,esportes,288.69,44
+d75e561e-3bc8-4c91-8c00-0d34b7c4778f,Jaqueta 981,moda,172.13,19
+6a02c1fa-e69a-45fb-8bf6-c9464b482f41,Caixa de Som 893,eletrônicos,,120
+c706c2f5-8287-40cd-b1be-8af7a5ea0eaf,Panela 678,casa,232.13,2
+d2487dd4-29f6-4304-8895-d21407638ff1,Panela 944,casa,276.29,72
+48d9d2bc-a9f1-42dc-9c53-38331fa26cb2,Fone Bluetooth 175,eletrônicos,121.14,33
+a16d72ee-9cfa-40db-b949-eb44940c2063,Livro Técnico 876,livros,78.95,80
+1ff24438-fff9-45bc-8a2d-f193b918b4c6,Tênis 443,moda,418.47,8
+81660250-188b-43fb-9997-dce9b8f0452f,Bola 902,esportes,,89
+0e0f2f4c-f88a-45f1-b223-54088e6e7ec0,Notebook 627,eletrônicos,6473.15,9
+04ab51f3-36fe-4b7e-84d4-71ba53e373b5,Bicicleta 417,esportes,,53
+d5ffd345-42bb-4567-8f34-a1b2ec1bfaaf,Skate 671,esportes,,29
+1c5cdd6a-411d-4566-908c-6793130d3f39,Smart TV 526,eletrônicos,4879.82,60
+89f3aae0-e920-44f4-af9b-04dcfae40284,Livro Técnico 711,livros,175.85,47
+54f780ef-68ca-4e11-8986-1a61c605f045,Lâmpada 519,casa,60.59,94
+49300410-86b6-4c4f-87bf-abd6d2fac27d,Caixa de Som 133,eletrônicos,599.71,147
+64af0419-ca40-4e07-bf47-90c9e6505bee,Boné 288,moda,68.42,139
+21cce4f5-68a6-4e77-823c-74167faa0c2a,Jaqueta 430,moda,302.95,65
+ac3447b9-a039-42dc-abbc-3183027ad13c,Smart TV 776,eletrônicos,3752.37,140
+05c6dbe7-7a16-4234-ae1d-ce89c6a1f9f7,Mochila 530,esportes,216.67,60
+280c8fa3-59c1-4b4c-9f0c-3db84fa9e33a,Camiseta 288,moda,99.67,63
+ecf5535c-f793-48ec-a5e8-d8af46d9ad08,Jaqueta 864,moda,347.09,43
+96efb1a6-6b75-4791-bc39-615c8c789f62,Boné 971,moda,31.21,79
+36b25524-f6be-4241-b353-5dcf0466fb4f,História 426,livros,78.44,57
+b0fbd308-e503-4b14-8ed6-950fe3ef7e5e,Livro Técnico 935,livros,106.63,110
+a1ee410f-a5f5-442d-a194-bced3732fccd,Smartphone 789,eletrônicos,,107
+9e40b0fd-cbec-48b3-afc0-da8d3648e213,Infantil 519,livros,38.72,99
+b137a38d-8a7b-45de-9e32-9144bab6c7b2,Panela 619,casa,229.95,10
+f64ba6b2-c348-4dfc-9af4-4f3a9cbb19bb,Autoajuda 545,livros,79.79,139
+b6db3ab8-d04e-4233-af51-7a2299287f25,Autoajuda 799,livros,86.92,74
+172a5fa7-6a09-473c-b74b-7a0f7e58932b,Bola 415,esportes,72.02,60
+d5d04ec8-6651-4663-8be8-ffb6c6755aff,Jaqueta 543,moda,234.76,83
+0b3ecc1b-08bd-4c19-98b3-4eab14d9018b,Fone Bluetooth 312,eletrônicos,370.21,97
+b0c4d5e2-93a8-4bcf-88ca-bc86278852c0,Bicicleta 269,esportes,1676.69,116
+bc22b264-1080-4b48-9fc3-add10b269b1b,Bola 976,esportes,66.08,41
+cc5cce25-9be0-42a4-a0af-d7173edf76e7,Smartphone 267,eletrônicos,3780.41,87
+e966da3e-c5c2-4b06-bc5f-e6fc2ea9199e,História 974,livros,81.26,107
+5381a8cb-5de6-4dbc-a3ea-c9a8c31fa95a,Camiseta 105,moda,118.37,49
+e4e84c34-ce51-44f0-87cb-d3e15af0d8c2,Bola 137,esportes,86.21,147
+23521072-01fa-43fd-a20e-70ad1756a607,Mochila 879,esportes,219.64,3
+fe5bbad7-421a-4633-bd43-e0ac198c086d,Smartphone 511,eletrônicos,3002.19,125
+0a74ed1a-448e-47cb-ab19-a8cd45961c6d,Liquidificador 723,casa,321.73,88
+6c50df68-28b5-4b77-af1f-293d6bddbb28,Mochila 400,esportes,120.48,77
+69e7330b-86cf-4d15-b00c-9251ec0a177f,Cadeira 570,casa,494.49,120
+d810a581-5da4-4bbe-ad1a-3d6e274a75e5,Sofá 791,casa,2469.33,120
+b26d4618-d90e-4146-a415-f66b625dae99,Boné 881,moda,54.56,67
+b84b22a7-2d2f-4d52-9b76-d66a4bd5db11,Panela 168,casa,193.53,5
+e44bca34-a8dd-472c-a85a-97960adc6c32,Bola 418,esportes,85.59,28
+8be1a9b2-03a2-4c7b-b320-88ede8520436,Smart TV 409,eletrônicos,3049.6,75
+99210cf4-0c86-45c8-a479-d49d8870e539,Sofá 312,casa,1683.93,61
+0ce91cee-13cd-4fdf-8bba-cc99916cd39c,Lâmpada 955,casa,47.61,60
+b3621b64-2b7f-421c-ace5-06692b209e23,Sofá 833,casa,2750.8,18
+e12c18d8-43f2-4501-93f4-29cccfb6442b,Smartphone 496,eletrônicos,1419.83,131
+1822f03f-fa4d-4e17-9a2b-2c3eac3b312b,Skate 874,esportes,568.3,31
+7bdfc67d-4514-42fd-9d36-b72eb1bf229d,Sofá 540,casa,1742.09,23
+b9547fb1-300c-48d9-95d2-e8ca264e5087,Lâmpada 422,casa,63.06,39
+d58ecda3-e2ff-461d-a4ed-9aa9921060fa,Mochila 154,esportes,253.44,5
+1bf18503-056b-4578-b1bd-369e47aca488,Liquidificador 359,casa,147.86,56
+14c5fe66-3129-4d0a-93b6-bee137a1ad46,Boné 887,moda,45.28,63
+602a1d3b-4be6-4a60-8262-8b402e5569be,Lâmpada 682,casa,59.55,123
+1ada87b4-fde3-4189-a719-d0548e959eee,Jaqueta 325,moda,244.01,142
+74cae53e-4082-4164-bb04-58a4b1efd452,Romance 397,livros,71.65,55
+128ce132-4981-4d26-a653-3533768cb6a5,Livro Técnico 632,livros,127.0,106
+3a450444-61b1-4de2-8712-8343d4b47525,Mochila 810,esportes,154.12,143
+e0479c15-29ae-4bc4-a3c4-7d4033f1024d,Livro Técnico 960,livros,108.32,7
+dd72895d-6dd5-4838-879e-8a0c81c04cb7,Bola 790,esportes,107.23,132
+2596db30-d268-47b7-a675-c260d4927328,Notebook 216,eletrônicos,2096.3,129
+1feff244-1b70-4413-8451-86ac413f692e,Fone Bluetooth 224,eletrônicos,,70
+cd31f928-2056-4a30-bbae-a9df374241ae,Autoajuda 496,livros,32.77,92
+0dc936d5-c95f-403b-a68e-d2f3da2ba956,Jaqueta 610,moda,108.43,26
+1a30c4f8-b992-4d53-975d-222718b60ec7,História 240,livros,52.77,78
+6ac31880-a1af-4fcf-8003-88087725e3b8,Mochila 857,esportes,104.23,109
+4a3b52dc-9c22-456d-abdf-a710bcba5b78,Boné 654,moda,45.94,9
+f9beeed5-f889-44c3-a31d-fe6ea59b36d3,Panela 698,casa,236.64,125
+d87a3851-bb97-435d-94a4-555c988c3fe6,Lâmpada 377,casa,37.54,110
+35db10d1-6eab-46d0-b1b9-625521632eea,Panela 229,casa,134.94,147
+d86a67b1-1c5a-4802-b18f-09e15178b44e,Caixa de Som 740,eletrônicos,778.84,131
+2206dd57-e5a4-4ce4-9c25-397018131335,Boné 946,moda,64.53,80
+23f5b61f-eab1-4f65-a782-06e3d420c611,Calça Jeans 783,moda,225.01,70
+cd35ac97-09fe-454f-b5d2-a3694679f9dc,Tênis de Corrida 422,esportes,259.43,117
+fbde4cc0-a6d8-4afd-9de0-7f9098c86231,Bicicleta 180,esportes,1013.34,44
+b5981897-678a-460e-bda8-1e8f4b2094e4,Mochila 287,esportes,202.57,83
+1bef4780-8d52-48ff-80fc-d072fa2a2dc6,Cadeira 923,casa,384.19,49
+48eaeccd-3d63-4670-8d5b-7b4cb31971e3,Smart TV 456,eletrônicos,4343.86,52
+6493a2b5-13f0-4f4b-a0dd-c54681ef5f55,Jaqueta 225,moda,147.55,115
+3d3abd95-8aa2-4420-a83e-14b968e58508,Notebook 908,eletrônicos,6297.67,57
+617eb82d-8c5c-4b31-a505-829075227c35,Smart TV 154,eletrônicos,3012.75,59
+f2e73a65-4439-4bdc-a37f-fe18dbddea3e,Caixa de Som 573,eletrônicos,241.15,82
+69bcb15f-b2a6-4639-9d0a-dfaeae6c943d,Autoajuda 948,livros,46.78,17
+ab48e9d1-faf7-4a12-ad5f-fe9e24686d79,Bola 815,esportes,191.1,115
+8b04da94-d1c5-46fb-9ae8-4f0315a15a3c,Caixa de Som 394,eletrônicos,438.96,30
+c3abcde5-678c-4de8-8945-aa1a6e1c6ea1,Jaqueta 157,moda,,92
+cff89557-4b95-46ad-914f-2740ba36c48c,Jaqueta 845,moda,265.53,84
+3bdb7103-aaeb-4f13-abba-2d7f231b5454,Bicicleta 590,esportes,2392.3,10
+e12d644a-aa05-448b-ad0e-e805e1b4833f,Boné 159,moda,42.92,87
+35a528d0-d6f1-4340-8c0e-1b5337e0dabd,Jaqueta 187,moda,372.63,79
+bd5295e9-e970-4bc6-ba51-dcf9a3307e53,Boné 843,moda,42.25,88
+0f5e6336-2720-48b0-93dd-b553f07d57b5,Cadeira 132,casa,,105
+a2266c7c-35da-442c-90df-fe3921cc49c3,Notebook 691,eletrônicos,5765.85,10
+9b989f81-a29f-4f7c-a83f-5b0f3dbc6cb3,Tênis de Corrida 149,esportes,571.11,14
+6fe52024-203d-4ce5-b2d6-46ac7075dfc7,Bicicleta 320,esportes,2218.06,98
+27770595-c3a9-446b-ae18-8a833bb5e220,Camiseta 973,moda,92.06,60
+a0267309-e468-49fe-b43b-821646235347,Jaqueta 622,moda,363.6,146
+b24e1a49-a83f-4453-a583-f74691b7c170,Lâmpada 372,casa,38.57,128
+9df8d580-05e2-4d36-ad09-296567bb1b64,Skate 856,esportes,656.88,63
+b684783f-0fc0-4cc6-be1d-266041ebabbf,Calça Jeans 926,moda,122.61,47
+e9fe0344-4461-451f-af93-8f062a11213b,História 474,livros,62.5,132
+4e41db6a-4069-4a1f-999e-3c98dda7dd02,Cadeira 826,casa,212.1,27
+46069824-f774-4d3e-a568-d0964dda0f50,Panela 397,casa,85.59,127
+4c206df6-4e2e-455c-8af3-8f1bc2501267,Sofá 836,casa,1339.29,54
+5bdcfcc1-3bee-4752-9446-930e7102199e,Panela 632,casa,245.89,114
+4593b962-fdb4-4901-abb8-b62029495d43,Panela 786,casa,212.04,144
+83876d90-dde0-4761-bcf1-d4135665b3ae,Sofá 271,casa,1635.71,136
+a014d627-8ed2-4210-bb77-4fe860b15db9,Calça Jeans 161,moda,153.06,135
+afa02aa4-555f-4f0e-840e-b96b3dd6d47a,Boné 331,moda,51.51,65
+cc3800d5-b96e-4316-a7f6-3880eaa4771e,Camiseta 319,moda,60.52,86
+97ebc32e-494d-4686-bfea-8a30053571c1,Tênis 165,moda,557.14,136
+27dba9c8-99ed-4e8e-bcad-8ac32f445df7,Camiseta 121,moda,55.47,146
+ffa76486-1ab0-402f-8b69-a15ba47bea0e,Sofá 235,casa,2088.44,11
+602ffd8a-b454-45d0-a47c-dc5009fc992d,Bicicleta 386,esportes,2328.94,115
+422b30b9-2c09-4593-acd5-6987f768256b,Notebook 385,eletrônicos,3644.49,86
+1e8c9618-852f-4647-82e7-7cae91798e6c,Liquidificador 304,casa,207.09,11
+7cda6113-4568-4323-817b-956bffa92f13,Lâmpada 692,casa,58.69,110
+638e7cb3-4f9a-45ec-a506-1986c098850c,Fone Bluetooth 472,eletrônicos,701.6,123
+12cbda41-b667-41ca-ad7e-cebb985d624d,Sofá 802,casa,1849.56,4
+e5306436-11ea-4a49-abaa-4e4615574cb4,Panela 394,casa,,140
+e66ccd60-0520-4ac6-9de1-ea9e018ea6d5,Tênis 531,moda,161.17,109
+07fba21b-0d5a-4797-9f1e-1e729f957f84,Bola 957,esportes,140.92,8
+0cede92f-5260-43ce-bebb-a498937bd15b,Infantil 615,livros,38.17,75
+a8208c9d-37eb-485a-9b50-c5c1d0e34409,Panela 567,casa,77.49,10
+d79b948d-5ce7-488c-ab5b-e1b3ab49eeb4,Fone Bluetooth 366,eletrônicos,640.27,55
+e4739736-cbd5-4de5-bce9-653cbb8170b8,Caixa de Som 466,eletrônicos,573.46,92
+0a624927-4a9d-48be-bed4-dafcd8081f54,Smart TV 973,eletrônicos,2398.31,61
+5f007f70-7f28-4687-90a4-d901834de0e9,Fone Bluetooth 210,eletrônicos,459.61,89
+1dd2205a-7fad-4e70-8c51-bbb8c082cf47,Lâmpada 384,casa,34.17,115
+543237af-1dd4-49d3-9146-77a96fc5448e,Tênis 951,moda,436.98,140
+42e997ff-cf07-4cc6-944b-c3221891a853,Camiseta 112,moda,43.3,83
+f0592c8d-f4e6-43a0-adad-e623441fdad7,Autoajuda 773,livros,94.73,105
+8affbf53-6b94-4db9-9704-df7c9a24a6a2,Smart TV 667,eletrônicos,2369.48,130
+98af2b01-d476-4660-9466-f7055e5af1a7,Mochila 716,esportes,103.11,80
+62c46ad6-4445-4a81-a595-458b5e1c982e,Mochila 255,esportes,291.31,94
+bb5116c9-af58-4009-b4dd-66553adff455,Boné 432,moda,,150
+91ba7e34-dfab-4029-823e-98e94b131d6c,Lâmpada 231,casa,18.16,132
+60745979-bc94-409f-9793-33a3d036e4f1,Romance 525,livros,65.09,138
+3f13e08a-6396-4143-9ef1-aaf4e749c8b6,Liquidificador 264,casa,296.22,12
+314a957a-ddce-4a7b-b29a-147d03a2919c,Tênis de Corrida 859,esportes,456.09,72
+63145ea0-23ef-4ee2-8c9b-c6e7c92314dc,Calça Jeans 179,moda,226.37,11
+7f0f7ca2-5570-4a46-a4dd-4cfa747996ab,Livro Técnico 467,livros,124.7,69
+638a8787-8dc2-4fcd-8231-1c2aa9dbd1fe,Lâmpada 465,casa,59.43,28
+e86a4a2b-8a66-411f-8399-81afc9d7b67e,Bola 877,esportes,146.03,1
+d10f46ae-b0e4-460f-87ff-5a2893be1976,Mochila 565,esportes,284.05,10
+fb086b0c-84be-46e0-890e-af944eb73fd1,Jaqueta 389,moda,220.48,96
+c2f57aea-b907-4231-b88c-8f47237ba938,Fone Bluetooth 707,eletrônicos,407.72,100
+5bd18253-65d3-42f3-924b-b735efcf31ef,Romance 857,livros,52.91,34
+4fa262b7-d16c-45c6-896f-1fcd54b1bcbc,Mochila 568,esportes,166.34,76
+281a7517-dae9-425c-b845-5c2ad4bbe6d0,Tênis de Corrida 794,esportes,219.87,145
+8346d462-5e80-4836-aaae-1eeae4eacab5,Fone Bluetooth 873,eletrônicos,500.01,112
+8d4d763b-6bf1-4fdf-9c84-0ab3ba4c7952,Camiseta 405,moda,95.93,31
+26a91260-e964-4287-8079-723f793b7537,Autoajuda 830,livros,65.37,127
+e64ead02-d078-42a0-beb2-1b8cb0d7618a,Liquidificador 647,casa,186.76,25
+0c52e822-c6fc-4dd6-af28-d5b96c287217,Tênis 549,moda,291.05,138
+b8d908e4-52b8-48c1-a96c-c94d7c6fe421,Autoajuda 737,livros,31.66,92
+2ced8184-ba66-4e86-b2a4-8216bfa20a13,Calça Jeans 214,moda,236.45,4
+dba48ae1-1c1d-49b5-9adf-695a1c3568d8,Panela 750,casa,220.0,27
+6dca99f0-a174-411c-b610-a8c893debe4a,Calça Jeans 362,moda,151.59,150
+9676e01f-f321-4c29-b74d-01f68b4a0383,Romance 517,livros,63.22,18
+0028bace-d33c-4f52-a080-60b5493ac45e,Calça Jeans 497,moda,238.87,12
+9426af88-7066-410d-9ec4-1a1e74ac8b4b,Bola 868,esportes,104.95,119
+90075ac2-933f-4050-9678-285d1ec37287,Smart TV 646,eletrônicos,2033.16,126
+a746fa9d-db39-45d3-95be-3313d54fd1c7,Cadeira 589,casa,392.59,41
+fc1182ef-defc-4eca-989e-7c346b186e52,Mochila 816,esportes,,20
+7fe25929-a793-4005-8191-0d3a822866e0,Tênis de Corrida 974,esportes,312.4,89
+ff4058a2-f017-4a30-90b1-10e201db7dff,Smartphone 975,eletrônicos,-2885.23,86
+27a3637b-b008-427a-bbd6-22925016ce0b,Panela 460,casa,286.03,70
+92fca662-4f25-4471-91df-5ebe8cbc5cc1,Bola 566,esportes,-81.08,127
+79b5b5fa-3a1d-4ad3-896e-d20b00884b48,Tênis 288,moda,,12
+7e525a44-09ae-4ed4-92f7-bf9c98b1e88a,Lâmpada 697,casa,58.97,22
+f2471152-25f6-4902-8778-09fc9b3289c5,Romance 852,livros,45.12,131
+ba904d2e-f761-4a10-b590-b4176cb35395,Tênis de Corrida 708,esportes,413.12,73
+2897dc3c-fbed-4b7a-8205-2b8b5c7f2d32,Camiseta 621,moda,53.47,71
+c534ddd7-4b97-47ab-8b01-fa564b04541a,Smartphone 507,eletrônicos,2594.23,46
+511f5f5f-7e2a-445d-b61c-a53a690d1125,Smartphone 519,eletrônicos,4429.9,124
+a38e5caa-0893-4de4-bafa-4ecfbeee56fb,Romance 329,livros,30.99,65
+b4d77215-a4f4-4267-bece-7b6807920616,Tênis 513,moda,211.3,108
+463c4fa4-d52a-4762-bedf-f2afbaeb3821,Skate 469,esportes,670.24,85
+210a05d1-1c0c-4fa4-b119-e31a3553974a,Cadeira 694,casa,169.89,5
+df5dd1a4-b323-4845-b9b6-18ccfa023a0f,Skate 519,esportes,434.5,24
+36518fbb-7d95-49c7-864d-4121ad471868,Liquidificador 836,casa,242.71,38
+1b15ec3d-8c97-485c-b5a4-29c4116191df,Livro Técnico 113,livros,94.99,117
+c51d7b71-9551-4028-b7b6-3d796fc95ae8,Notebook 401,eletrônicos,6982.51,12
+bcdc702a-df72-4126-bafb-4e01fec45683,Tênis 623,moda,464.07,51
+4fcf1ec6-72d9-432c-82c2-e9f70482e446,Notebook 490,eletrônicos,2741.03,18
+0ae1858c-81c2-4f89-b6b9-7eeb24409a82,Autoajuda 624,livros,90.4,147
+03e32bb2-fb59-4c38-8261-faae8a05cec7,Camiseta 588,moda,64.43,25
+51835553-c9f5-49e7-b96a-5f219b5e870a,Romance 772,livros,44.72,104
+6ba8c076-b5d7-4b05-9872-2efd59ce3d0e,Infantil 568,livros,52.08,42
+e2321718-932a-43d3-b6c8-b76a81000e5d,Infantil 939,livros,48.71,117
+b7bdcdf7-8ec3-4223-b285-92a58286ec44,Liquidificador 312,casa,176.03,92
+d026ef82-b747-45fe-97f5-a6f69a17f0a3,Fone Bluetooth 799,eletrônicos,120.8,100
+89854721-1b5d-4841-bb96-cbf14fd04b4d,Cadeira 347,casa,300.21,126
+c4f0405e-1783-480d-9aa5-5552ce437737,Calça Jeans 768,moda,179.29,149
+214fdcab-0284-45d5-bc03-02b15ad6f076,Cadeira 652,casa,498.53,56
+56a55408-5796-405f-af33-6d764036d982,História 472,livros,47.68,31
+2ea5b3b5-1a53-4e1f-9eb0-a56949a4d1b6,Autoajuda 131,livros,76.16,132
+ff372acb-12ea-42e5-bfb1-05c12692303c,Boné 718,moda,62.98,134
+feb1f0dd-a497-4627-b98a-b8b9b184b7a7,Camiseta 625,moda,92.14,79
+0c89f9dd-64f0-4129-8db6-c29a65e479d0,Infantil 643,livros,51.21,29
+0c8f698a-5f09-4c82-bde4-cbf7236d77ea,Mochila 280,esportes,134.74,36
+79a0b551-c5c1-40c3-b6e9-b0e205bedadf,Sofá 785,casa,2496.63,140
+7e7e2aa2-6eb3-428d-a196-fea65fd85a54,Jaqueta 449,moda,137.5,88
+f7354f49-30d6-4dc8-b941-d0c1f6e9ec14,Bola 169,esportes,175.42,99
+524d791c-3d2a-4ede-a288-c2b576f14b60,Tênis de Corrida 148,esportes,449.93,3
+540d271f-0f32-479d-b112-3f94b9ee085a,Tênis 416,moda,433.95,130
+6e2d6bb5-6d5d-472f-9247-0bcd1902a65f,Infantil 733,livros,34.31,103
+60852c81-4d0c-4e15-a192-1429562f9e58,Panela 962,casa,293.04,100
+1562b6da-0cac-47cb-a34f-a3f498abae99,Panela 628,casa,208.64,51
+7fc6f0e8-6c0e-4230-8001-574bb3a44de4,Fone Bluetooth 989,eletrônicos,282.77,129
+a6605aca-5d67-43f6-80d6-22201862a5dc,Sofá 350,casa,2671.24,48
+c6053579-c35a-400c-a795-092052265adf,Notebook 690,eletrônicos,4486.1,111
+d7c39dbd-95f3-4ce8-bff4-e3415e16a7ea,Camiseta 402,moda,93.71,39
+b9c0036d-2da7-401e-8eb9-691eecc79819,Camiseta 808,moda,84.94,94
+a79d26ad-d181-4d0d-9da2-5c1b1b80895c,Boné 542,moda,56.54,90
+61d7960b-6c54-421f-8d31-e8df3e050fa6,Autoajuda 720,livros,41.51,24
+8551ef20-9a71-4d06-8e9f-de26238fb955,Boné 276,moda,79.27,145
+8b78b71f-f0bc-4ba2-bc51-4758d7e2495e,Skate 248,esportes,443.84,119
+4b51af23-2ff9-4353-b7a7-53f685704818,Jaqueta 359,moda,134.29,118
+62dcbf13-91eb-44cf-aa2a-10ca1d9681a7,Jaqueta 940,moda,120.67,64
+a0cecca5-b276-4df8-aa1a-a30ac7d42352,Romance 975,livros,66.14,14
+91a5e89a-558e-4e4b-ba4c-2e3651734ea7,Liquidificador 246,casa,178.77,120
+54e09e1b-eab0-4718-a5a8-5870b49e5f89,Bicicleta 272,esportes,2280.13,35
+eb1ccef8-7bd4-4aab-8609-1b762192795e,Fone Bluetooth 120,eletrônicos,188.64,21
+e2b6f923-8a58-4c7b-b333-aff0b6dc7537,Caixa de Som 304,eletrônicos,660.63,67
+ab9962f1-b2d2-464d-8763-bda9db0c66cc,Calça Jeans 590,moda,200.25,20
+df09269f-1bbc-4f5a-beb1-62953ad6df25,Boné 421,moda,47.04,103
+450cae0f-1cf4-4ef5-b05a-b547f22b486f,Lâmpada 146,casa,41.76,69
+6ec85615-6b16-4968-845e-84bc63b9a943,Fone Bluetooth 501,eletrônicos,167.72,34
+caaf109a-5d1e-4785-b371-651152f7113a,Caixa de Som 622,eletrônicos,749.62,140
+79139e0a-b834-46f4-9ef9-be61cf230214,Bicicleta 995,esportes,-1680.36,119
+73c7feb5-2a7d-453f-b74a-653377d0afcd,Panela 365,casa,,37
+fb0ad0b6-a74f-4f42-aab1-f7f78515b598,Tênis de Corrida 630,esportes,432.14,35
+573c22af-b0ab-46a4-b583-b82427167226,Liquidificador 802,casa,139.5,146
+9715399c-7fea-4aa8-af87-2296478c7438,Cadeira 405,casa,464.82,43
+7df88008-8b64-4282-8a70-211779a17ca2,Camiseta 493,moda,99.76,26
+2dcfd6e4-429f-491e-8826-b5e139305a9b,Skate 272,esportes,471.44,37
+0c0cad39-a2a9-431b-adc8-d38808cf6b3d,Skate 976,esportes,713.31,87
+950fd002-4f10-4333-8019-4875464e38f6,Infantil 550,livros,48.67,13
+b66e80d8-6be6-4681-acfe-6cc513f57bd6,Livro Técnico 655,livros,112.57,88
+8769ab2a-3f25-4cd8-8df9-6e1480da8b7f,Smartphone 307,eletrônicos,1143.2,131
+27e8850c-3fe6-4df4-8db8-8a9da193a6d9,Cadeira 401,casa,560.05,109
+95013ea7-ab04-4383-b5da-8fdb2b1f3e34,Romance 264,livros,54.42,107
+21ace61c-b7b5-4bf0-ab37-7bceb985e46c,Skate 854,esportes,,37
+83f708c2-d050-46ee-8562-1466937feb8a,Romance 340,livros,35.74,114
+f6e58d0d-0277-4da5-a2b7-aec02b03521d,Sofá 904,casa,1100.77,50
+a69e665a-4d12-4718-978a-f384db9efefc,Autoajuda 705,livros,89.84,53
+3a14f0c1-ca64-40ca-88ad-9168ee5cc202,Livro Técnico 108,livros,107.94,115
+6b77a694-b526-4c4b-8350-f2064300e00e,Livro Técnico 399,livros,91.3,27
+50bfe8de-bd5c-400d-a9ef-bacb2e213504,Skate 230,esportes,544.9,17
+84f31ea0-3049-4285-a3c2-12a6f1cbd59c,Panela 985,casa,287.7,70
+f1fb9f34-ba51-464b-a7f9-a7439b921f24,Infantil 188,livros,41.43,63
+ec90168a-a5d0-4880-a8c3-e07840a13cf8,Romance 157,livros,47.38,77
+490bb7d8-097b-4d73-b0a8-88f972ced773,Skate 942,esportes,,47
+864ee59a-3f94-41d8-9351-2dcadc2a0913,Caixa de Som 361,eletrônicos,659.05,99
+26168c41-6d07-40c8-89ce-e2843e30a063,História 772,livros,44.28,60
+6d7f8772-df72-4ac3-b881-10ab53c2afcd,Jaqueta 898,moda,386.37,44
+7b84b92f-ee02-480a-92c4-2321935c585f,Calça Jeans 828,moda,103.52,45
+f238e1d9-ccd9-4b1a-baa5-efdee970f19b,Smartphone 932,eletrônicos,4170.63,96
+8461186d-70a5-484c-b372-014da61e16d6,Liquidificador 949,casa,108.53,89
+a0a2a025-c974-41b9-9578-4f50c2ff258b,Livro Técnico 459,livros,158.14,128
+3f44b643-07c9-4c05-a05c-ad0b3dae5e63,Livro Técnico 515,livros,121.82,25
+363dc369-b31f-44b5-a369-ae8501eede1e,Camiseta 670,moda,54.44,46
+290f4041-9f3b-4f0e-a443-473e58b2fc05,Jaqueta 373,moda,201.56,9
+58cb5b4c-50c4-41dd-8991-2ea865509369,Tênis de Corrida 403,esportes,585.67,48
+7664aced-b996-4dcb-9af2-f306caed4a70,Livro Técnico 414,livros,173.75,52
+6c199c59-9225-4328-b1cd-8609938abec8,Bicicleta 692,esportes,1966.35,76
+fd0461af-3bd6-4bbf-9954-e414cc636f85,Tênis 194,moda,186.45,25
+dd7c4370-c815-4c9e-a08e-200f3c62671d,Smartphone 270,eletrônicos,2913.89,14
+d1c039a2-fc59-4c2c-9918-48713c3f0fcd,Cadeira 608,casa,149.32,1
+a9718378-fae6-42bc-9fd3-a291166b9b72,Notebook 213,eletrônicos,2295.15,39
+8db1c9b4-e0a2-4427-8557-0866f2e5b6a1,Mochila 692,esportes,-173.6,150
+7bb57842-ceab-4786-8d3f-4f41cb151c47,Cadeira 847,casa,336.38,44
+52ae19d4-fd32-4c5b-b0d4-b1fabd08f952,Panela 848,casa,224.85,77
+ed1b2b61-bd34-40eb-9855-04bab20e0a3b,Notebook 133,eletrônicos,5894.73,90
+cd614075-37a4-44d3-91ae-6abe77878855,Bola 589,esportes,-116.59,34
+7cf639c4-3b9c-4c8a-8eff-a73e945f3f72,Cadeira 797,casa,125.14,36
+03c5d9c1-b399-4490-86e3-610ed6b3833d,Smartphone 478,eletrônicos,1839.12,15
+b59f57e5-eb8d-4678-babb-8e3380612738,Bola 452,esportes,133.06,8
+df882ef5-41a8-453c-82ec-bf5564f6e058,Bola 147,esportes,-81.96,18
+6380b722-2e81-4bb7-91e9-b2e6d0878169,Jaqueta 804,moda,247.63,131
+b2f9a39a-ecba-40d0-8c7f-5eda82dbb114,Liquidificador 745,casa,277.93,90
+4acea3c4-0d45-45cf-b7d3-fe9010cf1271,Infantil 775,livros,35.74,18
+cebc6927-a03d-46cb-8b18-118891b5dc87,Skate 599,esportes,323.59,7
+25a413e4-4a7b-4e76-a153-72726afd1693,Boné 272,moda,30.25,88
+ab26b86f-1400-49cc-8a5c-027a3eb5bc33,Tênis 653,moda,194.44,93
+9b7c7eb6-be8e-490e-b1ba-d840e5031567,História 629,livros,111.71,34
+903eaec2-8938-4bc9-87f9-56711a6c5ef4,Lâmpada 240,casa,26.58,42
+d5a19f10-7e77-42a2-b29b-885c7fb8d5ac,Cadeira 187,casa,,140
+db2971ec-524b-4f15-bfc2-ca93ed3fc040,Fone Bluetooth 435,eletrônicos,-211.93,116
+c7755df2-1cf7-4ded-b130-8bab963d1fd3,Infantil 310,livros,21.56,93
+8ad2bb37-a58f-434b-bc86-1ebd3fe8ed92,História 443,livros,76.01,81
+d5e8a83a-ef26-4b70-bf23-111fbb9b4ed3,Skate 625,esportes,719.86,116
+06392513-2713-4540-b4ba-22547c647657,Smartphone 331,eletrônicos,4097.78,89
+15070950-c6c6-4464-8dd2-7e929054678c,Camiseta 958,moda,86.0,79
+beaddf1e-f47e-4d6d-90a6-602d7531aa34,Bola 947,esportes,77.54,99
+dc2442c2-4629-4b99-8627-e7440a689f47,Liquidificador 110,casa,195.77,92
+ba06ea45-4c85-4174-950e-88483b86aa58,Liquidificador 916,casa,366.55,72
+8596d649-cf9d-4950-b845-d8d36c763968,Romance 268,livros,57.64,11
+b7251bd4-b864-49d3-bd53-a354c0aa7957,Autoajuda 696,livros,94.59,98
+80a63f57-b1e4-43fe-938a-9044848fab90,Smart TV 224,eletrônicos,1629.16,28
+6c11c870-b482-4cac-925e-c433c16372cf,Boné 233,moda,,9
+9442fbc8-91fe-4d01-ae8c-ed6a01789610,Liquidificador 235,casa,269.98,102
+17aa8929-0444-4b96-8c53-aa71a507fe10,História 167,livros,51.35,131
+c6feedfb-46e3-4937-bc18-c03c7adc9824,Camiseta 208,moda,84.1,99
+bbfeaac3-29b1-4c5f-8c93-d436d957ecae,Cadeira 174,casa,476.42,12
+ceb648fa-78fc-4345-ba23-fbfae2a6e2f2,Tênis de Corrida 781,esportes,277.79,65
+ed36ecbb-8a99-4c03-86a9-93964ff74734,Tênis de Corrida 618,esportes,236.02,28
+adb6da48-9fd7-4c1f-bb2b-5fc9d2436604,Calça Jeans 675,moda,96.18,33
+dcc81800-b4b0-4009-8125-2da0c4e38432,Livro Técnico 493,livros,167.26,92
+31bf89ce-81aa-4f45-96f7-a6d7fe7c6141,Boné 773,moda,71.87,11
+9201284b-2e9b-4d4a-94df-9aba6e4d3bcc,Lâmpada 344,casa,67.24,130
+8b8e65b4-0412-4565-a680-88638d9e6624,Skate 145,esportes,580.93,73
+e4011145-5d3b-47c1-8c3d-168a055ce2b1,Lâmpada 153,casa,60.75,134
+2a73bc9d-4707-4c4f-9721-ebcde5da4f60,Mochila 921,esportes,231.11,128
+c03f1216-dfb5-4666-aa3f-0d9473206e07,Sofá 149,casa,2823.84,9
+f0532f66-cc50-48c0-b580-b893e5484fe0,Caixa de Som 245,eletrônicos,199.58,147
+0fc007fe-74b9-4ab0-8b67-20a37d3bc122,Autoajuda 871,livros,44.4,47
+fc3056f6-a04e-41b1-85b0-6d48a01fa8c9,Tênis 509,moda,182.96,57
+8e5cc735-e8a3-4abd-8add-9acdecaed08c,Bicicleta 651,esportes,1298.52,13
+7c23238b-4c0c-4715-b862-5552a24cad85,Bicicleta 733,esportes,1668.12,48
+db2ec620-8d25-4fca-8414-a73e651f29e3,Smart TV 181,eletrônicos,4500.97,23
+670d120d-a0c4-4cb9-962f-38601ece988c,História 682,livros,104.47,115
+95dfbc26-4985-4040-b2e8-696275790ff0,Smart TV 934,eletrônicos,1487.71,3
+4d6ac7f6-ecb3-4025-b22d-e226881fa8f4,Caixa de Som 185,eletrônicos,890.47,150
+a0a46752-abf5-4cab-b729-d144760d4c4e,Calça Jeans 170,moda,111.01,18
+3cac8c98-02e1-4e55-bdcc-1485eb379e67,Liquidificador 193,casa,210.29,42
+9aba1e93-d39d-4e1e-af7a-6685b956bc55,Calça Jeans 411,moda,114.16,41
+958dbf32-5a0b-4847-9141-56246929afd9,Boné 909,moda,63.69,74
+c3ea56b0-eae2-47ee-a6db-6ffeaa51fafe,Smart TV 373,eletrônicos,3209.02,32
+85325c9b-8bce-41af-ae04-40bf57136892,Smartphone 296,eletrônicos,2513.62,34
+140303c6-0cd0-4c81-8096-5bbcc622fe60,Notebook 539,eletrônicos,3199.41,78
+367da018-e42d-4b52-9bbb-9d2f5d92247e,Cadeira 718,casa,320.79,123
+5ddf7ade-d957-46a2-93c8-0bdb8e5d3084,Notebook 613,eletrônicos,6592.64,87
+df7f2130-1ea5-49d3-9c79-423dba128f83,Fone Bluetooth 650,eletrônicos,792.32,81
+e2a9b095-2085-4d48-8d52-c5e9aa9e4f99,Bicicleta 133,esportes,1997.04,33
+bd8d05cc-e545-4bb8-b9b3-51560a2e917e,Jaqueta 797,moda,367.16,98
+ae14c80e-b422-46a0-a320-6a4f827c6398,Bola 746,esportes,120.1,50
+d4abdcbe-6ddc-4198-aac7-61f619e71070,Mochila 623,esportes,145.27,79
+6fefadcb-48c1-4354-86ff-c8d1c0af57f5,Jaqueta 904,moda,195.9,46
+3783fc9a-dbf2-4202-99e8-68cb2cf25e76,Cadeira 532,casa,440.0,119
+a840cd15-c225-46b4-8990-3671a052f932,Notebook 603,eletrônicos,3860.62,4
+65945b53-ecd7-43be-acf5-2d3ab3191175,Lâmpada 228,casa,26.16,65
+8813c3c2-b2c8-4921-83b0-65fc99c37229,Calça Jeans 152,moda,206.23,93
+2a297bc2-c413-4acc-888f-6a745f752e5b,Romance 514,livros,56.59,141
+ad2d49de-d993-400c-a64a-b107839119f5,Fone Bluetooth 295,eletrônicos,351.12,71
+8616dff6-9ef5-414a-b4d4-a5a471f146f8,Panela 639,casa,77.93,1
+0fa4e14e-bf99-4317-b4d8-21e3094e51b3,Autoajuda 900,livros,32.95,71
+778328ce-7672-4b67-864f-6b9ea634b1f0,Liquidificador 613,casa,289.07,119
+27e2b820-9eba-4ae5-9e28-d3daec58c476,Smart TV 528,eletrônicos,1427.5,18
+806c57bb-daa7-4f6e-9dc3-ff813985e94e,Calça Jeans 129,moda,144.74,32
+e90ece5a-f268-4006-b5dd-f5e249b01782,Livro Técnico 665,livros,117.25,131
+2ea9adf9-5a23-4a78-a2a0-61402a2c9bff,Autoajuda 791,livros,49.49,131
+b3d355b4-1faa-4643-a179-4ae592230033,Liquidificador 839,casa,208.41,135
+cbd830e6-26e8-4673-97b0-5b498155f50e,Jaqueta 786,moda,177.07,77
+25f21700-0d23-4a22-8547-289b1406d5cf,Lâmpada 869,casa,48.37,120
+de350eff-9cf5-46c5-a58a-2cf42c1e10a6,Caixa de Som 831,eletrônicos,388.36,122
+4d5169b1-4add-4923-81c1-df6d6d9b72d5,Skate 342,esportes,,40
+096aec7c-1951-47cc-bae5-3815131963bb,Smartphone 644,eletrônicos,3375.3,140
+83863d39-e498-4a1c-9ae3-99b08bc2d0a5,Smart TV 999,eletrônicos,4243.77,85
+3ac85793-ceeb-4118-90d7-a5252915fb85,Lâmpada 792,casa,48.2,95
+3a413e84-6bf4-4a76-967a-69d92a41dd81,Jaqueta 714,moda,249.15,48
+48b85c6a-9d8a-4dc9-8e19-e152d7b5362a,Cadeira 795,casa,227.6,63
+0ed4c544-3ae9-408f-a65d-c244fb0a0aee,Autoajuda 871,livros,68.6,120
+592bb0d0-feb4-4cf4-892f-ffdcad8ce644,Autoajuda 913,livros,98.8,24
+73b47b14-e300-4ba9-81bf-054e74df38ac,Fone Bluetooth 507,eletrônicos,205.35,126
+5b45330b-de18-4846-8395-14a83c8c87a0,Caixa de Som 799,eletrônicos,753.51,31
+56a0c6f3-611a-419d-9274-d76808eb25f0,Autoajuda 348,livros,74.08,0
+920591e9-0d1b-4338-9ea0-afe81d7c2741,Skate 566,esportes,797.57,143
+fb1bab02-51ba-4bc9-b8a9-b843e0eb17a8,História 405,livros,108.52,119
+5ac90efd-976b-412c-b160-003bb08a5ff7,Liquidificador 261,casa,224.01,90
+f67f019e-f3d5-465c-a49a-52ef3b083c79,Cadeira 954,casa,126.51,82
+c9622221-f463-46a2-a480-8b7a3a1043ff,Mochila 532,esportes,140.71,62
+dd25d964-b93d-4041-a0a1-500b4e94c1ff,Mochila 611,esportes,,135
+c9cc3ad5-2609-450d-8442-3ac6e111c3bd,Panela 217,casa,191.53,46
+f8aab73a-bd69-4b58-96a7-3f3ee0920aba,Notebook 964,eletrônicos,3162.51,127
+55c7645c-4dbe-44ff-9220-373502e0b217,Lâmpada 993,casa,52.53,46
+59b616e4-6572-45ab-b26d-b863034b4d25,Infantil 822,livros,56.26,84
+31de6b19-039f-4b25-a926-1d57b9cd98ba,Mochila 906,esportes,199.32,0
+38ef9659-2a64-4d53-9c80-b04f7947fc06,Mochila 155,esportes,153.61,68
+4e6a92c2-d3c5-4d8d-a696-be7f5439674f,Boné 352,moda,56.08,17
+581d332b-bb88-490c-a5bc-fd3b1f325b3b,Caixa de Som 487,eletrônicos,304.7,0
+bd7cb98f-b487-4e06-9525-9efa66964573,Bicicleta 377,esportes,1393.5,61
+3bc9cb77-07dd-4882-beb7-aea66c3672b5,Notebook 364,eletrônicos,4418.17,134
+85d29c75-1b57-4a52-ad70-d6ead8a8e343,Jaqueta 286,moda,326.27,49
+5b6428ce-60d7-458b-bb5a-d34edf376fea,Smart TV 531,eletrônicos,2032.51,75
+dd4f6691-f3f9-4ef6-9ca2-7a2b2b9ff4d3,Skate 815,esportes,562.79,46
+a83367f7-0c5a-4f89-8287-b94723d57507,História 907,livros,78.87,26
+7e5f421d-0aa3-4fb6-95e3-9023192a77bc,Sofá 304,casa,1515.52,44
+a87b3174-3941-4204-8a95-d05b63287b61,Mochila 177,esportes,195.63,39
+933249b3-d819-4631-bb36-7dc5fee4f5d5,Livro Técnico 538,livros,141.75,40
+0618606e-8aaa-4a8f-a9ad-e3a021380ff0,Autoajuda 344,livros,43.03,68
+0e734879-d10a-4a10-a7db-a70e9e12fdbe,Livro Técnico 941,livros,81.51,73
+9c548294-bee7-478e-851c-e3eb99d1cce5,Autoajuda 286,livros,61.74,1
+b911bf25-a66d-47b4-8114-2197ee1c38f3,Bola 406,esportes,130.93,141
+cc6be7e1-f943-4827-b681-c4a460479d58,Infantil 412,livros,38.07,80
+35c44814-3dee-44a6-be7c-2c952b295299,Romance 731,livros,27.65,14
+aeaea14f-52b1-425f-b3e8-81b450538667,Boné 620,moda,79.31,43
+112523b5-28ca-4e5d-b9ac-e044bd499d83,Jaqueta 250,moda,249.59,42
+4f8ae948-5f2b-4ee7-aefc-6ec03956746d,Tênis de Corrida 565,esportes,391.23,137
+48f9d12a-80e7-4e0f-8359-f5471c6d85fa,Panela 588,casa,225.46,108
+f76710e4-85f8-4fa4-b654-cb20585e5b53,Lâmpada 461,casa,41.67,32
+b7097d48-e675-47a5-a03f-61b7d12c43e9,Tênis de Corrida 882,esportes,400.45,28
+acbf7d0e-a922-4189-8ae8-5336e4cba198,Jaqueta 822,moda,-379.92,149
+2ce8f1b7-a028-4448-a440-a5f3ca09ef82,História 541,livros,103.74,101
+1c1988a1-2985-42a1-b2fb-b24eca2209f7,Tênis 489,moda,182.98,139
+a5f56e09-ff13-40ae-958f-f5660b95fd44,Bola 917,esportes,96.74,63
+faa3f490-97bc-4afa-9c2c-32931c569809,Smart TV 797,eletrônicos,3949.92,143
+b5d3b3f8-268d-4b40-827c-d992abd9fb16,Bola 122,esportes,182.31,7
+60a97be9-491f-414a-be67-03e11a51bf38,Infantil 843,livros,28.45,92
+8f015de8-fe8e-432e-a52a-05ed269bce42,Tênis 557,moda,337.98,137
+e0f236f6-f7a1-4ae0-9192-11ef98e3a4ff,Romance 148,livros,54.1,40
+21a739dd-9821-40dd-b622-d709120713e8,Caixa de Som 175,eletrônicos,942.96,121
+aa8c860b-7911-4f28-862e-05efbe9cb899,Smartphone 671,eletrônicos,3443.99,99
+004f5542-28f5-4397-a910-920024f26887,Tênis 128,moda,410.62,123
+d1d4b954-a493-42f8-8d18-e49a8882dc83,Livro Técnico 932,livros,72.59,149
+a6671377-b8bb-4c4b-9000-c2eedf6d5271,Boné 811,moda,32.5,7
+c3274043-f8ae-436c-8c94-4817f3fde277,Panela 990,casa,106.59,113
+8adf9ab3-e47f-404f-83c7-ee94b6d2567e,Panela 593,casa,,112
+b70f244e-1725-47de-b3c1-bac18c3946b9,Tênis de Corrida 459,esportes,292.82,56
+9da6e91c-6744-4df7-9853-83e41fa8d8c1,Infantil 559,livros,57.96,3
+d3d62d20-b58a-4fcf-8fd5-05f3211ef509,Panela 175,casa,235.75,80
+b667627b-a1bc-4a06-b630-4ad3a163b800,Bicicleta 968,esportes,1045.36,139
+c598dc8d-79b1-48b0-b0e6-c38b41221634,Fone Bluetooth 707,eletrônicos,517.25,128
+693e7e38-01ad-4922-ab52-548dffd5b008,Fone Bluetooth 991,eletrônicos,234.7,136
+4b22e186-2282-45f0-875a-2522eb72600a,Skate 879,esportes,,142
+8d42ea73-08b1-4269-b717-badb5db6da91,Smart TV 770,eletrônicos,4671.47,102
+fae81202-c07c-4835-a104-510b06008793,Smart TV 556,eletrônicos,2039.23,101
+06275ab6-b6e5-4520-82d6-50e0ef9c2343,Caixa de Som 463,eletrônicos,931.12,50
+6453fdb7-0d77-4150-a40f-57ab70fae1d8,Liquidificador 236,casa,165.67,128
+0a89d07e-ec64-4225-8deb-29c86f269771,Autoajuda 346,livros,51.02,135
+c8485801-3b2e-4c71-9f71-b7bfa78fa174,Fone Bluetooth 381,eletrônicos,546.82,53
+ad8b905c-e056-40ed-8f7f-38687477554e,Tênis 710,moda,438.29,105
+ba6cf4aa-671a-4320-881e-ad8912c46d62,Fone Bluetooth 973,eletrônicos,253.37,11
+b9700d08-e209-4eb9-8661-81f46f455ba5,Calça Jeans 485,moda,142.53,37
+7238acf5-f5f6-4785-b07b-26cd61b0127d,Lâmpada 272,casa,49.81,99
+289b2df4-32a3-4fa4-8d63-6415e3e2e1b3,Tênis 180,moda,477.34,87
+09f1f94c-f397-4a3d-a280-24064072d990,Skate 575,esportes,541.91,45
+5e9d3ff0-6a42-4764-9b57-204723ca89c3,Tênis de Corrida 610,esportes,550.84,24
+5d879f49-fcf5-43c3-8876-43c739c9a5e7,Bicicleta 636,esportes,1325.89,76
+a31785b2-ad2d-403c-b199-d3d33e4085cf,Fone Bluetooth 445,eletrônicos,745.38,38
+a5929037-87a2-4d48-8fe7-5ad726da1a45,Jaqueta 689,moda,170.36,129
+ac54fee7-ef95-4e07-b904-51b1afefce5d,Infantil 128,livros,43.3,55
+a9d70dd8-eeba-496f-af42-17b5e3383a73,Sofá 255,casa,2926.09,11
+c85d882b-c946-465f-a8ab-1fb3eaaa1bf5,Smartphone 866,eletrônicos,2197.87,0
+6ec783c8-47cf-4f59-ba7a-2bd3b20a47f4,Liquidificador 784,casa,117.93,145
+3f3cef57-fbdd-4e0f-b5e2-6dcf59f6a0df,Skate 107,esportes,792.14,63
+08bcafa5-3d0f-408b-95a4-160a96dbab6e,Calça Jeans 422,moda,237.68,62
+f8e3b640-1efa-4530-8817-985adb7486d5,Liquidificador 890,casa,309.49,99
+1b61c410-8e3c-4fff-a206-e0c0996bd6e7,Infantil 968,livros,24.04,134
+f69a539b-f9d0-446d-9801-cfea9728365f,Liquidificador 322,casa,164.05,23
+7565b748-d0bd-426f-9f66-2309f394c847,Mochila 857,esportes,142.32,49
+1b9f452e-8c93-4bfe-b68d-03413f52e48d,Cadeira 715,casa,417.4,6
+2e4c00b5-6874-4b53-8bca-3ac324d2e687,Smart TV 558,eletrônicos,2325.52,98
+9aeeb33a-3f98-4a51-ae27-315a59bb90ad,Notebook 421,eletrônicos,5106.22,48
+19dc03ee-fd4f-44f8-b693-6706be230ac4,Cadeira 150,casa,396.42,57
+58787c77-5f8d-4d75-a399-eb7af4d85e48,Jaqueta 274,moda,238.33,58
+752a13e2-0cb0-46de-b2cf-4232edb9d395,Boné 754,moda,62.07,150
+4e70c1fd-7282-41e1-8d21-49d4373c2318,Livro Técnico 682,livros,101.31,59
+480a933b-7c34-4516-9d1d-a05c0c66461e,Cadeira 271,casa,429.54,113
+14ba3f33-dec2-45a8-8781-6265e5ea378e,Sofá 900,casa,1156.56,143
+3376660d-05ef-4849-a36e-f9d49090c2d4,Autoajuda 739,livros,91.91,56
+1c570ebd-6ea7-4d26-952c-8832f16a1426,Jaqueta 519,moda,198.86,89
+403d06c4-2271-45a4-9e83-550889066393,Sofá 833,casa,1741.62,88
+005aa6b3-d5d5-42c6-b0b6-166f0191125c,Smartphone 937,eletrônicos,4995.55,81
+95b1b5fb-f77b-443b-9b22-5c5f43a10a73,Fone Bluetooth 501,eletrônicos,739.58,37
+6d37e4d8-4307-4371-b69e-a75586e574c1,Cadeira 893,casa,,29
+936ef218-1ab8-4d34-accc-a2548ea2381b,Sofá 791,casa,1451.64,23
+3a206ad9-e9c6-4dec-8733-a8412c359d31,Calça Jeans 905,moda,220.93,27
+7124ed67-c877-443f-9628-abb7a56c3b4d,Camiseta 298,moda,100.98,52
+47efbd1b-61d0-4c68-841d-0397729d46d3,Romance 179,livros,,71
+cad88307-6094-46a3-b6b2-275d76e281ee,Cadeira 535,casa,292.6,117
+fbd73e95-569e-431e-857c-94eda94bc599,Bola 669,esportes,156.6,24
+4c3a33d0-6285-4ced-be99-cbd0e4892c1f,Calça Jeans 608,moda,100.89,16
+82285cb6-bf0e-41b9-b223-60b79206cfe6,Boné 837,moda,78.33,1
+75fa183f-061b-4797-aafa-7d6afbc7b68d,Skate 448,esportes,406.67,104
+29be8f2a-8963-4703-ad7d-1746dbe274e6,Calça Jeans 510,moda,80.69,110
+fa362818-c7a3-4eeb-bbe7-e368db57b48a,Infantil 374,livros,52.45,43
+7761432a-f02b-4df4-ba4f-43391971b87f,Calça Jeans 275,moda,117.84,54
+57834346-b928-45cf-862a-a7130519b31b,Tênis de Corrida 184,esportes,483.41,19
+d8664942-7ae3-4809-a268-16a1da661a2c,Panela 584,casa,99.65,91
+3b00efd5-2ca3-4819-a099-5b6171894a3b,Tênis de Corrida 556,esportes,460.42,85
+879e479b-8885-47b9-82e3-02e308fc1e8d,Liquidificador 276,casa,149.15,25
+23c7fff6-3d5b-4738-b48d-111f83b5ac49,Fone Bluetooth 185,eletrônicos,369.82,63
+78a60a38-5394-41b3-b800-8cce6c8404da,Lâmpada 611,casa,55.4,145
+1c28b5e2-2d29-4cf6-b16a-f831a4fe7785,Boné 854,moda,60.78,112
+19044b5a-3067-4d19-baf0-5944c29cb23b,Infantil 888,livros,49.64,96
+f1ff723d-d14c-4a6f-a533-3e2d2b8020db,Calça Jeans 426,moda,244.88,92
+d5564a25-08a2-46ad-8feb-114a6513ac3c,Panela 766,casa,,65
+354c3ecd-5e2c-4ab8-abea-38b0f4a94846,Smartphone 578,eletrônicos,4792.18,70
+98034f7c-103d-4104-a618-afbd07963950,Skate 323,esportes,521.04,75
+80d1f4f3-4810-43ea-8940-30aca887631a,Mochila 685,esportes,192.07,72
+d3bbd33a-3736-4af5-927b-df7bff195bf4,Fone Bluetooth 447,eletrônicos,454.46,63
+1762f6e9-acce-488f-ae29-a4f19a9efe60,Cadeira 184,casa,221.99,136
+670f46b1-5fdd-4e7e-aac0-a3ce086df0e2,Boné 698,moda,43.86,51
+7716eec3-a2d7-40e2-8eb5-c5fcb4f960a6,Liquidificador 866,casa,145.08,34
+71f9ed2a-1112-40cf-a97d-ab89bbc8839f,Smartphone 545,eletrônicos,-4858.65,68
+8904cf2f-8fd4-4150-9d26-a1599ecefe1c,Mochila 474,esportes,273.89,111
+8b8ccce6-241c-491e-9a1b-c4a4b4cb87ee,Mochila 693,esportes,263.56,105
+c24faad1-f193-451d-8a89-12fbe8c390b9,Notebook 932,eletrônicos,2205.19,73
+95da2e16-bc64-4441-965f-b95643a7c85b,Liquidificador 675,casa,273.58,13
+6e21e410-1674-4939-ae59-e8cc1c3928b0,Smartphone 968,eletrônicos,1960.26,122
+1ca0e706-e7d3-4fc2-a132-a6fa4a7d9aae,Tênis de Corrida 751,esportes,203.71,102
+4a5d6d3f-752e-47a0-947e-55c3d264ed3a,Mochila 235,esportes,115.71,74
+989cf342-6a53-44fb-93bb-8c5a0781dfb8,Sofá 267,casa,2322.08,57
+5390976f-daa8-4c64-bf8b-9891c21d2927,Romance 701,livros,26.13,92
+ec7f8762-7d04-4dc2-85f5-32028f94c2ee,Caixa de Som 381,eletrônicos,469.63,127
+c1015560-6999-40f5-bf11-02e11bbe3682,Livro Técnico 652,livros,64.7,64
+52e51b10-1bdf-44c9-8b44-878ef32880e5,Skate 917,esportes,524.2,17
+eb806c1a-3700-4b5b-ab70-ec1b98b2f3d7,Calça Jeans 316,moda,163.02,82
+389a3717-06e6-4035-849a-540409df05a1,Skate 159,esportes,766.45,60
+b76b31dc-ac0b-4001-b2e4-4f38f5ced0ca,Mochila 563,esportes,189.26,46
+d9c6f769-805f-4e54-9c2b-e258158ca23d,Tênis 652,moda,167.81,0
+a50898ed-c996-4de9-a1d5-1f23a1bc9f41,Autoajuda 282,livros,64.15,71
+6c70536d-2638-4153-bcaf-37f0ac8f6e91,Mochila 294,esportes,,78
+115c1490-9bf1-410f-818c-d3926e7ff88d,Bicicleta 645,esportes,1192.11,131
+3635e76c-cdab-4ea9-b8cf-e61fdca99174,Smart TV 947,eletrônicos,2606.8,90
+326a6b5d-ff2a-44a4-b82a-785dc44fcea7,Cadeira 823,casa,274.59,72
+21d7e286-bdaf-4435-bfcc-06e44cb50310,Skate 972,esportes,655.18,115
+5e83d0e6-caf6-4bb1-b453-16f5104972b8,Fone Bluetooth 634,eletrônicos,793.23,147
+8ce201e7-696a-47c2-ad3b-1df95e44079f,Sofá 484,casa,1355.79,125
+b0cd2732-387b-4892-830e-34591d2975ad,Boné 127,moda,49.8,132
+df412de8-c74e-41ba-b4fb-b4b418c69528,Bola 777,esportes,162.28,103
+e437f3d0-99fb-4916-bb01-056383012cbc,Notebook 867,eletrônicos,5219.43,6
+7408dd15-5d73-4085-ba75-1cd3b3773488,Cadeira 903,casa,443.11,73
+970c6f1b-4c15-49c1-b955-b8fd95214c08,Cadeira 340,casa,141.05,113
+1d7eac9e-c6c1-4a04-879a-d0fa069aa266,Camiseta 688,moda,116.1,78
+b507edfc-9265-46a1-b36b-f063d252fcd8,Cadeira 346,casa,185.15,90
+bac4cd36-23ef-4dd7-89b4-8b42081bb698,Panela 414,casa,120.09,110
+82f7350e-1538-446e-b3fa-bf2226a48abb,Camiseta 869,moda,60.34,122
+21d0a165-53a3-4835-92af-c4a12f2e98d5,Bicicleta 482,esportes,2355.2,4
+5a3c6b63-b069-4896-8b3a-babcee64e6fd,Boné 690,moda,30.03,24
+302afbb5-e298-41ee-8ba4-9d4d3de75617,Livro Técnico 818,livros,92.21,114
+602c1ab3-b811-4b60-a825-6f299271f44b,Tênis 979,moda,547.9,110
+386c25a1-5c31-4d0d-8ca0-c2c5df7054a8,Smart TV 219,eletrônicos,3547.54,48
+6f3e5d7a-0347-4626-b9c1-3f9800c99a16,Notebook 970,eletrônicos,5700.2,11
+74d4ceb6-bba1-433f-b42b-508a7dc89de4,Camiseta 576,moda,89.15,135
+6cf99267-53a8-4f07-973a-67fc7b2da13e,Mochila 438,esportes,176.33,62
+786a7468-5736-4797-bbe5-4d0e36b04a41,Smart TV 786,eletrônicos,2487.02,68
+d39762cf-3321-44fa-a540-941d7af46006,Jaqueta 847,moda,393.48,121
+838d07e7-021e-4236-a101-a71f0e63ca0c,Notebook 817,eletrônicos,2046.33,83
+0852476d-b192-4da0-885b-80d32eb08dee,Notebook 193,eletrônicos,5836.01,91
+f7813945-eb07-494d-8d22-daed7f77910f,Tênis 827,moda,256.0,6
+be55e358-1c87-43eb-834a-5f758401a59d,Autoajuda 813,livros,70.98,35
+3d87cf81-37d6-43a9-a2c7-b6db3c5966f6,Smartphone 739,eletrônicos,4792.4,74
+157a4a3a-938b-45f4-973e-87aa468019f3,Romance 944,livros,37.3,0
+9b80657c-4c99-4ff7-994d-c09e2d258d65,História 339,livros,52.84,36
+593aeeae-90be-4c6a-ad2c-b035f6638fa8,Livro Técnico 235,livros,159.96,38
+b88e4a19-5e83-46c5-a11b-654f748614ce,Smart TV 351,eletrônicos,2680.34,129
+213ceee8-71ad-48cb-ab8e-0766747b7821,Bola 478,esportes,199.8,78
+89d906bf-15ce-4b99-8613-14e20aaac1fb,Smartphone 355,eletrônicos,3456.75,139
+9af21476-6884-412a-86a1-aaa440a07a6e,Sofá 662,casa,1103.35,102
+d58722f5-03bc-4f8b-bb57-6f459898192c,Mochila 439,esportes,173.16,132
+e35e690e-1a68-4e48-a081-12d5d1069b61,Infantil 346,livros,28.12,37
+76f5bdbf-07fc-4139-94c1-deba74a51830,Cadeira 979,casa,315.06,104
+670c890a-f460-4371-bd99-b181bf7bfd2b,Autoajuda 970,livros,84.52,115
+580fb616-a602-4d0c-bf9f-7634c660a462,Smart TV 831,eletrônicos,3417.73,23
+0e66a39d-be70-48d7-9d55-3d5890efb94a,Smart TV 622,eletrônicos,4341.46,12
+f2a570be-c01e-42dd-8f78-859fd08a8e9c,Tênis 110,moda,417.75,119
+51d481c9-89e4-4fc6-b729-b230ecbbc061,História 106,livros,95.78,31
+ce8764c5-cf4c-4efe-ab6c-589cb37bda8b,Bola 559,esportes,151.75,106
+9227e2e4-6a5a-4875-a0ff-fea36ea6732b,Tênis de Corrida 983,esportes,579.89,129
+92926398-b355-4211-b6c0-4f5da5d1c675,Tênis de Corrida 744,esportes,439.16,107
+690ca6a5-4928-46fa-8bf0-810ec044fe98,Smartphone 324,eletrônicos,4216.43,6
+2f334cf8-a7cf-4420-87f4-9987322752f6,Sofá 892,casa,2320.98,139
+a60543cf-7b5c-4263-a7a5-97b81133d8fa,Smartphone 821,eletrônicos,,12
+57eae7d2-bd0d-4a67-bb29-abff30a3717d,Tênis 849,moda,294.63,103
+b9eb64e1-4e3b-4da6-b68b-59f413a9f4ac,Tênis 609,moda,219.16,136
+93585c18-ade3-482e-a985-30ba8ae3a86d,Skate 473,esportes,764.62,25
+cd71a736-6244-4a49-905c-33ad9939a0a5,História 435,livros,49.4,69
+fe7436c0-7525-4d44-922a-e875ac908312,Lâmpada 525,casa,24.28,136
+0f99e6f3-3315-41fd-8667-fd1b052babd7,Autoajuda 103,livros,44.69,124
+0ea42a87-34f0-4c36-a352-650d78b35bd0,Smart TV 822,eletrônicos,3809.34,124
+a07c288a-45c4-45a5-b673-68d073cc834c,Panela 462,casa,103.77,71
+5af11be4-4fe6-4813-b6ec-fedf10526a6c,Boné 517,moda,76.56,89
+63b4fa7f-8198-41cd-a103-efd8ab2868bf,Lâmpada 272,casa,15.67,127
+ee37925b-e2ed-442d-bbb8-ffa0a6a2ee04,História 809,livros,42.27,6
+9f653626-e4ab-4874-a331-5a265635767a,Livro Técnico 330,livros,,26
+c458b489-c729-4148-a5f5-4cddd54f4bbe,Mochila 117,esportes,260.75,26
+6e32958d-c53f-4ab2-9a2f-e1fb957580d7,Sofá 701,casa,2685.14,138
+f709892b-76d8-4304-98c4-343d53767b7e,História 139,livros,79.24,4
+2de9301e-5783-4b09-8172-cdda2c48ed0e,Notebook 513,eletrônicos,5603.09,9
+28dea6d6-dbf5-40ac-b50c-44a2f51c12ff,Cadeira 778,casa,449.59,85
+803bd18c-2840-4277-81ca-ef0da1d391d2,Livro Técnico 590,livros,169.5,70
+81c9a59f-3516-4ac8-a428-aa2270f73e2e,Tênis 472,moda,574.92,33
+13a22891-e347-44ec-93e9-6e079cb0a254,Tênis 905,moda,433.43,120
+c7821e62-a0b2-49ec-8a00-213a2d7662c9,Autoajuda 604,livros,60.85,68
+951d40e7-6801-40bc-8f26-1112b0ba42f3,Fone Bluetooth 822,eletrônicos,527.94,115
+fe759035-08e1-4b2c-a2eb-4b73fa0db127,Camiseta 316,moda,53.02,6
+58ce2a0d-bbab-458e-9871-d6fc6f99e980,Autoajuda 898,livros,56.25,36
+e0a08e04-94f1-43b7-8923-6f59d003fee1,Notebook 651,eletrônicos,3910.45,95
+af1ee5c1-91e4-4d43-b065-cd5d58157ae0,Livro Técnico 356,livros,120.63,78
+f0f82a87-45bc-4a81-8a34-65214c33d180,Jaqueta 214,moda,287.09,95
+143e9f65-708c-42c9-a4fa-0e05a4faf7de,Bola 587,esportes,127.17,108
+acd872c0-569a-4f2d-bca7-3cb085fc8604,Boné 685,moda,36.18,22
+2d5a5553-f01f-43ac-b1c3-673dfd0e66d3,Bola 410,esportes,178.48,90
+8f201330-67ac-4afb-9a07-051b9ed518b8,Sofá 665,casa,2704.07,70
+874fd0bd-c991-411c-9519-cf18c909aef7,Livro Técnico 260,livros,105.65,92
+4cebbfed-46d0-4dec-a2ae-a57fe459c0b9,Smartphone 164,eletrônicos,4514.32,71
+0fac78f9-1056-454c-9bb8-b0673e424806,Bola 398,esportes,197.16,106
+5218b3d3-52f3-4caa-82b4-a7b2d87a8cb4,Autoajuda 170,livros,48.07,84
+d6947862-2890-478e-b418-36208d7e209f,Autoajuda 317,livros,44.47,61
+5ff06685-8d67-4214-a34b-25db49fa5d5b,Skate 584,esportes,326.69,7
+3b51e74c-87d5-4da6-aaaf-587e477eeca5,Notebook 553,eletrônicos,6783.98,77
+e09ae2fb-b389-4791-b868-2461827781df,Tênis 717,moda,381.71,63
+960f418c-db55-4a16-bb41-132120ea3e73,Liquidificador 295,casa,380.83,40
+a668094f-906e-40e5-a3df-d8177ced4325,Livro Técnico 503,livros,81.45,140
+ef51c1a1-89dd-421b-9ba5-8f0f03316c4c,Notebook 556,eletrônicos,3663.79,30
+b0609291-43ea-414d-9302-620bb89d0e69,Smartphone 937,eletrônicos,2788.59,68
+9b2bcea4-8c80-4259-b582-779df258aba2,Skate 598,esportes,420.38,144
+fbd7177e-c35a-44b2-a6a7-b4a1e6a134a2,Autoajuda 418,livros,-90.76,67
+db95c0ed-8cc1-447f-8adb-3718d40664bb,Sofá 899,casa,2273.48,100
+0ec07916-d2fc-4d00-9452-157efe8fd848,Mochila 112,esportes,126.15,60
+03da3fd1-700d-4c38-a144-d7df4013608e,Camiseta 496,moda,79.24,108
+49d8710e-bbbf-463e-9b1d-7db9fdd232c0,Skate 425,esportes,726.7,10
+aec92dcb-9d34-4ae3-864e-566dcbdb9556,Camiseta 644,moda,56.15,70
+8bb7d4ae-86c6-442b-93f6-23305878a267,Jaqueta 527,moda,211.46,8
+44cf68af-3bc6-4403-97a8-0bf322c78471,Liquidificador 617,casa,391.66,103
+c928bdc0-b1fd-4329-9b72-b3c6e2a5b98b,Cadeira 704,casa,171.25,47
+d5c340ec-ee04-4802-937a-ccbaa46f3825,Romance 744,livros,28.19,128
+b93f445a-9367-4597-ae29-ee78d279e0b5,Bicicleta 127,esportes,,24
+e244ac2e-dd46-488d-8b3e-9211808b2b6b,Sofá 221,casa,,128
+2cd5411e-f44c-463f-9ca9-7dbe4dafa38d,Jaqueta 872,moda,142.2,16
+927ee7cc-2b30-47e6-87da-eabe223928e8,Liquidificador 416,casa,268.62,9
+4a54b79d-f9b1-4ea9-911e-e7fa3f04a919,Sofá 205,casa,2351.41,16
+1e55298f-6308-4631-9297-0c36e99571c1,Jaqueta 294,moda,195.7,99
+e2addb06-6a22-47b5-b102-ff8b604b0a13,Notebook 501,eletrônicos,2557.53,113
+18a917b9-c870-4a00-b53f-1706f200096c,Sofá 906,casa,2285.09,3
+fc039722-3886-4e05-9d34-d38744584f4f,Fone Bluetooth 532,eletrônicos,715.72,66
+e944b325-0968-4df3-9708-a5d6f5a6218f,Bicicleta 788,esportes,2300.7,145
+a728f87e-c483-40a7-b113-0b49272a0dff,Mochila 293,esportes,128.23,95
+fa453220-886a-403f-9c20-2301e952948b,Skate 221,esportes,522.04,72
+eaa58c74-8934-4f1a-846d-eee0cf4be719,Livro Técnico 882,livros,99.01,111
+26a99fb8-6c37-4ca6-a9b3-859b40bf4c6a,Lâmpada 774,casa,54.72,71
+6a67d382-dfa7-4afc-bbbc-36ab90fdd2a5,Autoajuda 740,livros,,98
+5570daab-152c-4b6a-8a0f-202a555b683d,História 806,livros,71.3,98
+d0e60c62-55b0-4d05-9dd5-964b172958de,Tênis 417,moda,584.53,69
+f614e183-3b3e-4fda-b39b-cc9f8200d2d2,Calça Jeans 167,moda,87.66,114
+1b0bed9d-efa8-4ae6-bbe6-1b54c4ab816f,Panela 630,casa,291.77,66
+ff3a4d4f-35b1-4f26-ad97-0de1fcf2d228,Camiseta 890,moda,90.96,32
+4f59217f-c2dc-4817-9e26-0ddd698f8652,Romance 201,livros,44.92,58
+414e935a-7ace-402e-8748-69edfdef1d85,Romance 552,livros,39.11,149
+ff8067db-b6a7-4ee0-b2c4-a327e938e29a,Infantil 727,livros,45.26,101
+9925428b-4974-44cf-897b-13a9793df600,Infantil 168,livros,29.38,114
+ba0c4bca-00f3-411e-9fba-b06b2cb1d4e7,Notebook 862,eletrônicos,-2390.14,5
+86233208-c958-452e-8d88-840a8671cf7e,Bicicleta 185,esportes,1913.1,36
+6584eb0c-df33-40af-9c09-77e30b6f28f2,Lâmpada 350,casa,46.26,21
+eae595b4-32a2-4aa6-a27a-fdf050e9ea77,Infantil 586,livros,35.11,8
+f7a9f6eb-0a9d-4f18-828b-fff12fd16b82,Fone Bluetooth 853,eletrônicos,140.23,102
+c97934b0-5b1c-4ac5-a045-5a3e48e4b544,Panela 420,casa,286.24,25
+66b59ed2-ed77-481c-8f6b-8b088015a200,Boné 590,moda,51.34,98
+79d4f559-b0ae-40ce-b47e-2a92ea131909,Tênis de Corrida 612,esportes,322.34,107
+f869f312-1a9c-4782-865b-90e50d0577eb,Jaqueta 973,moda,322.4,100
+a32e1129-e096-4bab-b39a-7ef2be51ca1d,Tênis de Corrida 717,esportes,464.46,75
+e172fa01-263d-474b-ab10-ba59c71dacf8,Smartphone 678,eletrônicos,2921.98,83
+bd2d1a26-bc49-4583-ac5b-41a27fefeb4e,Skate 139,esportes,690.84,4
+0951249a-2c2d-4a06-855d-d923e366577a,História 935,livros,111.81,100
+65451bf7-17a0-4dec-9968-c5e1e7669643,Jaqueta 679,moda,161.58,117
+13a98e21-ab5e-4385-a97f-48fba5a5304d,Tênis de Corrida 718,esportes,412.85,117
+0561ccaf-93da-4b4b-ad11-9c7deb417d8c,Lâmpada 526,casa,31.68,44
+4a78d98a-57a0-483b-9b09-1448bfeec6af,Notebook 140,eletrônicos,6967.12,126
+70b4e843-49a3-4a6c-a47c-232a8713f5ab,Liquidificador 125,casa,186.13,66
+68b0477d-8c65-4e8b-a9e9-e7fdf890d53c,Smart TV 131,eletrônicos,3553.46,64
+f57943c7-39ef-40ec-9b94-314458179456,Bicicleta 761,esportes,841.94,127
+f5409fad-ceb3-4884-93ca-1f2d83c6d984,Tênis de Corrida 973,esportes,352.89,69
+60854ac3-1dfa-4b1c-9a0f-4f7c8094502b,Bola 290,esportes,89.63,91
+844262b6-53a8-4ace-adc2-0e974132b19d,Cadeira 755,casa,147.61,29
+6632c562-60cd-46bc-801e-ecfc62b4e96f,Autoajuda 679,livros,98.14,64
+9f19409d-95bc-4a26-92a5-297569ddf3ef,Smartphone 401,eletrônicos,3220.42,119
+dd0bc800-68ab-45cf-9b01-4132e0e761ca,Lâmpada 605,casa,44.95,128
+2540854f-4bae-4bb9-bd82-89c2d56b5d54,Tênis 291,moda,406.63,115
+55e32003-81af-4a11-b3c6-5b471617f463,Infantil 282,livros,22.28,18
+6504e77d-b1c8-4933-968b-06f9a18a8469,Bola 257,esportes,149.83,108
+074edcd7-5024-4bf6-ae2d-74ee0b930836,Cadeira 502,casa,466.25,138
+ecb4a6ed-35e8-4daf-9bfe-c79c965f2d01,Tênis de Corrida 998,esportes,511.52,135
+5a3d8854-7809-4661-adb8-72f819aaf02c,Bola 596,esportes,117.51,45
+5abe91ea-6c2e-4de1-b5e4-8169e8052d74,Panela 439,casa,154.74,69
+123469bd-5517-4038-8f5d-e58e56557557,Sofá 901,casa,1745.12,59
+11e50294-e81d-49f5-8e0d-9d99b81894f1,Tênis de Corrida 596,esportes,246.1,40
+4f96689d-52fe-4b5c-b09d-6c48f49b051c,Tênis 865,moda,593.09,89
+c5a43428-68b2-4040-a0ac-bd2ab322146d,Notebook 981,eletrônicos,5784.01,143
+bd46f945-797a-43be-8c22-5782668ab0e3,Mochila 512,esportes,119.84,121
+9b250732-f77d-4919-a3db-e3ca28044d09,Infantil 368,livros,32.37,87
+d7dfa59f-f008-4424-b139-876a9da9c7f8,Autoajuda 834,livros,,82
+a1d8ee9e-8dcd-4be2-ba70-73825f522831,Skate 303,esportes,293.32,126
+d1440a6f-5e68-492c-9b2a-0a04baddc751,Tênis 802,moda,419.55,80
+7ee39fb4-a38a-40b8-a351-d1205fd52210,Notebook 736,eletrônicos,2220.58,112
+f97ed022-92fa-4991-b7b6-059597d74038,Liquidificador 839,casa,,7
+ad2d49de-d993-400c-a64a-b107839119f5,Fone Bluetooth 295,eletrônicos,351.12,71
+cbd830e6-26e8-4673-97b0-5b498155f50e,Jaqueta 786,moda,177.07,77
+df7f2130-1ea5-49d3-9c79-423dba128f83,Fone Bluetooth 650,eletrônicos,792.32,81
+ba06ea45-4c85-4174-950e-88483b86aa58,Liquidificador 916,casa,366.55,72
+c6053579-c35a-400c-a795-092052265adf,Notebook 690,eletrônicos,4486.1,111
+6493a2b5-13f0-4f4b-a0dd-c54681ef5f55,Jaqueta 225,moda,147.55,115
+7565b748-d0bd-426f-9f66-2309f394c847,Mochila 857,esportes,142.32,49
+702ffeb9-84bf-475a-841a-8815254e1c1d,Liquidificador 157,casa,376.58,94
+eb806c1a-3700-4b5b-ab70-ec1b98b2f3d7,Calça Jeans 316,moda,163.02,82
+213ceee8-71ad-48cb-ab8e-0766747b7821,Bola 478,esportes,199.8,78
+23f5b61f-eab1-4f65-a782-06e3d420c611,Calça Jeans 783,moda,225.01,70
+2a297bc2-c413-4acc-888f-6a745f752e5b,Romance 514,livros,56.59,141
+831d72fe-1563-4212-b064-223cc5753ee6,Jaqueta 922,moda,341.1,108
+6a094a50-c57b-4576-b98d-bb83c2f51e7a,Lâmpada 284,casa,62.8,116
+41220758-a448-449b-af9c-854ad247bce7,Bola 354,esportes,,119
+7664aced-b996-4dcb-9af2-f306caed4a70,Livro Técnico 414,livros,173.75,52
+210a05d1-1c0c-4fa4-b119-e31a3553974a,Cadeira 694,casa,169.89,5
+693e7e38-01ad-4922-ab52-548dffd5b008,Fone Bluetooth 991,eletrônicos,234.7,136
+6c199c59-9225-4328-b1cd-8609938abec8,Bicicleta 692,esportes,1966.35,76
+5e9d3ff0-6a42-4764-9b57-204723ca89c3,Tênis de Corrida 610,esportes,550.84,24
+fd0461af-3bd6-4bbf-9954-e414cc636f85,Tênis 194,moda,186.45,25
+71f9ed2a-1112-40cf-a97d-ab89bbc8839f,Smartphone 545,eletrônicos,4858.65,68
+fa453220-886a-403f-9c20-2301e952948b,Skate 221,esportes,522.04,72
+b7bdcdf7-8ec3-4223-b285-92a58286ec44,Liquidificador 312,casa,176.03,92
+3a221ccc-fa2b-4113-9fc8-8242c6c7094f,Mochila 324,esportes,,133
+ff8067db-b6a7-4ee0-b2c4-a327e938e29a,Infantil 727,livros,45.26,101
+d5ffd345-42bb-4567-8f34-a1b2ec1bfaaf,Skate 671,esportes,328.54,29
+ecf5535c-f793-48ec-a5e8-d8af46d9ad08,Jaqueta 864,moda,347.09,43
+9b80657c-4c99-4ff7-994d-c09e2d258d65,História 339,livros,52.84,36
+43d1b9d0-187a-46ed-a3d7-026e9bcf5a4e,Sofá 201,casa,2880.97,18
+36b25524-f6be-4241-b353-5dcf0466fb4f,História 426,livros,78.44,57
+969338a6-5928-4a4f-a986-f306036dda09,Caixa de Som 702,eletrônicos,675.07,15
+8813c3c2-b2c8-4921-83b0-65fc99c37229,Calça Jeans 152,moda,206.23,93
+5381a8cb-5de6-4dbc-a3ea-c9a8c31fa95a,Camiseta 105,moda,118.37,49
+e0479c15-29ae-4bc4-a3c4-7d4033f1024d,Livro Técnico 960,livros,108.32,7
+f81d3a6e-1f5e-40e7-aec9-f64fc2beaae4,Livro Técnico 156,livros,169.49,64
+1c28b5e2-2d29-4cf6-b16a-f831a4fe7785,Boné 854,moda,60.78,112
+0ec07916-d2fc-4d00-9452-157efe8fd848,Mochila 112,esportes,126.15,60
+f7813945-eb07-494d-8d22-daed7f77910f,Tênis 827,moda,256.0,6
+27dba9c8-99ed-4e8e-bcad-8ac32f445df7,Camiseta 121,moda,55.47,146
+9660b0b0-5283-4c12-aac8-c7863be57a3a,Camiseta 862,moda,52.0,98
+21a739dd-9821-40dd-b622-d709120713e8,Caixa de Som 175,eletrônicos,942.96,121
+7fc6f0e8-6c0e-4230-8001-574bb3a44de4,Fone Bluetooth 989,eletrônicos,282.77,129
+7493e0ce-6ea5-4125-9ace-1541d23425d2,Smartphone 129,eletrônicos,1773.66,8
+69e7330b-86cf-4d15-b00c-9251ec0a177f,Cadeira 570,casa,-494.49,120
+e66ccd60-0520-4ac6-9de1-ea9e018ea6d5,Tênis 531,moda,161.17,109
+c1571009-4683-4a19-80bb-060d3a881fe6,Camiseta 939,moda,98.5,81
+630a7629-cf91-4cad-9c39-028263796cd7,Infantil 765,livros,25.76,101
+c78d30d4-12bb-408a-996b-3dc403b23c46,Mochila 459,esportes,270.91,12
+6c50df68-28b5-4b77-af1f-293d6bddbb28,Mochila 400,esportes,-120.48,77
