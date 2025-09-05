@@ -56,6 +56,7 @@ x-airflow-common:
   environment:
     &airflow-common-env
     AIRFLOW__CORE__EXECUTOR: LocalExecutor
+    DOTENV_PATH: "/opt/airflow/.credentials.env"
     AIRFLOW__CORE__AUTH_MANAGER: airflow.providers.fab.auth_manager.fab_auth_manager.FabAuthManager
     AIRFLOW__DATABASE__SQL_ALCHEMY_CONN: postgresql+psycopg2://airflow:airflow@postgres/airflow
     AIRFLOW__CORE__FERNET_KEY: ''
@@ -79,6 +80,7 @@ x-airflow-common:
     - ../mnt/airflow/plugins:/opt/airflow/plugins
     - ../mnt/airflow/python:/opt/python
     - ../mnt/airflow/spark:/opt/spark
+    - conf/.credentials.env:/opt/airflow/.credentials.env:ro
 
   user: "${AIRFLOW_UID:-50000}:0"
   depends_on:

@@ -21,7 +21,7 @@ services:
       - "9000:9000"
       - "9001:9001"
     env_file:
-      - conf/.credentials.conf
+      - conf/.credentials.env
     command: server /data --console-address ":9001"
     volumes:
       - lake_minio_vol:/data
