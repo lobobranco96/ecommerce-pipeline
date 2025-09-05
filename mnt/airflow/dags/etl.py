@@ -4,10 +4,13 @@ from airflow.models.param import Param
 from datetime import datetime, timedelta
 
 import os
+from dotenv import load_dotenv
 import pandas as pd
-from include.minio_uploader import MinioUploader
+from python.minio_uploader import MinioUploader
 
 CSV_DIR = "/opt/airflow/include/{date_folder}"
+
+load_dotenv()
 
 @dag(
     schedule_interval=None,
@@ -37,10 +40,14 @@ def ingest_csv_to_minio():
         dataset_name = os.path.basename(file_path).replace(".csv", "")
         today = datetime.today().strftime('%Y-%m-%d')
 
+        endpoint_url = os.getenv("MINIO_ENDPOINT")
+        access_key = os.getenv("MINIO_ACCESS_KEY")
+        secret_key = os.getenv("MINIO_SECRET_KEY")
+
         uploader = MinioUploader(
-            endpoint_url="http://minio:9000",
-            access_key="minioadmin",
-            secret_key="minioadmin",
+            endpoint_url=endpoint_url,
+            access_key=access_key,
+            secret_key=secret_key,
             bucket_name="raw"
         )
 
