@@ -77,8 +77,8 @@ x-airflow-common:
     - ../mnt/airflow/logs:/opt/airflow/logs
     - ../mnt/airflow/config:/opt/airflow/config
     - ../mnt/airflow/plugins:/opt/airflow/plugins
-    - ../mnt/python:/opt/python
-    - ../mnt/spark:/opt/spark
+    - ../mnt/airflow/python:/opt/python
+    - ../mnt/airflow/spark:/opt/spark
 
   user: "${AIRFLOW_UID:-50000}:0"
   depends_on:
