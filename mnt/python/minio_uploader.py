@@ -15,16 +15,28 @@ class MinioUploader:
             region_name='us-east-1'
         )
 
-    def upload_df_as_parquet(self, df, dataset_name):
-        today = datetime.today().strftime('%Y-%m-%d')
-        parquet_buffer = io.BytesIO()
+    def upload_df_as_parquet(self, df, dataset_name, partition_cols=None):
+        today = datetime.today()
+        year, month, day = today.strftime("%Y"), today.strftime("%m"), today.strftime("%d")
 
-        table = pa.Table.from_pandas(df)
-        pq.write_table(table, parquet_buffer)
+        # Converter Pandas para Arrow Table com schema otimizado
+        table = pa.Table.from_pandas(df, preserve_index=False)
+
+        # Buffer Parquet otimizado
+        parquet_buffer = io.BytesIO()
+        pq.write_table(
+            table,
+            parquet_buffer,
+            compression="snappy",      
+            use_dictionary=True,          
+            coerce_timestamps="ms",      
+            data_page_size=64 * 1024      
+        )
         parquet_buffer.seek(0)
 
-        key = f"{dataset_name}/date={today}/{dataset_name}.parquet"
+        key = f"{dataset_name}/year={year}/month={month}/day={day}/{dataset_name}.parquet"
 
+        # Upload no MinIO
         self.client.put_object(
             Bucket=self.bucket,
             Key=key,
