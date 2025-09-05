@@ -13,7 +13,7 @@ services:
     image: grafana/grafana:latest
     container_name: grafana
     env_file:
-      - conf/.credentials.env
+      - ./conf/.credentials.conf
     ports:
       - "3000:3000"  
     depends_on:

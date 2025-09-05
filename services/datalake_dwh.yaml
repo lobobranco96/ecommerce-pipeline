@@ -21,7 +21,7 @@ services:
       - "9000:9000"
       - "9001:9001"
     env_file:
-      - conf/.credentials.env
+      - ./conf/.credentials.conf
     command: server /data --console-address ":9001"
     volumes:
       - lake_minio_vol:/data
@@ -57,7 +57,7 @@ services:
       echo 'Políticas de acesso definidas para público.';
       "
     env_file:
-      - conf/.credentials.conf
+      - ./conf/.credentials.conf
     networks:
       - ecommerce_network
 
