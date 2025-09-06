@@ -81,7 +81,6 @@ x-airflow-common:
     - ../mnt/airflow/plugins:/opt/airflow/plugins
     - ../mnt/airflow/python:/opt/python
     - ../mnt/airflow/spark:/opt/spark
-    - ./conf/.credentials.conf:/opt/airflow/.credentials.conf
 
   user: "${AIRFLOW_UID:-50000}:0"
   depends_on:
@@ -108,6 +107,23 @@ services:
     restart: always
     networks:
       - ecommerce_network  
+
+  airflow-apiserver:
+    <<: *airflow-common
+    command: api-server
+    ports:
+      - "8080:8080"
+    healthcheck:
+      test: ["CMD", "curl", "--fail", "http://localhost:8080/api/v2/version"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+      start_period: 30s
+    restart: always
+    depends_on:
+      <<: *airflow-common-depends-on
+      airflow-init:
+        condition: service_completed_successfully
 
   airflow-scheduler:
     <<: *airflow-common
