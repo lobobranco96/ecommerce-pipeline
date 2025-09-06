@@ -81,7 +81,7 @@ x-airflow-common:
     - ../mnt/airflow/plugins:/opt/airflow/plugins
     - ../mnt/python:/opt/airflow/dags/python
     - ../mnt/spark:/opt/airflow/dags/spark
-    - ./include:/opt/airflow/include
+    - ../include:/opt/airflow/include
 
   user: "${AIRFLOW_UID:-50000}:0"
   depends_on:
