@@ -208,3 +208,9 @@ __marimo__/
 
 # Colab
 dev/
+
+# arquivos internos minio
+mnt/minio/.minio.sys/
+
+mnt/airflow/logs/dag_processor/latest/
+mnt/airflow/config/airflow.cfg
