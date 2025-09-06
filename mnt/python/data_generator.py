@@ -17,8 +17,9 @@ logging.basicConfig(
 class DataGenerator:
     def __init__(self):
         timestamp = datetime.today().strftime('%Y-%m-%d')
-        self.output_dir = os.path.join("include", timestamp)
+        self.output_dir = os.path.join("/opt/airflow/include", timestamp)
         os.makedirs(self.output_dir, exist_ok=True)
+
         self.fake = Faker('pt_BR')
         logging.info(f"Diretório de saída: {self.output_dir}")
 
