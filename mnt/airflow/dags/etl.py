@@ -30,6 +30,7 @@ def ingest_csv_to_minio():
     wait_for_file = FileSensor(
     task_id="wait_for_file",
     filepath=f"/opt/airflow/include/{date_folder}",
+    fs_conn_id="fs_default", 
     poke_interval=60,  
     timeout=60 * 60,   
     mode="poke",       
@@ -50,9 +51,9 @@ def ingest_csv_to_minio():
         dataset_name = os.path.basename(file_path).replace(".csv", "")
         today = datetime.today().strftime('%Y-%m-%d')
 
-        endpoint_url = os.getenv("MINIO_ENDPOINT")
-        access_key = os.getenv("MINIO_ACCESS_KEY")
-        secret_key = os.getenv("MINIO_SECRET_KEY")
+        endpoint_url = os.getenv("S3_ENDPOINT")
+        access_key = os.getenv("AWS_ACCESS_KEY_ID") 
+        secret_key = os.getenv("AWS_SECRET_ACCESS_KEY")
 
         uploader = MinioUploader(
             endpoint_url=endpoint_url,
