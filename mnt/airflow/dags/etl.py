@@ -2,6 +2,7 @@ from airflow.decorators import dag, task
 from airflow.utils.dates import days_ago
 from airflow.models.param import Param
 from datetime import datetime, timedelta
+from airflow.sensors.filesystem import FileSensor
 
 import os
 from dotenv import load_dotenv
@@ -25,14 +26,24 @@ load_dotenv()
 )
 def ingest_csv_to_minio():
 
-    @task
+    # Espera pelo diretório com arquivos
+    date_folder = datetime.today().strftime('%Y-%m-%d')
+    wait_for_file = FileSensor(
+    task_id="wait_for_file",
+    filepath=f"/opt/airflow/include/{date_folder}",
+    poke_interval=60,  
+    timeout=60 * 60,   
+    mode="poke",       
+    )
+
+    @task # Lista todos os CSVs disponíveis
     def list_csv_files():
         date_folder = datetime.today().strftime('%Y-%m-%d')
         folder = CSV_DIR.format(date_folder=date_folder)
         files = [os.path.join(folder, f) for f in os.listdir(folder) if f.endswith(".csv")]
         return files
 
-    @task
+    @task # Faz upload dos CSVs para o MinIO
     def upload_file_to_minio(file_path: str):
         print(f"Processando: {file_path}")
         df = pd.read_csv(file_path)
@@ -53,7 +64,8 @@ def ingest_csv_to_minio():
 
         uploader.upload_df_as_parquet(df, dataset_name)
 
+    
     file_list = list_csv_files()
-    upload_file_to_minio.expand(file_path=file_list)
+    wait_for_file >> file_list >> upload_file_to_minio.expand(file_path=file_list)
 
 dag = ingest_csv_to_minio()
