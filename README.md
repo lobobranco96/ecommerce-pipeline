@@ -74,16 +74,23 @@ Objetivos principais:
 ---
 
 ## Descrição do Pipeline
+1. **Data source generator**
+  - A dag generator_dag inicia o codigo para gerar os dados sinteticos via class `DataGenerator`
+    - `users.csv`
+    - `products.csv`
+    - `orders.csv`
+    - `payments.csv`
+  - Todos os arquivos são salvos localmente em `include/`
 
-1. **Ingestão (Raw)**  
-   - Dados sintéticos gerados via `DataGenerator`:
-     - `users.csv` → clientes
-     - `products.csv` → produtos
-     - `orders.csv` → pedidos
-     - `payments.csv` → pagamentos
-   - Todos os arquivos são salvos no bucket `raw/` do MinIO em **formato Parquet**.
+2. **Ingestão (Raw)**  
+   - Dados sintéticos .csv são carregados no bucket `raw/` do MinIO em **formato Parquet**.:
+    - A ideia é focar em reduzir o custo de armazenamento, aplicando algumas boas praticas de otimização de arquivo:
+      - Compressão com Snappy = menos espaço em disco, leitura rápida.
+      - Codificação por dicionário = ótimo para colunas repetitivas, economia grande.
+      - Redução de precisão de timestamps = menor armazenamento desnecessário.
+      - Controle do tamanho de páginas = equilíbrio entre compressão e acesso seletivo eficiente.
 
-2. **Transformação (Processed)**  
+3. **Transformação (Processed)**  
    - Cada dataset é processado individualmente com PySpark:
      - **Users:** deduplicação, padronização de e-mails e IDs
      - **Products:** normalização de preços, categorias e estoque
@@ -91,16 +98,16 @@ Objetivos principais:
      - **Payments:** reconciliação com orders, validação de valores
    - Os dados transformados são salvos no bucket `processed/` do MinIO em **formato Parquet**.
 
-3. **Validação de Qualidade (Great Expectations)**  
+4. **Validação de Qualidade (Great Expectations)**  
    - Cada dataset processado possui uma task GX separada para validação de regras de negócio:
      - Integridade de chaves
      - Valores nulos ou inválidos
      - Consistência de métricas
 
-4. **Carga no Data Warehouse**  
+5. **Carga no Data Warehouse**  
    - Tabelas limpas e validadas são carregadas no PostgreSQL para análise e BI via Metabase.
 
-5. **Observabilidade**  
+6. **Observabilidade**  
    - Métricas do Airflow, Spark e containers coletadas pelo Prometheus e visualizadas no Grafana.
 
 ---
