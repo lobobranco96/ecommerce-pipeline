@@ -1,5 +1,4 @@
 from airflow.decorators import dag, task
-from airflow.utils.dates import days_ago
 from airflow.models.param import Param
 from datetime import datetime, timedelta
 from airflow.sensors.filesystem import FileSensor
@@ -14,8 +13,8 @@ CSV_DIR = "/opt/airflow/include/{date_folder}"
 load_dotenv()
 
 @dag(
-    schedule_interval=None,
-    start_date=days_ago(1),
+    schedule=None,
+    start_date=datetime.now() - timedelta(days=1),
     catchup=False,
     tags=["minio", "ingestion", "csv", "pyspark", "postgres"],
     default_args={
