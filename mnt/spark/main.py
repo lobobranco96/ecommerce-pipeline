@@ -19,11 +19,12 @@ if __name__ == "__main__":
 
 
     logging.info("Coletando o nome do dataset à ser processado e transformado.")
-    dataset = sys.argv[1]
+    dataset_path = sys.argv[0]
+    dataset_name = dataset_path.split("/")[0]
 
     logging.info("Iniciando a transformação.")
     transformer = Transformer(spark)
-    transformer.dataset
+    transformer.dataset_name(dataset_path)
     logging.info("Transformação finalizada.")
 
     logging.info("Encerrando a sessão spark.")
