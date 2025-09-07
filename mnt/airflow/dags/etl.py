@@ -11,17 +11,21 @@ from python.minio_uploader import MinioUploader
 CSV_DIR = "/opt/airflow/include/{date_folder}"
 
 load_dotenv()
+ENDPOINT_URL = os.getenv("S3_ENDPOINT")
+ACCESS_KEY = os.getenv("AWS_ACCESS_KEY_ID") 
+SECRET_KEY = os.getenv("AWS_SECRET_ACCESS_KEY")
 
+default_args = {
+    "owner": "lobobranco",
+    "retries": 1,
+    "retry_delay": timedelta(minutes=2),
+}
 @dag(
     schedule=None,
     start_date=datetime.now() - timedelta(days=1),
     catchup=False,
     tags=["minio", "ingestion", "csv", "pyspark", "postgres"],
-    default_args={
-        "owner": "lobobranco",
-        "retries": 2,
-        "retry_delay": timedelta(minutes=2)
-    }
+    default_args=default_args,
 )
 def etl():
   """
@@ -56,14 +60,10 @@ def etl():
       dataset_name = os.path.basename(file_path).replace(".csv", "")
       today = datetime.today().strftime('%Y-%m-%d')
 
-      endpoint_url = os.getenv("S3_ENDPOINT")
-      access_key = os.getenv("AWS_ACCESS_KEY_ID") 
-      secret_key = os.getenv("AWS_SECRET_ACCESS_KEY")
-
       uploader = MinioUploader(
-          endpoint_url=endpoint_url,
-          access_key=access_key,
-          secret_key=secret_key,
+          endpoint_url=ENDPOINT_URL,
+          access_key=ACCESS_KEY,
+          secret_key=SECRET_KEY,
           bucket_name="raw"
       )
 
