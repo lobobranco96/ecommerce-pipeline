@@ -12,16 +12,17 @@ CSV_DIR = "/opt/airflow/include/{date_folder}"
 
 load_dotenv()
 
+default_args = {
+    "owner": "lobobranco",
+    "retries": 1,
+    "retry_delay": timedelta(minutes=2),
+}
 @dag(
     schedule=None,
     start_date=datetime.now() - timedelta(days=1),
     catchup=False,
     tags=["minio", "ingestion", "csv", "pyspark", "postgres"],
-    default_args={
-        "owner": "lobobranco",
-        "retries": 2,
-        "retry_delay": timedelta(minutes=2)
-    }
+    default_args=default_args,
 )
 def etl():
   """
