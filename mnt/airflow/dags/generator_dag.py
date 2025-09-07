@@ -1,6 +1,5 @@
 from airflow.decorators import dag, task
-from airflow.utils.dates import days_ago
-from datetime import timedelta
+from datetime import datetime, timedelta
 from python.data_generator import DataGenerator
 
 default_args = {
@@ -12,8 +11,8 @@ default_args = {
 @dag(
     dag_id="fake_data_generator_dag",
     description="Gera dados fake em CSV para simular dados de ecommerce",
-    schedule_interval="@daily",
-    start_date=days_ago(1),
+    schedule="@daily",
+    start_date=datetime.now() - timedelta(days=1),
     catchup=False,
     default_args=default_args,
     tags=["fake_data", "csv", "ecommerce"],

@@ -11,7 +11,9 @@ x-common-log-config: &default_config
     start_period: 10s
 
 x-spark-worker-default: &spark_worker_default
-  build: ../docker/spark
+  build:
+    context: ../docker/spark  
+    dockerfile: Dockerfile
   <<: *default_config
   environment:
     - SPARK_MODE=worker
@@ -43,9 +45,8 @@ services:
     volumes:
       - ../mnt/spark:/spark/
     ports:
-      - 9090:8080
+      - 9091:8080
       - 7077:7077
-      - 18080:8080
 
   spark-worker-1:
     container_name: spark-worker-1
