@@ -1,7 +1,7 @@
 from airflow.decorators import dag, task
+from airflow.utils.dates import days_ago
 from airflow.models.param import Param
 from datetime import datetime, timedelta
-from airflow.sensors.filesystem import FileSensor
 
 import os
 from dotenv import load_dotenv
@@ -13,8 +13,8 @@ CSV_DIR = "/opt/airflow/include/{date_folder}"
 load_dotenv()
 
 @dag(
-    schedule=None,
-    start_date=datetime.now() - timedelta(days=1),
+    schedule_interval=None,
+    start_date=days_ago(1),
     catchup=False,
     tags=["minio", "ingestion", "csv", "pyspark", "postgres"],
     default_args={
@@ -25,25 +25,14 @@ load_dotenv()
 )
 def ingest_csv_to_minio():
 
-    # Espera pelo diretório com arquivos
-    date_folder = datetime.today().strftime('%Y-%m-%d')
-    wait_for_file = FileSensor(
-    task_id="wait_for_file",
-    filepath=f"/opt/airflow/include/{date_folder}",
-    fs_conn_id="fs_default", 
-    poke_interval=60,  
-    timeout=60 * 60,   
-    mode="poke",       
-    )
-
-    @task # Lista todos os CSVs disponíveis
-    def list_csv_files():
+    @task
+    def list_csv_files() -> list[str]:
         date_folder = datetime.today().strftime('%Y-%m-%d')
         folder = CSV_DIR.format(date_folder=date_folder)
         files = [os.path.join(folder, f) for f in os.listdir(folder) if f.endswith(".csv")]
         return files
 
-    @task # Faz upload dos CSVs para o MinIO
+    @task
     def upload_file_to_minio(file_path: str):
         print(f"Processando: {file_path}")
         df = pd.read_csv(file_path)
@@ -52,7 +41,7 @@ def ingest_csv_to_minio():
         today = datetime.today().strftime('%Y-%m-%d')
 
         endpoint_url = os.getenv("S3_ENDPOINT")
-        access_key = os.getenv("AWS_ACCESS_KEY_ID") 
+        access_key = os.getenv("AWS_ACCESS_KEY_ID")
         secret_key = os.getenv("AWS_SECRET_ACCESS_KEY")
 
         uploader = MinioUploader(
@@ -64,8 +53,7 @@ def ingest_csv_to_minio():
 
         uploader.upload_df_as_parquet(df, dataset_name)
 
-    
     file_list = list_csv_files()
-    wait_for_file >> file_list >> upload_file_to_minio.expand(file_path=file_list)
+    upload_file_to_minio.expand(file_path=file_list)
 
 dag = ingest_csv_to_minio()
