@@ -1,7 +1,7 @@
 from airflow.decorators import dag, task
-from airflow.utils.dates import days_ago
 from airflow.models.param import Param
 from datetime import datetime, timedelta
+from airflow.sensors.filesystem import FileSensor
 
 import os
 from dotenv import load_dotenv
@@ -13,8 +13,8 @@ CSV_DIR = "/opt/airflow/include/{date_folder}"
 load_dotenv()
 
 @dag(
-    schedule_interval=None,
-    start_date=days_ago(1),
+    schedule=None,
+    start_date=datetime.now() - timedelta(days=1),
     catchup=False,
     tags=["minio", "ingestion", "csv", "pyspark", "postgres"],
     default_args={
@@ -23,37 +23,54 @@ load_dotenv()
         "retry_delay": timedelta(minutes=2)
     }
 )
-def ingest_csv_to_minio():
+def etl():
+  """
+    Sensor searches for new files in the "include" folder by date.
+    Files are ingested into MinIO in Parquet format, partitioned by date, and stored in the "raw" bucket.
+    PySpark scripts perform transformation and validation using Great Expectations, then load the data into the "processed" bucket.
+  """
 
-    @task
-    def list_csv_files() -> list[str]:
-        date_folder = datetime.today().strftime('%Y-%m-%d')
-        folder = CSV_DIR.format(date_folder=date_folder)
-        files = [os.path.join(folder, f) for f in os.listdir(folder) if f.endswith(".csv")]
-        return files
+  # Espera pelo diretório com arquivos
+  date_folder = datetime.today().strftime('%Y-%m-%d')
+  wait_for_file = FileSensor(
+  task_id="wait_for_file",
+  filepath=f"/opt/airflow/include/{date_folder}",
+  fs_conn_id="fs_default", 
+  poke_interval=60,  
+  timeout=60 * 60,   
+  mode="poke",       
+  )
 
-    @task
-    def upload_file_to_minio(file_path: str):
-        print(f"Processando: {file_path}")
-        df = pd.read_csv(file_path)
+  @task # Lista todos os CSVs disponíveis
+  def list_csv_files():
+      date_folder = datetime.today().strftime('%Y-%m-%d')
+      folder = CSV_DIR.format(date_folder=date_folder)
+      files = [os.path.join(folder, f) for f in os.listdir(folder) if f.endswith(".csv")]
+      return files
 
-        dataset_name = os.path.basename(file_path).replace(".csv", "")
-        today = datetime.today().strftime('%Y-%m-%d')
+  @task # Faz upload dos CSVs para o MinIO
+  def upload_file_to_minio(file_path: str):
+      print(f"Processando: {file_path}")
+      df = pd.read_csv(file_path)
 
-        endpoint_url = os.getenv("S3_ENDPOINT")
-        access_key = os.getenv("AWS_ACCESS_KEY_ID")
-        secret_key = os.getenv("AWS_SECRET_ACCESS_KEY")
+      dataset_name = os.path.basename(file_path).replace(".csv", "")
+      today = datetime.today().strftime('%Y-%m-%d')
 
-        uploader = MinioUploader(
-            endpoint_url=endpoint_url,
-            access_key=access_key,
-            secret_key=secret_key,
-            bucket_name="raw"
-        )
+      endpoint_url = os.getenv("S3_ENDPOINT")
+      access_key = os.getenv("AWS_ACCESS_KEY_ID") 
+      secret_key = os.getenv("AWS_SECRET_ACCESS_KEY")
 
-        uploader.upload_df_as_parquet(df, dataset_name)
+      uploader = MinioUploader(
+          endpoint_url=endpoint_url,
+          access_key=access_key,
+          secret_key=secret_key,
+          bucket_name="raw"
+      )
 
-    file_list = list_csv_files()
-    upload_file_to_minio.expand(file_path=file_list)
+      uploader.upload_df_as_parquet(df, dataset_name)
 
-dag = ingest_csv_to_minio()
+  
+  file_list = list_csv_files()
+  wait_for_file >> file_list >> upload_file_to_minio.expand(file_path=file_list)
+
+dag = etl()
