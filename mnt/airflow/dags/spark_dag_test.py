@@ -58,7 +58,7 @@ def test():
     logging.info(f"File Path: {file_path}")
     return SparkSubmitOperator(
     task_id='spark_submit_task',
-    application='/opt/spark_job/data_transformation.py',
+    application='/opt/airflow/dags/spark',
     conn_id='spark_default',
     conf={
         "spark.executor.memory": "512m",
