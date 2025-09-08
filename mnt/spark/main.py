@@ -1,7 +1,6 @@
 import sys
 import logging
 
-import pyspark
 from src.transformer import Transformer
 from src.spark_session import create_spark_session
 
@@ -17,15 +16,24 @@ if __name__ == "__main__":
     logging.info("Criando a sessão spark.")
     spark = create_spark_session()
 
-
     logging.info("Coletando o nome do dataset à ser processado e transformado.")
-    dataset_path = sys.argv[0]
-    dataset_name = dataset_path.split("/")[0]
+    # O caminho do arquivo vem como argumento da DAG
+    dataset_path = sys.argv[1]  
+    print(dataset_path) 
+    dataset_name = dataset_path.split("/")[-1].split(".")[0]  
+    print(dataset_name)
+
+    logging.info(f"Dataset: {dataset_name} | Path: {dataset_path}")
 
     logging.info("Iniciando a transformação.")
     transformer = Transformer(spark)
-    transformer.dataset_name(dataset_path)
-    logging.info("Transformação finalizada.")
+
+    # Chama dinamicamente o método certo (orders, payments, etc)
+    if hasattr(transformer, dataset_name):
+        method = getattr(transformer, dataset_name)
+        df = method(dataset_path)
+        logging.info(f"Transformação finalizada para {dataset_name}")
+    else:
+        raise AttributeError(f"O dataset '{dataset_name}' não possui método correspondente no Transformer")
 
     logging.info("Encerrando a sessão spark.")
-    spark.stop()
