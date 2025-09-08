@@ -80,7 +80,7 @@ x-airflow-common:
     - ../mnt/airflow/config:/opt/airflow/config
     - ../mnt/airflow/plugins:/opt/airflow/plugins
     - ../mnt/python:/opt/airflow/dags/python
-    - ../mnt/spark:/opt/airflow/dags/spark
+    - ../mnt/spark:/opt/spark
     - ../include:/opt/airflow/include
 
   user: "${AIRFLOW_UID:-50000}:0"
