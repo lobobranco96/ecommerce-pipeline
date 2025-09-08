@@ -23,7 +23,7 @@ def create_spark_session():
         conf = (
             pyspark.SparkConf()
             .set("spark.master", "spark://spark-master:7077")
-        )
+            )
         
         spark = SparkSession.builder \
             .appName("Minio Integration with PySpark") \
