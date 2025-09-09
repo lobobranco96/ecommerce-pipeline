@@ -21,9 +21,13 @@ def create_spark_session():
         logger.info("Iniciando a configuração da Spark Session")
         
         conf = (
-            pyspark.SparkConf()
-            .set("spark.master", "spark://spark-master:7077")
-            )
+          pyspark.SparkConf()
+          .set("spark.master", "spark://spark-master:7077")
+          .set("spark.executor.memory", "512m")
+          .set("spark.executor.cores", "1")
+          .set("spark.hadoop.fs.s3a.impl", "org.apache.hadoop.fs.s3a.S3AFileSystem")
+          .set("spark.hadoop.fs.s3a.path.style.access", "true")
+      )
         
         spark = SparkSession.builder \
             .appName("Minio Integration with PySpark") \
