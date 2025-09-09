@@ -1,5 +1,4 @@
 from airflow.decorators import dag, task
-from airflow.models.param import Param
 from datetime import datetime, timedelta
 from airflow.sensors.filesystem import FileSensor
 
@@ -8,7 +7,7 @@ from dotenv import load_dotenv
 import pandas as pd
 from python.minio_uploader import MinioUploader
 
-CSV_DIR = "/opt/airflow/include/{date_folder}"
+CSV_DIR = "/opt/airflow/include/{date}"
 
 load_dotenv()
 ENDPOINT_URL = os.getenv("S3_ENDPOINT")
@@ -35,10 +34,10 @@ def etl():
   """
 
   # Espera pelo diretório com arquivos
-  date_folder = datetime.today().strftime('%Y-%m-%d')
+  date = datetime.today().strftime('%Y-%m-%d')
   wait_for_file = FileSensor(
   task_id="wait_for_file",
-  filepath=f"/opt/airflow/include/{date_folder}",
+  filepath=f"/opt/airflow/include/{date}",
   fs_conn_id="fs_default", 
   poke_interval=60,  
   timeout=60 * 60,   
@@ -47,13 +46,14 @@ def etl():
 
   @task # Lista todos os CSVs disponíveis
   def list_csv_files():
-      date_folder = datetime.today().strftime('%Y-%m-%d')
-      folder = CSV_DIR.format(date_folder=date_folder)
+      date = datetime.today().strftime('%Y-%m-%d')
+      folder = CSV_DIR.format(date=date)
       files = [os.path.join(folder, f) for f in os.listdir(folder) if f.endswith(".csv")]
       return files
 
   @task # Faz upload dos CSVs para o MinIO
   def upload_file_to_minio(file_path: str):
+      
       print(f"Processando: {file_path}")
       df = pd.read_csv(file_path)
 
