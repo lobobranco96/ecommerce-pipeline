@@ -1,5 +1,8 @@
-from datetime import datetime
+from datetime import datetime, timezone
 import logging 
+import json
+import os
+from gx_validator import validate_spark_df
 
 from pyspark.sql.types import (
     StringType, IntegerType, DoubleType, DateType, TimestampType
@@ -27,6 +30,9 @@ class Transformer:
         self.spark = spark
         self.processed_bucket = "processed_bucket/"
         self.now = datetime.now()
+
+    def _validate_with_json(self, df, json_path, output_path):
+            return validate_spark_df(df, json_path, output_path)
 
     def orders(self, file_path: str):
         """
@@ -79,6 +85,13 @@ class Transformer:
             logger.error(f"Error writing the data to {file_processed_path}: {str(e)}")
             raise e
 
+        """ Gera a validação apos a gravação do arquivo no miniO com Great Expectations"""
+        #expectation_json = "/opt/great_expectations/gx/expectations/orders_expectations.json"
+        expectation_json = "/content/drive/MyDrive/projetos/ecommerce-pipeline/mnt/great_expectations/gx/expectations/orders_expectations.json"
+        validation_result = self._validate_with_json(df_transformed, expectation_json, file_processed_path)
+
+        logger.info(f"Arquivo de validação salvo em: {validation_result}")
+
     def payments(self, file_path: str):
         """
         Transforma o dataset de pagamentos (payments).
@@ -126,6 +139,13 @@ class Transformer:
             logger.error(f"Error writing the data to {file_processed_path}: {str(e)}")
             raise e
 
+        """ Gera a validação apos a gravação do arquivo no miniO com Great Expectations"""
+        #expectation_json = "/opt/great_expectations/gx/expectations/payments_expectations.json"
+        expectation_json = "/content/drive/MyDrive/projetos/ecommerce-pipeline/mnt/great_expectations/gx/expectations/payments_expectations.json"
+        validation_result = self._validate_with_json(df_transformed, expectation_json, file_processed_path)
+
+        logger.info(f"Arquivo de validação salvo em: {validation_result}")
+
     def products(self, file_path: str):
         """
         Transforma o dataset de produtos (products).
@@ -169,6 +189,12 @@ class Transformer:
         except Exception as e:
             logger.error(f"Error writing the data to {file_processed_path}: {str(e)}")
             raise e
+
+        """ Gera a validação apos a gravação do arquivo no miniO com Great Expectations"""
+        #expectation_json = "/opt/great_expectations/gx/expectations/products_expectations.json"
+        expectation_json = "/content/drive/MyDrive/projetos/ecommerce-pipeline/mnt/great_expectations/gx/expectations/products_expectations.json"
+        validation_result = self._validate_with_json(df_transformed, expectation_json, file_processed_path)
+        logger.info(f"Arquivo de validação salvo em: {validation_result}")
 
     def users(self, file_path: str):
         """
@@ -216,3 +242,10 @@ class Transformer:
         except Exception as e:
             logger.error(f"Error writing the data to {file_processed_path}: {str(e)}")
             raise e
+
+        """ Gera a validação apos a gravação do arquivo no miniO com Great Expectations"""
+       # expectation_json = "/opt/great_expectations/gx/expectations/users_expectations.json"
+        expectation_json = "/content/drive/MyDrive/projetos/ecommerce-pipeline/mnt/great_expectations/gx/expectations/users_expectations.json"
+        validation_result = self._validate_with_json(df_transformed, expectation_json, file_processed_path)
+
+        logger.info(f"Arquivo de validação salvo em: {validation_result}")

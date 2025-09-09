@@ -85,42 +85,44 @@ Objetivos principais:
 
 ---
 
-## Descrição do Pipeline
-1. **Data source generator**
-  - A dag generator_dag inicia o codigo para gerar os dados sinteticos via class `DataGenerator`
-    - `users.csv`
-    - `products.csv`
-    - `orders.csv`
-    - `payments.csv`
-  - Todos os arquivos são salvos localmente em `include/`
+## Descrição de como funciona
+- Dag 1: 
+  1. **Data source generator**
+    - A dag generator_dag inicia o codigo para gerar os dados sinteticos via class `DataGenerator`
+      - `users.csv`
+      - `products.csv`
+      - `orders.csv`
+      - `payments.csv`
+    - Todos os arquivos são salvos localmente em `include/`
 
-2. **Ingestão (Raw)**  
-   - Dados sintéticos .csv são carregados no bucket `raw/` do MinIO em **formato Parquet**.:
-    - A ideia é focar em reduzir o custo de armazenamento, aplicando algumas boas praticas de otimização de arquivo:
-      - Compressão com Snappy = menos espaço em disco, leitura rápida.
-      - Codificação por dicionário = ótimo para colunas repetitivas, economia grande.
-      - Redução de precisão de timestamps = menor armazenamento desnecessário.
-      - Controle do tamanho de páginas = equilíbrio entre compressão e acesso seletivo eficiente.
+- Dag 2: 
+  2. **Ingestão (Raw)**  
+    - Dados sintéticos .csv são carregados no bucket `raw/` do MinIO em **formato Parquet**.:
+      - A ideia é focar em reduzir o custo de armazenamento, aplicando algumas boas praticas de otimização de arquivo:
+        - Compressão com Snappy = menos espaço em disco, leitura rápida.
+        - Codificação por dicionário = ótimo para colunas repetitivas, economia grande.
+        - Redução de precisão de timestamps = menor armazenamento desnecessário.
+        - Controle do tamanho de páginas = equilíbrio entre compressão e acesso seletivo eficiente.
 
-3. **Transformação (Processed)**  
-    - Cada dataset é processado individualmente com PySpark, com inferência de schema seguida de cast explícito para garantir tipos corretos:
-      - Users: deduplicação, padronização de e-mails, IDs e datas; remoção de registros sem user_id ou email; limpeza de nomes, cidade e estado.
-      - Products: deduplicação, normalização de categorias e nomes, validação de price > 0 e stock >= 0.
-      - Orders: deduplicação, validação de datas (order_date <= current_timestamp()), quantity > 0, total_price > 0; padronização de status; cast de IDs e valores.
-      - Payments: deduplicação, validação de datas (paid_at <= current_timestamp()), amount > 0; padronização de métodos de pagamento; cast de IDs, valores e timestamps.
-    - Os dados transformados são salvos no bucket processed/ do MinIO em formato Parquet com organização por ano, mês e dia.
+  3. **Transformação (Processed)**  
+      - Cada dataset é processado individualmente com PySpark, com inferência de schema seguida de cast explícito para garantir tipos corretos:
+        - Users: deduplicação, padronização de e-mails, IDs e datas; remoção de registros sem user_id ou email; limpeza de nomes, cidade e estado.
+        - Products: deduplicação, normalização de categorias e nomes, validação de price > 0 e stock >= 0.
+        - Orders: deduplicação, validação de datas (order_date <= current_timestamp()), quantity > 0, total_price > 0; padronização de status; cast de IDs e valores.
+        - Payments: deduplicação, validação de datas (paid_at <= current_timestamp()), amount > 0; padronização de métodos de pagamento; cast de IDs, valores e timestamps.
+      - Os dados transformados são salvos no bucket processed/ do MinIO em formato Parquet com organização por ano, mês e dia.
 
-4. **Validação de Qualidade (Great Expectations)**  
-   - Cada dataset processado possui uma task GX separada para validação de regras de negócio:
-     - Integridade de chaves
-     - Valores nulos ou inválidos
-     - Consistência de métricas
+  4. **Validação de Qualidade (Great Expectations)**  
+    - Cada dataset processado possui uma task GX separada para validação de regras de negócio:
+      - Integridade de chaves
+      - Valores nulos ou inválidos
+      - Consistência de métricas
 
-5. **Carga no Data Warehouse**  
-   - Tabelas limpas e validadas são carregadas no PostgreSQL para análise e BI via Metabase.
+  5. **Carga no Data Warehouse**  
+    - Tabelas limpas e validadas são carregadas no PostgreSQL para análise e BI via Metabase.
 
 6. **Observabilidade**  
-   - Métricas do Airflow, Spark e containers coletadas pelo Prometheus e visualizadas no Grafana.
+   - Métricas do Airflow, Spark e docker coletadas pelo Prometheus e visualizadas no Grafana.
 
 ---
 
