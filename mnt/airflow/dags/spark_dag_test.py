@@ -59,13 +59,9 @@ def test():
             conf={
                 "spark.jars": "/opt/spark/jars/aws-java-sdk-bundle-1.12.262.jar,"
                 "/opt/spark/jars/hadoop-aws-3.3.4.jar",
-                "spark.executor.memory": "512m",
-                "spark.executor.cores": "1",
                 "spark.hadoop.fs.s3a.endpoint": ENDPOINT_URL,
                 "spark.hadoop.fs.s3a.access.key": ACCESS_KEY,
                 "spark.hadoop.fs.s3a.secret.key": SECRET_KEY,
-                "spark.hadoop.fs.s3a.impl": "org.apache.hadoop.fs.s3a.S3AFileSystem",
-                "spark.hadoop.fs.s3a.path.style.access": "true",
             },
             application_args=[files], 
             verbose=True,
