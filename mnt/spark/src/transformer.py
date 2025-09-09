@@ -1,5 +1,8 @@
 from datetime import datetime
 import logging 
+import json
+import os
+from great_expectations.dataset import SparkDFDataset
 
 from pyspark.sql.types import (
     StringType, IntegerType, DoubleType, DateType, TimestampType
@@ -27,6 +30,45 @@ class Transformer:
         self.spark = spark
         self.processed_bucket = "processed_bucket/"
         self.now = datetime.now()
+
+    def validate_with_json(self, parquet_path: str, json_path: str):
+        """
+        Valida um dataset Parquet salvo no S3 usando um JSON de expectativas.
+        O resultado da validação é salvo no mesmo diretório do parquet.
+
+        Args:
+            parquet_path (str): Caminho do arquivo parquet já gravado.
+            json_path (str): Caminho do JSON com as expectativas.
+        """
+        # Lê parquet salvo
+        df = self.spark.read.parquet(parquet_path)
+
+        # Converte para GE dataset
+        spark_df = SparkDFDataset(df)
+
+        # Carrega regras do JSON
+        with open(json_path, "r") as f:
+            expectations = json.load(f).get("expectations", [])
+
+        validation_results = []
+        for expectation in expectations:
+            expectation_type = expectation["expectation_type"]
+            kwargs = expectation.get("kwargs", {})
+            result = getattr(spark_df, expectation_type)(**kwargs)
+            validation_results.append({
+                "expectation_type": expectation_type,
+                "kwargs": kwargs,
+                "success": result["success"]
+            })
+
+        # Caminho do arquivo de validação
+        validation_path = parquet_path.replace(".parquet", "_validation.json")
+
+        # Salva JSON de resultado no mesmo bucket
+        results_df = self.spark.createDataFrame(validation_results)
+        results_df.coalesce(1).write.mode("overwrite").json(validation_path)
+
+        return validation_path
 
     def orders(self, file_path: str):
         """
@@ -79,6 +121,15 @@ class Transformer:
             logger.error(f"Error writing the data to {file_processed_path}: {str(e)}")
             raise e
 
+        """ Gera a validação apos a gravação do arquivo no miniO com Great Expectations"""
+        expectation_json = "/opt/great_expectations/gx/expectations/orders_expectations.json"
+
+        validation_file = self.validate_with_json(
+            parquet_path=file_processed_path,
+            json_path=expectation_json
+        )
+        logger.info(f"Validation results saved at {validation_file}")
+
     def payments(self, file_path: str):
         """
         Transforma o dataset de pagamentos (payments).
@@ -126,6 +177,15 @@ class Transformer:
             logger.error(f"Error writing the data to {file_processed_path}: {str(e)}")
             raise e
 
+        """ Gera a validação apos a gravação do arquivo no miniO com Great Expectations"""
+        expectation_json = "/opt/great_expectations/gx/expectations/payments_expectations.json"
+
+        validation_file = self.validate_with_json(
+            parquet_path=file_processed_path,
+            json_path=expectation_json
+        )
+        logger.info(f"Validation results saved at {validation_file}")
+
     def products(self, file_path: str):
         """
         Transforma o dataset de produtos (products).
@@ -169,6 +229,15 @@ class Transformer:
         except Exception as e:
             logger.error(f"Error writing the data to {file_processed_path}: {str(e)}")
             raise e
+
+        """ Gera a validação apos a gravação do arquivo no miniO com Great Expectations"""
+        expectation_json = "/opt/great_expectations/gx/expectations/products_expectations.json"
+
+        validation_file = self.validate_with_json(
+            parquet_path=file_processed_path,
+            json_path=expectation_json
+        )
+        logger.info(f"Validation results saved at {validation_file}")
 
     def users(self, file_path: str):
         """
@@ -216,3 +285,12 @@ class Transformer:
         except Exception as e:
             logger.error(f"Error writing the data to {file_processed_path}: {str(e)}")
             raise e
+
+        """ Gera a validação apos a gravação do arquivo no miniO com Great Expectations"""
+        expectation_json = "/opt/great_expectations/gx/expectations/users_expectations.json"
+
+        validation_file = self.validate_with_json(
+            parquet_path=file_processed_path,
+            json_path=expectation_json
+        )
+        logger.info(f"Validation results saved at {validation_file}")
