@@ -24,7 +24,7 @@ Objetivos principais:
 - **Data Warehouse:** PostgreSQL
 - **BI / Visualização:** Metabase
 - **Monitoramento e métricas:** Grafana + Prometheus
-- **Linguagem:** Python 3.12
+- **Linguagem:** Python 3.11
 
 ---
 
@@ -38,37 +38,49 @@ Objetivos principais:
 │   ├── prometheus
 │   │   └── prometheus.yaml
 │   └── spark
+│       └── Dockerfile
 ├── include
 │   └── 2025-09-05
 │       ├── orders.csv
 │       ├── payments.csv
 │       ├── products.csv
 │       └── users.csv
+├── Makefile
 ├── mnt
 │   ├── airflow
 │   │   ├── config
+│   │   │   └── airflow.cfg
 │   │   ├── dags
 │   │   │   ├── etl.py
-│   │   │   └── generator_dag.py
+│   │   │   ├── generator_dag.py
+│   │   │   └── spark_dag_test.py
 │   │   ├── logs
 │   │   └── plugins
 │   ├── minio
+│   │   └── raw
+│   │       ├── orders
+│   │       ├── payments
+│   │       ├── products
+│   │       └── users
 │   ├── python
 │   │   ├── data_generator.py
 │   │   ├── __init__.py
 │   │   └── minio_uploader.py
 │   └── spark
 │       ├── __init__.py
-│       ├── orders.py
-│       ├── payments.py
-│       ├── products.py
-│       ├── settings.py
-│       └── users.py
-├── README.txt
+│       ├── main.py
+│       ├── minio_to_postgres.py
+│       └── src
+│           ├── __pycache__
+│           ├── spark_session.py
+│           └── transformer.py
+├── README.md
 └── services
     ├── conf
     ├── datalake_dwh.yaml
-    └── orchestration.yaml
+    ├── observability.yaml
+    ├── orchestration.yaml
+    └── processing.yaml
 ```
 
 ---
@@ -91,12 +103,12 @@ Objetivos principais:
       - Controle do tamanho de páginas = equilíbrio entre compressão e acesso seletivo eficiente.
 
 3. **Transformação (Processed)**  
-   - Cada dataset é processado individualmente com PySpark:
-     - **Users:** deduplicação, padronização de e-mails e IDs
-     - **Products:** normalização de preços, categorias e estoque
-     - **Orders:** validação de datas, status e total_price
-     - **Payments:** reconciliação com orders, validação de valores
-   - Os dados transformados são salvos no bucket `processed/` do MinIO em **formato Parquet**.
+    - Cada dataset é processado individualmente com PySpark, com inferência de schema seguida de cast explícito para garantir tipos corretos:
+      - Users: deduplicação, padronização de e-mails, IDs e datas; remoção de registros sem user_id ou email; limpeza de nomes, cidade e estado.
+      - Products: deduplicação, normalização de categorias e nomes, validação de price > 0 e stock >= 0.
+      - Orders: deduplicação, validação de datas (order_date <= current_timestamp()), quantity > 0, total_price > 0; padronização de status; cast de IDs e valores.
+      - Payments: deduplicação, validação de datas (paid_at <= current_timestamp()), amount > 0; padronização de métodos de pagamento; cast de IDs, valores e timestamps.
+    - Os dados transformados são salvos no bucket processed/ do MinIO em formato Parquet com organização por ano, mês e dia.
 
 4. **Validação de Qualidade (Great Expectations)**  
    - Cada dataset processado possui uma task GX separada para validação de regras de negócio:

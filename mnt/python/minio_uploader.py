@@ -1,19 +1,12 @@
-import boto3
 import io
 import pyarrow as pa
 import pyarrow.parquet as pq
 from datetime import datetime
 
 class MinioUploader:
-    def __init__(self, endpoint_url, access_key, secret_key, bucket_name):
+    def __init__(self, s3_client, bucket_name):
+        self.client = s3_client
         self.bucket = bucket_name
-        self.client = boto3.client(
-            's3',
-            endpoint_url=endpoint_url,
-            aws_access_key_id=access_key,
-            aws_secret_access_key=secret_key,
-            region_name='us-east-1'
-        )
 
     def upload_df_as_parquet(self, df, dataset_name, partition_cols=None):
         today = datetime.today()
