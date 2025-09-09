@@ -1,11 +1,12 @@
-from airflow.decorators import dag, task
-from datetime import datetime, timedelta
-from airflow.sensors.filesystem import FileSensor
-
 import os
+from typing import List
 from dotenv import load_dotenv
 import pandas as pd
 from python.minio_uploader import MinioUploader
+
+from airflow.decorators import dag, task
+from datetime import datetime, timedelta
+from airflow.sensors.filesystem import FileSensor
 
 CSV_DIR = "/opt/airflow/include/{date}"
 
@@ -45,7 +46,7 @@ def etl():
   )
 
   @task # Lista todos os CSVs disponíveis
-  def list_csv_files():
+  def list_csv_files() -> List[str]:
       date = datetime.today().strftime('%Y-%m-%d')
       folder = CSV_DIR.format(date=date)
       files = [os.path.join(folder, f) for f in os.listdir(folder) if f.endswith(".csv")]
@@ -70,7 +71,7 @@ def etl():
       uploader.upload_df_as_parquet(df, dataset_name)
 
   
-  file_list = list_csv_files()
-  wait_for_file >> file_list >> upload_file_to_minio.expand(file_path=file_list)
+  files = list_csv_files()
+  wait_for_file >> files >> upload_file_to_minio.expand(file_path=files)
 
 dag = etl()
