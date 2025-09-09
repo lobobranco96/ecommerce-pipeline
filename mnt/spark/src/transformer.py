@@ -85,9 +85,9 @@ class Transformer:
             logger.error(f"Error writing the data to {file_processed_path}: {str(e)}")
             raise e
 
-        """ Gera a validação apos a gravação do arquivo no miniO com Great Expectations"""
-        #expectation_json = "/opt/great_expectations/gx/expectations/orders_expectations.json"
-        expectation_json = "/content/drive/MyDrive/projetos/ecommerce-pipeline/mnt/great_expectations/gx/expectations/orders_expectations.json"
+        """Gera a validação apos a gravação do arquivo no miniO com Great Expectations."""
+
+        expectation_json = "/opt/great_expectations/gx/expectations/orders_expectations.json"
         validation_result = self._validate_with_json(df_transformed, expectation_json, file_processed_path)
 
         logger.info(f"Arquivo de validação salvo em: {validation_result}")
@@ -139,9 +139,9 @@ class Transformer:
             logger.error(f"Error writing the data to {file_processed_path}: {str(e)}")
             raise e
 
-        """ Gera a validação apos a gravação do arquivo no miniO com Great Expectations"""
-        #expectation_json = "/opt/great_expectations/gx/expectations/payments_expectations.json"
-        expectation_json = "/content/drive/MyDrive/projetos/ecommerce-pipeline/mnt/great_expectations/gx/expectations/payments_expectations.json"
+        """Gera a validação apos a gravação do arquivo no miniO com Great Expectations."""
+
+        expectation_json = "/opt/great_expectations/gx/expectations/payments_expectations.json"
         validation_result = self._validate_with_json(df_transformed, expectation_json, file_processed_path)
 
         logger.info(f"Arquivo de validação salvo em: {validation_result}")
@@ -190,9 +190,8 @@ class Transformer:
             logger.error(f"Error writing the data to {file_processed_path}: {str(e)}")
             raise e
 
-        """ Gera a validação apos a gravação do arquivo no miniO com Great Expectations"""
-        #expectation_json = "/opt/great_expectations/gx/expectations/products_expectations.json"
-        expectation_json = "/content/drive/MyDrive/projetos/ecommerce-pipeline/mnt/great_expectations/gx/expectations/products_expectations.json"
+        """Gera a validação apos a gravação do arquivo no miniO com Great Expectations."""
+        expectation_json = "/opt/great_expectations/gx/expectations/products_expectations.json"
         validation_result = self._validate_with_json(df_transformed, expectation_json, file_processed_path)
         logger.info(f"Arquivo de validação salvo em: {validation_result}")
 
@@ -243,9 +242,9 @@ class Transformer:
             logger.error(f"Error writing the data to {file_processed_path}: {str(e)}")
             raise e
 
-        """ Gera a validação apos a gravação do arquivo no miniO com Great Expectations"""
-       # expectation_json = "/opt/great_expectations/gx/expectations/users_expectations.json"
-        expectation_json = "/content/drive/MyDrive/projetos/ecommerce-pipeline/mnt/great_expectations/gx/expectations/users_expectations.json"
+        """Gera a validação apos a gravação do arquivo no miniO com Great Expectations."""
+        
+        expectation_json = "/opt/great_expectations/gx/expectations/users_expectations.json"
         validation_result = self._validate_with_json(df_transformed, expectation_json, file_processed_path)
 
         logger.info(f"Arquivo de validação salvo em: {validation_result}")

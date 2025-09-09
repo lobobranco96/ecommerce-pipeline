@@ -19,7 +19,7 @@ def validate_spark_df(df, json_path: str, output_path: str):
         str: caminho do arquivo de validação gerado
     """
     logger.info("Iniciando a validação...")
-    ge_path = "/content/drive/MyDrive/projetos/ecommerce-pipeline/mnt/great_expectations/gx/"
+    ge_path = "/opt/great_expectations/gx/"
     # Pegar o contexto ativo
     context = ge.get_context(ge_path)
 
