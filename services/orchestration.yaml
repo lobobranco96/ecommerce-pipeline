@@ -82,6 +82,7 @@ x-airflow-common:
     - ../mnt/python:/opt/airflow/dags/python
     - ../mnt/spark:/opt/spark
     - ../include:/opt/airflow/include
+    - ../mnt/great_expectations:/opt/great_expectations
 
   user: "${AIRFLOW_UID:-50000}:0"
   depends_on:
