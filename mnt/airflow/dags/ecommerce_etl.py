@@ -3,6 +3,7 @@ from typing import List
 from dotenv import load_dotenv
 from datetime import datetime, timedelta
 import logging
+import json
 
 from airflow.decorators import dag, task
 from airflow.utils.task_group import TaskGroup
@@ -138,12 +139,22 @@ def ecommerce_etl():
           },
           verbose=True,
       ).expand(
-          application_args=[[f] for f in files]  # cada arquivo em uma lista
+          application_args=[[f] for f in files]
       )
 
       # Definindo dependências
       branch >> [spark_task, skip_spark()]
-      
-  extract_group >> transform_group
+
+  # TaskGroup de Validacao
+  with TaskGroup("validation", tooltip="Great Expectations validation results") as validation_group:
+
+    @task
+    def check_validation(file_path: str):
+      obj = S3_CLIENT.get_object(Bucket="processed", Key=file_path)
+      result = json.loads(obj["Body"].read())
+      if not result["success"]:
+          raise ValueError(f"Validação falhou para {file_path}")
+
+  extract_group >> transform_group >> validation_group
 
 dag = ecommerce_etl()
