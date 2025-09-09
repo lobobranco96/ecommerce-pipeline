@@ -7,3 +7,4 @@ apache-airflow-providers-postgres==5.10.0
 pyspark==3.5.3
 findspark
 python-dotenv
+great_expectations
