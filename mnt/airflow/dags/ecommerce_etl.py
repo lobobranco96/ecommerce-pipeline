@@ -13,6 +13,7 @@ from airflow.providers.apache.spark.operators.spark_submit import SparkSubmitOpe
 import pandas as pd
 import boto3
 from botocore.client import Config
+from python.minio import MinioUtils
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(levelname)s - %(message)s")
 logger = logging.getLogger(__name__)
@@ -30,6 +31,8 @@ S3_CLIENT = boto3.client(
     config=Config(signature_version='s3v4'),
     region_name='us-east-1'
 )
+MINIO = MinioUtils(S3_CLIENT)
+
 TODAY_DATE= datetime.today().strftime('%Y-%m-%d')
 STADING_DIR = "/opt/airflow/include/{date}"
 
@@ -72,19 +75,13 @@ def ecommerce_etl():
 
     @task # Faz upload dos CSVs para o MinIO
     def upload_file_to_minio(file_path: str):
-        from python.minio_uploader import MinioUploader
 
         logger.info(f"Processando: {file_path}")
         df = pd.read_csv(file_path)
 
         dataset_name = os.path.basename(file_path).replace(".csv", "")
 
-        uploader = MinioUploader(
-          S3_CLIENT,
-          bucket_name="raw"
-        )
-
-        uploader.upload_df_as_parquet(df, dataset_name)
+        MINIO.upload_df_as_parquet(df, dataset_name, bucket_name="raw")
 
 
     sensor = wait_for_file
@@ -97,8 +94,7 @@ def ecommerce_etl():
       @task
       def list_raw_files():
           """Lista todos os arquivos Parquet disponíveis no bucket 'raw' do MinIO."""
-          from python.s3 import list_raw_objects
-          files = list_raw_objects(S3_CLIENT)
+          files = MINIO.list_raw_objects()
           logger.info(f"Arquivos encontrados no bucket raw: {files}")
           return files
 
