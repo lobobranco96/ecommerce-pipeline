@@ -63,19 +63,18 @@ def etl():
 
   @task # Faz upload dos CSVs para o MinIO
   def upload_file_to_minio(file_path: str):
-      from python.minio_uploader import MinioUploader
+      from python.minio import MinioUtils
 
       print(f"Processando: {file_path}")
       df = pd.read_csv(file_path)
 
       dataset_name = os.path.basename(file_path).replace(".csv", "")
 
-      uploader = MinioUploader(
-        S3_CLIENT,
-        bucket_name="raw"
+      minio = MinioUtils(
+        S3_CLIENT
       )
 
-      uploader.upload_df_as_parquet(df, dataset_name)
+      minio.upload_df_as_parquet(df, dataset_name, bucket_name="raw")
 
   
   files = list_csv_files()
