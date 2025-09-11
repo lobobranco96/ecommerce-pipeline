@@ -79,13 +79,12 @@ Objetivos principais:
 │   ├── python
 │   │   ├── data_generator.py
 │   │   ├── __init__.py
-│   │   ├── minio_uploader.py
-│   │   └── s3.py
+│   │   └── minio.py
 │   └── spark
 │       ├── __init__.py
 │       ├── main.py
-│       ├── minio_to_postgres.py
-│       └── src
+│       ├── postgres_ingestor.py
+│       └── utils
 │           ├── gx_validator.py
 │           ├── __init__.py
 │           ├── __pycache__
