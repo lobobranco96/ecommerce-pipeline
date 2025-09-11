@@ -4,17 +4,20 @@ import pyarrow.parquet as pq
 from datetime import datetime
 from typing import List
 import logging 
+import json
 
 logger = logging.getLogger(__name__)
 
 class MinioUtils:
     def __init__(self, s3_client):
         self.s3_client = s3_client
-        self.today = datetime.today()
+        today = datetime.today()
+        self.year = today.strftime("%Y")
+        self.month = today.strftime("%m"),
+        self.day = today.strftime("%d")
+
 
     def upload_df_as_parquet(self, df, dataset_name, bucket_name, partition_cols=None):
-        year, month, day = self.today.strftime("%Y"), self.today.strftime("%m"), self.today.strftime("%d")
-
         # Converter Pandas para Arrow Table com schema otimizado
         table = pa.Table.from_pandas(df, preserve_index=False)
 
@@ -30,7 +33,7 @@ class MinioUtils:
         )
         parquet_buffer.seek(0)
 
-        key = f"{dataset_name}/year={year}/month={month}/day={day}/{dataset_name}.parquet"
+        key = f"{dataset_name}/year={self.year}/month={self.month}/day={self.day}/{dataset_name}.parquet"
 
         # Upload no MinIO
         self.s3_client.put_object(
@@ -47,7 +50,7 @@ class MinioUtils:
       response = self.s3_client.list_objects_v2(Bucket="raw", Prefix="")
       files = [
           obj['Key'] for obj in response.get('Contents', [])
-          if f"year={year}/month={month}/day={day}" in obj['Key']
+          if f"year={self.year}/month={self.month}/day={self.day}" in obj['Key']
       ]
 
       for f in files:
@@ -57,3 +60,9 @@ class MinioUtils:
           logger.warning("Nenhum arquivo do dia de hoje foi encontrado no bucket 'raw'.")
 
       return files[0]
+
+    def object_validation(self, table):
+      file_path = f"{table}/year={self.year}/month={self.month}/day={self.day}/*.json"
+      obj = self.s3_client.get_object(Bucket="processed", Key=file_path)
+      result = json.loads(obj["Body"].read())
+      return result
