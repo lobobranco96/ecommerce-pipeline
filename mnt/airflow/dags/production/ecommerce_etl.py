@@ -117,11 +117,9 @@ def ecommerce_etl():
           """Task de placeholder quando não há arquivos para processar."""
           logger.info("SparkSubmit não será executado, pois não há arquivos para processar.")
 
-      # Não chamar diretamente as funções
       files = list_raw_files()
       branch = check_files_exist(files)
 
-      # SparkSubmitOperator dinâmico
       spark_task = SparkSubmitOperator.partial(
           task_id="spark_submit_task",
           application="/opt/spark/main.py",
@@ -145,11 +143,14 @@ def ecommerce_etl():
   with TaskGroup("validation", tooltip="Great Expectations validation results") as validation_group:
 
     @task
-    def check_validation(file_path: str):
-      obj = S3_CLIENT.get_object(Bucket="processed", Key=file_path)
-      result = json.loads(obj["Body"].read())
+    def check_validation(table: str):
+      result = MINIO.object_validation(table)
       if not result["success"]:
-          raise ValueError(f"Validação falhou para {file_path}")
+          raise ValueError(f"Validação falhou para {table}")
+
+    table_list = ["orders", "payments", "products", "users"]
+    
+    check_validation.expand(table=table_list)
 
   extract_group >> transform_group >> validation_group
 
