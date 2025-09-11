@@ -10,7 +10,7 @@ RUN install_packages curl wget python3.11 python3.11-venv python3.11-dev
 # Atualiza pip e instala great_expectations no Python nativo do Spark
 # (Bitnami Spark usa /opt/bitnami/python/bin/python3 por padrão)
 RUN /opt/bitnami/python/bin/pip install --upgrade pip \
- && /opt/bitnami/python/bin/pip install great_expectations
+ && /opt/bitnami/python/bin/pip install great_expectations boto3
 
 # versão adequada do Guava (necessária para o Hadoop AWS)
 RUN rm /opt/bitnami/spark/jars/guava-14.0.1.jar \
