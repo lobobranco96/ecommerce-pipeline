@@ -40,7 +40,12 @@ Objetivos principais:
 │   └── spark
 │       └── Dockerfile
 ├── include
-│   └── 2025-09-05
+│   ├── 2025-09-05
+│   │   ├── orders.csv
+│   │   ├── payments.csv
+│   │   ├── products.csv
+│   │   └── users.csv
+│   └── 2025-09-10
 │       ├── orders.csv
 │       ├── payments.csv
 │       ├── products.csv
@@ -51,11 +56,20 @@ Objetivos principais:
 │   │   ├── config
 │   │   │   └── airflow.cfg
 │   │   ├── dags
+│   │   │   ├── ecommerce_etl.py
 │   │   │   ├── etl.py
 │   │   │   ├── generator_dag.py
 │   │   │   └── spark_dag_test.py
 │   │   ├── logs
 │   │   └── plugins
+│   ├── great_expectations
+│   │   └── gx
+│   │       ├── checkpoints
+│   │       ├── expectations
+│   │       ├── great_expectations.yml
+│   │       ├── plugins
+│   │       ├── uncommitted
+│   │       └── validation_definitions
 │   ├── minio
 │   │   └── raw
 │   │       ├── orders
@@ -65,12 +79,15 @@ Objetivos principais:
 │   ├── python
 │   │   ├── data_generator.py
 │   │   ├── __init__.py
-│   │   └── minio_uploader.py
+│   │   ├── minio_uploader.py
+│   │   └── s3.py
 │   └── spark
 │       ├── __init__.py
 │       ├── main.py
 │       ├── minio_to_postgres.py
 │       └── src
+│           ├── gx_validator.py
+│           ├── __init__.py
 │           ├── __pycache__
 │           ├── spark_session.py
 │           └── transformer.py
