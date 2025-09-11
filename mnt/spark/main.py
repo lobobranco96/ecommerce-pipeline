@@ -3,7 +3,7 @@ import logging
 
 from utils.transformer import Transformer
 from utils.spark_session import create_spark_session
-#from src.gx_validator import validate_spark_df
+from utils.gx_validator import validate_spark_df
 
 logger = logging.getLogger(__name__)
 
@@ -24,7 +24,7 @@ if __name__ == "__main__":
     logging.info(f"Dataset: {dataset_name} | Path: {dataset_path}")
     
     logging.info("Iniciando a transformação.")
-    transformer = Transformer(spark)#, validate_spark_df)
+    transformer = Transformer(spark, validate_spark_df)
 
     # Chama dinamicamente o método certo (orders, payments, etc)
     if hasattr(transformer, dataset_name):
