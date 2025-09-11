@@ -4,7 +4,7 @@ import logging
 
 logger = logging.getLogger(__name__)
 
-def list_raw_objects(s3_client) -> List(str):
+def list_raw_objects(s3_client) -> List[str]:
   today = datetime.today()
   year, month, day = today.strftime("%Y"), today.strftime("%m"), today.strftime("%d")
 

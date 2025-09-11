@@ -24,7 +24,7 @@ Objetivos principais:
 - **Data Warehouse:** PostgreSQL
 - **BI / Visualização:** Metabase
 - **Monitoramento e métricas:** Grafana + Prometheus
-- **Linguagem:** Python 3.11
+- **Linguagem:** Python 3.12
 
 ---
 

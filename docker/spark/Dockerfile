@@ -4,6 +4,7 @@ WORKDIR /app
 
 USER root
 RUN install_packages curl wget python3.11 python3.11-venv python3.11-dev
+RUN pip install --upgrade pip && pip install great_expectations
 
 # Baixa a versão adequada do Guava (necessária para o Hadoop AWS)
 RUN rm /opt/bitnami/spark/jars/guava-14.0.1.jar

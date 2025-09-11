@@ -1,8 +1,6 @@
-from datetime import datetime, timezone
+from datetime import datetime
 import logging 
-import json
-import os
-from gx_validator import validate_spark_df
+#from gx_validator import validate_spark_df
 
 from pyspark.sql.types import (
     StringType, IntegerType, DoubleType, DateType, TimestampType
@@ -20,7 +18,7 @@ class Transformer:
     limpeza de dados e escreve a saída na camada 'processed'.
     """
 
-    def __init__(self, spark):
+    def __init__(self, spark):#, validate_spark_df):
         """
         Inicializa o Transformer com uma SparkSession.
 
@@ -30,9 +28,10 @@ class Transformer:
         self.spark = spark
         self.processed_bucket = "processed_bucket/"
         self.now = datetime.now()
+        #self.validate_spark_df = validate_spark_df 
 
     def _validate_with_json(self, df, json_path, output_path):
-            return validate_spark_df(df, json_path, output_path)
+            return self.validate_spark_df(df, json_path, output_path)
 
     def orders(self, file_path: str):
         """
