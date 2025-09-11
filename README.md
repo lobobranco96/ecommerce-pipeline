@@ -111,34 +111,36 @@ Objetivos principais:
       - `payments.csv`
     - Todos os arquivos são salvos localmente em `include/`
 
-- Dag 2: 
-  2. **Ingestão (Raw)**  
-    - Dados sintéticos .csv são carregados no bucket `raw/` do MinIO em **formato Parquet**.:
-      - A ideia é focar em reduzir o custo de armazenamento, aplicando algumas boas praticas de otimização de arquivo:
-        - Compressão com Snappy = menos espaço em disco, leitura rápida.
-        - Codificação por dicionário = ótimo para colunas repetitivas, economia grande.
-        - Redução de precisão de timestamps = menor armazenamento desnecessário.
-        - Controle do tamanho de páginas = equilíbrio entre compressão e acesso seletivo eficiente.
+- Dag 2 - ecommerce_etl: 
+  2. **Extract (Ingestão para raw/)**  
+    - Sensor deferrable (FileSensor com mode="reschedule") que aguarda os arquivos em include/{execution_date} sem ocupar slot do worker.
+    - params do DAG permitem selecionar execution_date diretamente pela UI para reprocessamentos rápidos.
+    - list_csv_files(date) identifica CSVs no diretório de staging.
+    - upload_file_to_minio faz o upload convertendo para Parquet. Implementado com dynamic mapping (.partial().expand(file_path=files)) para paralelizar uploads sem duplicar código.
+    - Boas práticas de Parquet (Snappy, dictionary encoding, page size ajustado) são aplicadas ao salvar.
 
-  3. **Transformação (Processed)**  
-      - Cada dataset é processado individualmente com PySpark, com inferência de schema seguida de cast explícito para garantir tipos corretos:
-        - Users: deduplicação, padronização de e-mails, IDs e datas; remoção de registros sem user_id ou email; limpeza de nomes, cidade e estado.
-        - Products: deduplicação, normalização de categorias e nomes, validação de price > 0 e stock >= 0.
-        - Orders: deduplicação, validação de datas (order_date <= current_timestamp()), quantity > 0, total_price > 0; padronização de status; cast de IDs e valores.
-        - Payments: deduplicação, validação de datas (paid_at <= current_timestamp()), amount > 0; padronização de métodos de pagamento; cast de IDs, valores e timestamps.
-      - Os dados transformados são salvos no bucket processed/ do MinIO em formato Parquet com organização por ano, mês e dia.
+  3. **Transform (Processamento com PySpark)**  
+    - list_raw_files() lista arquivos Parquet em raw/ via MinioUtils.
+    - files_exist usa @task.short_circuit para interromper o fluxo cedo quando não há dados, evitando steps desnecessários.
+    - SparkSubmitOperator.partial().expand(application_args=[[f] for f in files]) — Spark roda em paralelo sobre cada conjunto de arquivos.
+    - Configurações S3 (s3a), jars (hadoop-aws, aws-sdk) e credenciais são passadas via conf do Spark ou via Connections (recomendado).
 
   4. **Validação de Qualidade (Great Expectations)**  
-    - Cada dataset processado possui uma task GX separada para validação de regras de negócio:
-      - Integridade de chaves
-      - Valores nulos ou inválidos
-      - Consistência de métricas
+    - TaskGroup validation agrupa todas as validações GX, oferecendo um bloco visual no UI.
+    - check_validation é expandida dinamicamente para cada tabela (orders, payments, products, users) usando .partial().expand(table=table_list).
+    - MinioUtils.object_validation foi ajustado para:
+      - listar objetos com list_objects_v2 (não usar curingas em get_object), ler o(s) arquivo(s) JSON de resultado e retornar um dicionário com success e details.
+    - Falhas de validação resultam em ValueError na task correspondente — falha isolada (não derruba toda a pipeline).
 
-  5. **Carga no Data Warehouse**  
-    - Tabelas limpas e validadas são carregadas no PostgreSQL para análise e BI via Metabase.
+  5. **Carga no Data Warehouse**
+    - Após validações bem-sucedidas, dados confiáveis são carregados para o PostgreSQL (via Spark ou um ingestor dedicado).
+    - Tabelas no DWH ficam prontas para consumo no Metabase.
 
-6. **Observabilidade**  
-   - Métricas do Airflow, Spark e docker coletadas pelo Prometheus e visualizadas no Grafana.
+6. **Observabilidade e Operações**  
+  - Métricas do Airflow, Spark e containers coletadas pelo Prometheus; dashboards configurados no Grafana.
+  - Logs integrados ao Airflow (LoggingMixin) para centralizar rastreabilidade.
+  - SLAs podem ser aplicados em tasks críticas (sla=timedelta(...)) para alertas automáticos.
+  - Sensores deferrables e short_circuit reduzem ocupação de recursos e melhoram escalabilidade.
 
 ---
 
