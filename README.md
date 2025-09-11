@@ -56,10 +56,8 @@ Objetivos principais:
 │   │   ├── config
 │   │   │   └── airflow.cfg
 │   │   ├── dags
-│   │   │   ├── ecommerce_etl.py
-│   │   │   ├── etl.py
-│   │   │   ├── generator_dag.py
-│   │   │   └── spark_dag_test.py
+│   │   │   ├── dev_dag
+│   │   │   └── production
 │   │   ├── logs
 │   │   └── plugins
 │   ├── great_expectations
@@ -90,7 +88,7 @@ Objetivos principais:
 │           ├── __pycache__
 │           ├── spark_session.py
 │           └── transformer.py
-├── README.md
+├── README.txt
 └── services
     ├── conf
     ├── datalake_dwh.yaml
@@ -101,42 +99,41 @@ Objetivos principais:
 
 ---
 
-## Descrição de como funciona
-- Dag 1: 
-  1. **Data source generator**
-    - A dag generator_dag inicia o codigo para gerar os dados sinteticos via class `DataGenerator`
+# E como o projeto funciona?
+## Dag 1 - data_generator: 
+  1. A dag data_generator, inicia o codigo para gerar os dados sinteticos via class `DataGenerator`
       - `users.csv`
       - `products.csv`
       - `orders.csv`
       - `payments.csv`
     - Todos os arquivos são salvos localmente em `include/`
 
-- Dag 2 - ecommerce_etl: 
-  2. **Extract (Ingestão para raw/)**  
-    - Sensor deferrable (FileSensor com mode="reschedule") que aguarda os arquivos em include/{execution_date} sem ocupar slot do worker.
-    - params do DAG permitem selecionar execution_date diretamente pela UI para reprocessamentos rápidos.
-    - list_csv_files(date) identifica CSVs no diretório de staging.
-    - upload_file_to_minio faz o upload convertendo para Parquet. Implementado com dynamic mapping (.partial().expand(file_path=files)) para paralelizar uploads sem duplicar código.
-    - Boas práticas de Parquet (Snappy, dictionary encoding, page size ajustado) são aplicadas ao salvar.
+## Dag 2 - ecommerce_etl: 
+  1. **Extract (Ingestão para raw/)**
+      - Sensor deferrable (FileSensor com mode="reschedule") que aguarda os arquivos em include/{execution_date} sem ocupar slot do worker.
+      - Params do DAG permitem selecionar execution_date diretamente pela UI para reprocessamentos rápidos.
+      - list_csv_files(date) identifica CSVs no diretório de staging.
+      - Upload_file_to_minio faz o upload convertendo para Parquet. Implementado com dynamic mapping (.partial().expand(file_path=files)) para paralelizar uploads sem duplicar código.
+      - Boas práticas de Parquet (Snappy, dictionary encoding, page size ajustado) são aplicadas ao salvar.
 
   3. **Transform (Processamento com PySpark)**  
-    - list_raw_files() lista arquivos Parquet em raw/ via MinioUtils.
-    - files_exist usa @task.short_circuit para interromper o fluxo cedo quando não há dados, evitando steps desnecessários.
-    - SparkSubmitOperator.partial().expand(application_args=[[f] for f in files]) — Spark roda em paralelo sobre cada conjunto de arquivos.
-    - Configurações S3 (s3a), jars (hadoop-aws, aws-sdk) e credenciais são passadas via conf do Spark ou via Connections (recomendado).
+      - list_raw_files() lista arquivos Parquet em raw/ via MinioUtils.
+      - files_exist usa @task.short_circuit para interromper o fluxo cedo quando não há dados, evitando steps desnecessários.
+      - SparkSubmitOperator.partial().expand(application_args=[[f] for f in files]) — Spark roda em paralelo sobre cada conjunto de arquivos.
+      - Configurações S3 (s3a), jars (hadoop-aws, aws-sdk) e credenciais são passadas via conf do Spark ou via Connections (recomendado).
 
   4. **Validação de Qualidade (Great Expectations)**  
-    - TaskGroup validation agrupa todas as validações GX, oferecendo um bloco visual no UI.
-    - check_validation é expandida dinamicamente para cada tabela (orders, payments, products, users) usando .partial().expand(table=table_list).
-    - MinioUtils.object_validation foi ajustado para:
+      - TaskGroup validation agrupa todas as validações GX, oferecendo um bloco visual no UI.
+      - check_validation é expandida dinamicamente para cada tabela (orders, payments, products, users) usando .partial().expand(table=table_list).
+      - MinioUtils.object_validation foi ajustado para:
       - listar objetos com list_objects_v2 (não usar curingas em get_object), ler o(s) arquivo(s) JSON de resultado e retornar um dicionário com success e details.
-    - Falhas de validação resultam em ValueError na task correspondente — falha isolada (não derruba toda a pipeline).
+      - Falhas de validação resultam em ValueError na task correspondente — falha isolada (não derruba toda a pipeline).
 
   5. **Carga no Data Warehouse**
-    - Após validações bem-sucedidas, dados confiáveis são carregados para o PostgreSQL (via Spark ou um ingestor dedicado).
-    - Tabelas no DWH ficam prontas para consumo no Metabase.
+      - Após validações bem-sucedidas, dados confiáveis são carregados para o PostgreSQL (via Spark ou um ingestor dedicado).
+      - Tabelas no DWH ficam prontas para consumo no Metabase.
 
-6. **Observabilidade e Operações**  
+**Observabilidade e Operações**  
   - Métricas do Airflow, Spark e containers coletadas pelo Prometheus; dashboards configurados no Grafana.
   - Logs integrados ao Airflow (LoggingMixin) para centralizar rastreabilidade.
   - SLAs podem ser aplicados em tasks críticas (sla=timedelta(...)) para alertas automáticos.
@@ -162,6 +159,7 @@ make up
 3. Monitorar metricas:
 - Grafana → http://localhost:3000
 - Metabase → http://localhost:3001
+
 
 
 ## Em construção
