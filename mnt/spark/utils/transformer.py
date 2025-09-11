@@ -75,18 +75,18 @@ class Transformer:
                 .filter(col("order_date") <= current_timestamp())
         )
 
-        file_processed_path = file_path.replace("raw", "processed")
+        processed_filepath = file_path.replace("raw", "processed")
         try:
-            df_transformed.write.mode("overwrite").parquet(file_processed_path)
-            logger.info(f"Data written successfully to {file_processed_path}")
+            df_transformed.write.mode("overwrite").parquet(processed_filepath)
+            logger.info(f"Data written successfully to {processed_filepath}")
         except Exception as e:
-            logger.error(f"Error writing the data to {file_processed_path}: {str(e)}")
+            logger.error(f"Error writing the data to {processed_filepath}: {str(e)}")
             raise e
 
         """Gera a validação apos a gravação do arquivo no miniO com Great Expectations."""
 
         expectation_json = "/opt/great_expectations/gx/expectations/orders_expectations.json"
-        validation_result = self._validate_with_json(df_transformed, expectation_json, file_processed_path)
+        validation_result = self._validate_with_json(df_transformed, expectation_json, processed_filepath)
 
         logger.info(f"Arquivo de validação salvo em: {validation_result}")
 
@@ -129,18 +129,18 @@ class Transformer:
                 .filter(col("paid_at").isNotNull() & (col("paid_at") <= current_timestamp()))
         )
 
-        file_processed_path = file_path.replace("raw", "processed")
+        processed_filepath = file_path.replace("raw", "processed")
         try:
-            df_transformed.write.mode("overwrite").parquet(file_processed_path)
-            logger.info(f"Data written successfully to {file_processed_path}")
+            df_transformed.write.mode("overwrite").parquet(processed_filepath)
+            logger.info(f"Data written successfully to {processed_filepath}")
         except Exception as e:
-            logger.error(f"Error writing the data to {file_processed_path}: {str(e)}")
+            logger.error(f"Error writing the data to {processed_filepath}: {str(e)}")
             raise e
 
         """Gera a validação apos a gravação do arquivo no miniO com Great Expectations."""
 
         expectation_json = "/opt/great_expectations/gx/expectations/payments_expectations.json"
-        validation_result = self._validate_with_json(df_transformed, expectation_json, file_processed_path)
+        validation_result = self._validate_with_json(df_transformed, expectation_json, processed_filepath)
 
         logger.info(f"Arquivo de validação salvo em: {validation_result}")
 
@@ -180,17 +180,17 @@ class Transformer:
                 .filter(col("stock").isNotNull() & (col("stock") >= 0))
         )
 
-        file_processed_path = file_path.replace("raw", "processed")
+        processed_filepath = file_path.replace("raw", "processed")
         try:
-            df_transformed.write.mode("overwrite").parquet(file_processed_path)
-            logger.info(f"Data written successfully to {file_processed_path}")
+            df_transformed.write.mode("overwrite").parquet(processed_filepath)
+            logger.info(f"Data written successfully to {processed_filepath}")
         except Exception as e:
-            logger.error(f"Error writing the data to {file_processed_path}: {str(e)}")
+            logger.error(f"Error writing the data to {processed_filepath}: {str(e)}")
             raise e
 
         """Gera a validação apos a gravação do arquivo no miniO com Great Expectations."""
         expectation_json = "/opt/great_expectations/gx/expectations/products_expectations.json"
-        validation_result = self._validate_with_json(df_transformed, expectation_json, file_processed_path)
+        validation_result = self._validate_with_json(df_transformed, expectation_json, processed_filepath)
         logger.info(f"Arquivo de validação salvo em: {validation_result}")
 
     def users(self, file_path: str):
@@ -232,17 +232,17 @@ class Transformer:
                 .withColumn("state", trim(col("state")))
         )
 
-        file_processed_path = file_path.replace("raw", "processed")
+        processed_filepath = file_path.replace("raw", "processed")
         try:
-            df_transformed.write.mode("overwrite").parquet(file_processed_path)
-            logger.info(f"Data written successfully to {file_processed_path}")
+            df_transformed.write.mode("overwrite").parquet(processed_filepath)
+            logger.info(f"Data written successfully to {processed_filepath}")
         except Exception as e:
-            logger.error(f"Error writing the data to {file_processed_path}: {str(e)}")
+            logger.error(f"Error writing the data to {processed_filepath}: {str(e)}")
             raise e
 
         """Gera a validação apos a gravação do arquivo no miniO com Great Expectations."""
         
         expectation_json = "/opt/great_expectations/gx/expectations/users_expectations.json"
-        validation_result = self._validate_with_json(df_transformed, expectation_json, file_processed_path)
+        validation_result = self._validate_with_json(df_transformed, expectation_json, processed_filepath)
 
         logger.info(f"Arquivo de validação salvo em: {validation_result}")
