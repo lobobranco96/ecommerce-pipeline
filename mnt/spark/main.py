@@ -1,8 +1,8 @@
 import sys
 import logging
 
-from src.transformer import Transformer
-from src.spark_session import create_spark_session
+from utils.transformer import Transformer
+from utils.spark_session import create_spark_session
 #from src.gx_validator import validate_spark_df
 
 logger = logging.getLogger(__name__)
