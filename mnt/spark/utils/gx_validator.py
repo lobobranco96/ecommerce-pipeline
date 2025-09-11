@@ -3,6 +3,21 @@ import os
 import json
 from datetime import datetime, timezone
 import logging
+import boto3
+from botocore.client import Config
+
+ENDPOINT_URL = os.getenv("S3_ENDPOINT")
+ACCESS_KEY = os.getenv("AWS_ACCESS_KEY_ID") 
+SECRET_KEY = os.getenv("AWS_SECRET_ACCESS_KEY")
+
+S3_CLIENT = boto3.client(
+    's3',
+    endpoint_url=ENDPOINT_URL,
+    aws_access_key_id=ACCESS_KEY,
+    aws_secret_access_key=SECRET_KEY,
+    config=Config(signature_version='s3v4'),
+    region_name='us-east-1'
+)
 
 logger = logging.getLogger(__name__)
 
@@ -43,11 +58,12 @@ def validate_spark_df(df, json_path: str, output_path: str):
 
     # Salvar resultado
     validation_file = os.path.join(
-        output_path,
+        output_path.replace("processed/", ""),
         f"validation_result_{datetime.now(timezone.utc).strftime('%Y%m%d_%H%M%S')}.json",
     )
-    with open(validation_file, "w") as f:
-        json.dump(results.to_json_dict(), f, indent=2)
+
+    json_data = results.to_json_dict()
+    S3_CLIENT.put_object(Bucket="processed", Key=validation_file, Body=json_data.encode('utf-8'))
 
     logger.info(f"Validação concluída. Arquivo salvo em: {validation_file}")
     return validation_file
