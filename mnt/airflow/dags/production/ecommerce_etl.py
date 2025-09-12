@@ -2,9 +2,8 @@ import os
 from typing import List
 from dotenv import load_dotenv
 from datetime import datetime, timedelta
-import json
 
-from airflow.decorators import dag, task, task_group, short_circuit
+from airflow.decorators import dag, task
 from airflow.utils.task_group import TaskGroup
 from airflow.sensors.filesystem import FileSensor
 from airflow.providers.apache.spark.operators.spark_submit import SparkSubmitOperator
@@ -48,22 +47,22 @@ default_args = {
     catchup=False,
     default_args=default_args,
     tags=["etl", "minio", "ingestion", "csv", "pyspark", "postgres"],
-    # disponíveis na UI
     params={"execution_date": datetime.today().strftime('%Y-%m-%d')}
 )
 def ecommerce_etl(params=None):
 
-    execution_date = params["execution_date"]
-
+    # --------------------------
+    # TaskGroup: Extract
+    # --------------------------
     with TaskGroup("extract", tooltip="Extração e upload CSV -> MinIO") as extract_group:
 
         wait_for_file = FileSensor(
             task_id="wait_for_file",
-            filepath=f"/opt/airflow/include/{execution_date}",
+            filepath="/opt/airflow/include/{{ params.execution_date }}",
             fs_conn_id="fs_default",
             poke_interval=60,
             timeout=60 * 60,
-            mode="reschedule",  
+            mode="reschedule",
         )
 
         @task
@@ -80,43 +79,48 @@ def ecommerce_etl(params=None):
             dataset_name = os.path.basename(file_path).replace(".csv", "")
             MINIO.upload_df_as_parquet(df, dataset_name, bucket_name="raw")
 
-        files = list_csv_files(execution_date)
-        upload_file_to_minio.partial().expand(file_path=files)
+        files = list_csv_files("{{ params.execution_date }}")
+        wait_for_file >> files >> upload_file_to_minio.partial().expand(file_path=files)
 
+    # --------------------------
+    # TaskGroup: Transform
+    # --------------------------
     with TaskGroup("transform", tooltip="Transformação PySpark e carga processed") as transform_group:
 
         @task
-        def list_raw_files():
+        def list_raw_files() -> List[str]:
             files = MINIO.list_raw_objects()
             logger.info(f"Arquivos encontrados no bucket raw: {files}")
+            
+            # Certifica-se de que seja sempre uma lista
+            if isinstance(files, str):
+                files = [files]
             return files
 
-        @task.short_circuit
-        def files_exist(files):
-            """Só continua se existir arquivos"""
-            return bool(files)
+        raw_files = list_raw_files()
 
-        files = list_raw_files()
-        files_exist(files)
+        @task
+        def build_spark_args(files: List[str]) -> List[List[str]]:
+            return [[f] for f in files]
+
+        spark_args = build_spark_args(raw_files)
 
         spark_task = SparkSubmitOperator.partial(
             task_id="spark_submit_task",
-            application="/opt/spark/main.py",
+            application="/opt/airflow/dags/spark/main.py",
             conn_id="spark_default",
             conf={
                 "spark.jars": "/opt/spark/jars/aws-java-sdk-bundle-1.12.262.jar,"
-                              "/opt/spark/jars/hadoop-aws-3.3.4.jar",
-                "spark.hadoop.fs.s3a.endpoint": ENDPOINT_URL,
-                "spark.hadoop.fs.s3a.access.key": ACCESS_KEY,
-                "spark.hadoop.fs.s3a.secret.key": SECRET_KEY,
+                            "/opt/spark/jars/hadoop-aws-3.3.4.jar",
+                "spark.hadoop.fs.s3a.endpoint": os.getenv("S3_ENDPOINT"),
+                "spark.hadoop.fs.s3a.access.key": os.getenv("AWS_ACCESS_KEY_ID"),
+                "spark.hadoop.fs.s3a.secret.key": os.getenv("AWS_SECRET_ACCESS_KEY"),
             },
             verbose=True,
-        ).expand(
-            application_args=[[f] for f in files]
-        )
-
-        files_exist(files) >> spark_task
-
+        ).expand(application_args=spark_args)
+    # --------------------------
+    # TaskGroup: Validation
+    # --------------------------
     with TaskGroup("validation", tooltip="Great Expectations validation results") as validation_group:
 
         @task
@@ -128,6 +132,9 @@ def ecommerce_etl(params=None):
         table_list = ["orders", "payments", "products", "users"]
         check_validation.partial().expand(table=table_list)
 
+    # --------------------------
+    # Sequência do DAG
+    # --------------------------
     extract_group >> transform_group >> validation_group
 
 dag = ecommerce_etl()
