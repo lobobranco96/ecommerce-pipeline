@@ -13,7 +13,7 @@ class MinioUtils:
         self.s3_client = s3_client
         today = datetime.today()
         self.year = today.strftime("%Y")
-        self.month = today.strftime("%m"),
+        self.month = today.strftime("%m")
         self.day = today.strftime("%d")
 
 
@@ -42,10 +42,10 @@ class MinioUtils:
             Body=parquet_buffer.getvalue()
         )
 
-        logger.info(f"Upload concluído: s3://{self.bucket}/{key}")
+        logger.info(f"Upload concluído: s3://{bucket_name}/{key}")
 
     def list_raw_objects(self) -> List[str]:
-      year, month, day = self.today.strftime("%Y"), self.today.strftime("%m"), self.today.strftime("%d")
+     # year, month, day = self.today.strftime("%Y"), self.today.strftime("%m"), self.today.strftime("%d")
 
       response = self.s3_client.list_objects_v2(Bucket="raw", Prefix="")
       files = [
