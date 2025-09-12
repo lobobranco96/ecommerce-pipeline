@@ -27,6 +27,7 @@ x-spark-worker-default: &spark_worker_default
     - SPARK_USER=spark
   networks:
       - ecommerce_network
+      
 
 services:
   spark-master:
