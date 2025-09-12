@@ -81,7 +81,7 @@ x-airflow-common:
     - ../mnt/airflow/config:/opt/airflow/config
     - ../mnt/airflow/plugins:/opt/airflow/plugins
     - ../mnt/python:/opt/airflow/dags/python
-    - ../mnt/spark:/opt/spark
+    - ../mnt/spark:/opt/airflow/dags/spark
     - ../include:/opt/airflow/include
     - ../mnt/great_expectations:/opt/great_expectations
 
