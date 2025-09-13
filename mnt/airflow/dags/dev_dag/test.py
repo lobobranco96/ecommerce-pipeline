@@ -1,6 +1,5 @@
 import os
 from typing import List
-from dotenv import load_dotenv
 from datetime import datetime, timedelta
 
 from airflow.decorators import dag, task
@@ -76,7 +75,11 @@ def ecommerce_etl(params=None):
             MINIO.upload_df_as_parquet(df, dataset_name, bucket_name="raw")
 
         files = list_csv_files("{{ params.execution_date }}")
-        wait_for_file >> files >> upload_file_to_minio.partial().expand(file_path=files)
+        
+        # Expandindo para criar uma task para cada arquivo encontrado
+        upload_tasks = upload_file_to_minio.expand(file_path=files)
+
+        wait_for_file >> files >> upload_tasks
 
     # TaskGroup: Transform
     with TaskGroup("transform", tooltip="Transformação PySpark e carga processed") as transform_group:
@@ -85,7 +88,6 @@ def ecommerce_etl(params=None):
         def list_raw_files() -> List[str]:
             files = MINIO.list_raw_objects()
             logger.info(f"Arquivos encontrados no bucket raw: {files}")
-            
             if isinstance(files, str):
                 files = [files]
             return files
@@ -104,7 +106,7 @@ def ecommerce_etl(params=None):
             conn_id="spark_default",
             conf={
                 "spark.jars": "/opt/spark/jars/aws-java-sdk-bundle-1.12.262.jar,"
-                            "/opt/spark/jars/hadoop-aws-3.3.4.jar",
+                              "/opt/spark/jars/hadoop-aws-3.3.4.jar",
                 "spark.hadoop.fs.s3a.endpoint": os.getenv("S3_ENDPOINT"),
                 "spark.hadoop.fs.s3a.access.key": os.getenv("AWS_ACCESS_KEY_ID"),
                 "spark.hadoop.fs.s3a.secret.key": os.getenv("AWS_SECRET_ACCESS_KEY"),
@@ -122,7 +124,8 @@ def ecommerce_etl(params=None):
                 raise ValueError(f"Validação falhou para {table}")
 
         table_list = ["orders", "payments", "products", "users"]
-        check_validation.partial().expand(table=table_list)
+        # Criando tasks dinâmicas para validação de cada tabela
+        validation_tasks = check_validation.expand(table=table_list)
 
     # TaskGroup: Load processed file on Postgres Table
     with TaskGroup("Load", tooltip="Execute pyspark scripts to load data in Postgres table.") as load_group:
@@ -131,7 +134,6 @@ def ecommerce_etl(params=None):
         def list_processed_bucket():
             files = MINIO.list_processed_objects()
             logger.info(f"Arquivos encontrados no bucket processed: {files}")
-            
             if isinstance(files, str):
                 files = [files]
             return files
@@ -141,7 +143,7 @@ def ecommerce_etl(params=None):
             return [[f] for f in files]
 
         processed_files = list_processed_bucket()
-        spark_args = build_spark_args(raw_files)
+        spark_args = build_spark_args(processed_files)
 
         spark_task = SparkSubmitOperator.partial(
             task_id="spark_submit_task",
@@ -149,14 +151,15 @@ def ecommerce_etl(params=None):
             conn_id="spark_default",
             conf={
                 "spark.jars": "/opt/spark/jars/aws-java-sdk-bundle-1.12.262.jar,"
-                            "/opt/spark/jars/hadoop-aws-3.3.4.jar,"
-                            "/opt/spark/jars/postgresql-42.7.5.jar",
+                              "/opt/spark/jars/hadoop-aws-3.3.4.jar,"
+                              "/opt/spark/jars/postgresql-42.7.5.jar",
                 "spark.hadoop.fs.s3a.endpoint": os.getenv("S3_ENDPOINT"),
                 "spark.hadoop.fs.s3a.access.key": os.getenv("AWS_ACCESS_KEY_ID"),
                 "spark.hadoop.fs.s3a.secret.key": os.getenv("AWS_SECRET_ACCESS_KEY"),
             },
             verbose=True,
         ).expand(application_args=spark_args)
+
     # Sequência do DAG
     extract_group >> transform_group >> validation_group >> load_group
 

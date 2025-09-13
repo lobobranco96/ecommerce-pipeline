@@ -18,7 +18,8 @@ RUN rm /opt/bitnami/spark/jars/guava-14.0.1.jar \
 
 # JARs necessários para acessar o MinIO via Hadoop AWS
 RUN wget -P /opt/bitnami/spark/jars https://repo1.maven.org/maven2/org/apache/hadoop/hadoop-aws/3.3.4/hadoop-aws-3.3.4.jar \
- && wget -P /opt/bitnami/spark/jars https://repo1.maven.org/maven2/com/amazonaws/aws-java-sdk-bundle/1.12.262/aws-java-sdk-bundle-1.12.262.jar
+ && wget -P /opt/bitnami/spark/jars https://repo1.maven.org/maven2/com/amazonaws/aws-java-sdk-bundle/1.12.262/aws-java-sdk-bundle-1.12.262.jar \
+ && wget -P /opt/bitnami/spark/jars https://repo1.maven.org/maven2/org/postgresql/postgresql/42.7.5/postgresql-42.7.5.jar
 
 RUN chmod 644 /opt/bitnami/spark/jars/*.jar
 

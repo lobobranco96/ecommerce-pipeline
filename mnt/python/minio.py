@@ -61,6 +61,21 @@ class MinioUtils:
 
       return files[0]
 
+    def list_processed_objects(self) -> List[str]:
+      response = self.s3_client.list_objects_v2(Bucket="processed", Prefix="")
+      files = [
+          obj['Key'] for obj in response.get('Contents', [])
+          if f"year={self.year}/month={self.month}/day={self.day}" in obj['Key']
+      ]
+
+      for f in files:
+          logger.info(f"Arquivo do dia de hoje encontrado: {f}")
+
+      if not files:
+          logger.warning("Nenhum arquivo do dia de hoje foi encontrado no bucket 'processed'.")
+
+      return files[0]
+
     def object_validation(self, table):
       file_path = f"{table}/year={self.year}/month={self.month}/day={self.day}/*.json"
       obj = self.s3_client.get_object(Bucket="processed", Key=file_path)
