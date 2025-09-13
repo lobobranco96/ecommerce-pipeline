@@ -124,7 +124,40 @@ def ecommerce_etl(params=None):
         table_list = ["orders", "payments", "products", "users"]
         check_validation.partial().expand(table=table_list)
 
+    # TaskGroup: Load processed file on Postgres Table
+    with TaskGroup("Load", tooltip="Execute pyspark scripts to load data in Postgres table.") as load_group:
+    
+        @task
+        def list_processed_bucket():
+            files = MINIO.list_processed_objects()
+            logger.info(f"Arquivos encontrados no bucket processed: {files}")
+            
+            if isinstance(files, str):
+                files = [files]
+            return files
+
+        @task
+        def build_spark_args(files: List[str]) -> List[List[str]]:
+            return [[f] for f in files]
+
+        processed_files = list_processed_bucket()
+        spark_args = build_spark_args(raw_files)
+
+        spark_task = SparkSubmitOperator.partial(
+            task_id="spark_submit_task",
+            application="/opt/airflow/dags/spark/load.py",
+            conn_id="spark_default",
+            conf={
+                "spark.jars": "/opt/spark/jars/aws-java-sdk-bundle-1.12.262.jar,"
+                            "/opt/spark/jars/hadoop-aws-3.3.4.jar,"
+                            "/opt/spark/jars/postgresql-42.7.5.jar",
+                "spark.hadoop.fs.s3a.endpoint": os.getenv("S3_ENDPOINT"),
+                "spark.hadoop.fs.s3a.access.key": os.getenv("AWS_ACCESS_KEY_ID"),
+                "spark.hadoop.fs.s3a.secret.key": os.getenv("AWS_SECRET_ACCESS_KEY"),
+            },
+            verbose=True,
+        ).expand(application_args=spark_args)
     # Sequência do DAG
-    extract_group >> transform_group >> validation_group
+    extract_group >> transform_group >> validation_group >> load_group
 
 dag = ecommerce_etl()
