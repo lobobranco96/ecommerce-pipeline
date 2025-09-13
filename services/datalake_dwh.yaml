@@ -3,10 +3,8 @@ services:
     image: postgres:15
     container_name: dwh_postgres
     restart: always
-    environment:
-      POSTGRES_USER: dwh_user
-      POSTGRES_PASSWORD: dwh_pass
-      POSTGRES_DB: dwh_db
+    env_file:
+      - ./conf/.credentials.conf
     ports:
       - "5433:5432"
     volumes:
