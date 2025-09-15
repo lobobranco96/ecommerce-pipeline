@@ -45,7 +45,12 @@ Objetivos principais:
 │   │   ├── payments.csv
 │   │   ├── products.csv
 │   │   └── users.csv
-│   └── 2025-09-10
+│   ├── 2025-09-10
+│   │   ├── orders.csv
+│   │   ├── payments.csv
+│   │   ├── products.csv
+│   │   └── users.csv
+│   └── 2025-09-12
 │       ├── orders.csv
 │       ├── payments.csv
 │       ├── products.csv
@@ -80,21 +85,23 @@ Objetivos principais:
 │   │   └── minio.py
 │   └── spark
 │       ├── __init__.py
-│       ├── main.py
-│       ├── postgres_ingestor.py
+│       ├── load.py
+│       ├── processing.py
 │       └── utils
 │           ├── gx_validator.py
 │           ├── __init__.py
+│           ├── load_postgres.py
 │           ├── __pycache__
 │           ├── spark_session.py
-│           └── transformer.py
-├── README.txt
+│           └── transformation.py
+├── README.md
 └── services
     ├── conf
     ├── datalake_dwh.yaml
     ├── observability.yaml
     ├── orchestration.yaml
     └── processing.yaml
+
 ```
 
 ---
@@ -109,29 +116,55 @@ Objetivos principais:
     - Todos os arquivos são salvos localmente em `include/`
 
 ## Dag 2 - ecommerce_etl: 
+Pipeline ETL para ingestão, transformação, validação e carga em Postgres usando Airflow 3.0, MinIO (S3), PySpark e Great Expectations.  
+
   1. **Extract (Ingestão para raw/)**
-      - Sensor deferrable (FileSensor com mode="reschedule") que aguarda os arquivos em include/{execution_date} sem ocupar slot do worker.
-      - Params do DAG permitem selecionar execution_date diretamente pela UI para reprocessamentos rápidos.
-      - list_csv_files(date) identifica CSVs no diretório de staging.
-      - Upload_file_to_minio faz o upload convertendo para Parquet. Implementado com dynamic mapping (.partial().expand(file_path=files)) para paralelizar uploads sem duplicar código.
-      - Boas práticas de Parquet (Snappy, dictionary encoding, page size ajustado) são aplicadas ao salvar.
+       - **FileSensor Deferrable**
+         - Aguarda arquivos no diretório `include/{execution_date}` sem ocupar slot do worker (`mode="reschedule"`).
+       - **Params no DAG**
+         - Permitem selecionar `execution_date` diretamente pela UI para reprocessamentos rápidos.  
+      - **`list_csv_files(date)`**  
+        - Identifica todos os arquivos CSV no diretório de staging.  
+      - **`upload_file_to_minio`**  
+        - Faz upload dos CSV convertendo para Parquet, utilizando **dynamic task mapping** (`.partial().expand(file_path=files)`) para paralelizar uploads.  
+      - **Boas práticas de Parquet**  
+        - (Snappy, dictionary encoding, page size ajustado) aplicadas no `MinioUtils.upload_df_as_parquet()`.  
 
-  3. **Transform (Processamento com PySpark)**  
-      - list_raw_files() lista arquivos Parquet em raw/ via MinioUtils.
-      - files_exist usa @task.short_circuit para interromper o fluxo cedo quando não há dados, evitando steps desnecessários.
-      - SparkSubmitOperator.partial().expand(application_args=[[f] for f in files]) — Spark roda em paralelo sobre cada conjunto de arquivos.
-      - Configurações S3 (s3a), jars (hadoop-aws, aws-sdk) e credenciais são passadas via conf do Spark ou via Connections (recomendado).
 
-  4. **Validação de Qualidade (Great Expectations)**  
-      - TaskGroup validation agrupa todas as validações GX, oferecendo um bloco visual no UI.
-      - check_validation é expandida dinamicamente para cada tabela (orders, payments, products, users) usando .partial().expand(table=table_list).
-      - MinioUtils.object_validation foi ajustado para:
-      - listar objetos com list_objects_v2 (não usar curingas em get_object), ler o(s) arquivo(s) JSON de resultado e retornar um dicionário com success e details.
-      - Falhas de validação resultam em ValueError na task correspondente — falha isolada (não derruba toda a pipeline).
+  2. **Transform (Processamento com PySpark)**  
+      - **`list_raw_files()`**  
+        - Lista arquivos Parquet no bucket `raw/` via `MinioUtils`.  
+      - **`build_spark_args()`**  
+        - Constrói argumentos individuais para cada arquivo a ser processado.  
+      - **Execução Spark Paralela**  
+        - `SparkSubmitOperator.partial().expand(application_args=[[f] for f in files])` executa transformações PySpark de forma dinâmica sobre cada arquivo no MinIO.  
+        - Configurações S3 (s3a), jars (hadoop-aws, aws-sdk) e credenciais são passadas via `conf` do Spark.  
+      - **Isolamento Natural**  
+        - Cada arquivo é processado individualmente; falhas não interrompem os demais arquivos.  
 
-  5. **Carga no Data Warehouse**
-      - Após validações bem-sucedidas, dados confiáveis são carregados para o PostgreSQL (via Spark ou um ingestor dedicado).
-      - Tabelas no DWH ficam prontas para consumo no Metabase.
+
+  3. **Validação de Qualidade (Great Expectations)**  
+      - **TaskGroup `validation`**  
+        - Agrupa todas as validações GX num bloco visual do UI.  
+      - **`check_validation`**  
+        - Expandida dinamicamente para cada tabela (`orders`, `payments`, `products`, `users`) usando `.partial().expand(table=table_list)`.  
+      - **`MinioUtils.object_validation()`**  
+        - Lista objetos no bucket usando `list_objects_v2`;  
+        - Lê arquivos JSON de resultados das validações;  
+        - Retorna dicionário `{success: bool, details: {...}}`.  
+      - **Falhas Isoladas**  
+        - Cada tabela é validada separadamente. Se uma falhar, apenas aquela task quebra (não derruba a pipeline inteira).  
+        
+  4. **Carga no Data Warehouse**
+      - **`list_processed_bucket()`**  
+        - Lista arquivos já processados no bucket `processed/`.  
+      - **`build_spark_args()`**  
+        - Prepara argumentos para cada arquivo processado.  
+      - **Execução Spark Paralela**  
+        - `SparkSubmitOperator.partial().expand(application_args=spark_args)` carrega dados de `processed/` para tabelas do Postgres usando PySpark.  
+        - Conexão configurada com o driver PostgreSQL (`postgresql-42.7.5.jar`).  
+      - **Pipeline Completa**  
+        - Dados confiáveis pós-validação são carregados em tabelas prontas para consumo no Metabase ou outro BI.  
 
 **Observabilidade e Operações**  
   - Métricas do Airflow, Spark e containers coletadas pelo Prometheus; dashboards configurados no Grafana.
