@@ -166,11 +166,11 @@ Pipeline ETL para ingestão, transformação, validação e carga em Postgres us
       - **Pipeline Completa**  
         - Dados confiáveis pós-validação são carregados em tabelas prontas para consumo no Metabase ou outro BI.  
 
-**Observabilidade e Operações**  
-  - Métricas do Airflow, Spark e containers coletadas pelo Prometheus; dashboards configurados no Grafana.
-  - Logs integrados ao Airflow (LoggingMixin) para centralizar rastreabilidade.
-  - SLAs podem ser aplicados em tasks críticas (sla=timedelta(...)) para alertas automáticos.
-  - Sensores deferrables e short_circuit reduzem ocupação de recursos e melhoram escalabilidade.
+## Observabilidade e Operações
+  - Métricas do Airflow, Spark e containers coletadas pelo Prometheus; dashboards configurados no Grafana.  
+  - Logs integrados ao Airflow (`LoggingMixin`) para centralizar rastreabilidade.  
+  - SLAs **podem ser aplicados** em tasks críticas (`sla=timedelta(...)`) para alertas automáticos.  
+  - Sensores deferrables já implementados; uso de `short_circuit` **planejado** para reduzir ocupação de recursos e melhorar escalabilidade.
 
 ---
 
