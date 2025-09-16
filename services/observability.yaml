@@ -36,6 +36,7 @@ services:
 
 networks:
   ecommerce_network:
+    driver: bridge
 
 volumes:
   grafana-storage: 

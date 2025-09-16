@@ -59,4 +59,4 @@ services:
       
 networks:
   ecommerce_network:
-    name: ecommerce_network
+    driver: bridge
