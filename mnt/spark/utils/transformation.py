@@ -25,12 +25,20 @@ class Transformer:
             spark (SparkSession): Sessão do PySpark.
         """
         self.spark = spark
-        self.processed_bucket = "processed_bucket/"
         self.now = datetime.now()
         self.validate_spark_df = validate_spark_df 
+        self.s3_prefix = "s3a://"
+        self.raw = "raw/"
+        self.processed = "processed/"
 
     def _validate_with_json(self, df, json_path, output_path):
             return self.validate_spark_df(df, json_path, output_path)
+
+    def raw_path(self, file_path):
+        return self.s3_prefix + self.raw + file_path
+
+    def processed_path(self, file_path):
+        return self.s3_prefix + self.processed + file_path
 
     def orders(self, file_path: str):
         """
@@ -51,7 +59,9 @@ class Transformer:
         Raises:
             Exception: Se ocorrer erro ao escrever o Parquet.
         """
-        df = self.spark.read.format("parquet").load(file_path)
+
+        raw = self.raw_path(file_path)
+        df = self.spark.read.format("parquet").load(raw)
 
         df_casted = (
             df.withColumn("order_id", col("order_id").cast(StringType()))
@@ -74,19 +84,20 @@ class Transformer:
                 .filter(col("total_price") > 0)                      
                 .filter(col("order_date") <= current_timestamp())
         )
-
-        processed_filepath = file_path.replace("raw", "processed")
+        df_transformed = df_transformed.repartition(1)
+        
+        processed = self.processed_path(file_path)
         try:
-            df_transformed.write.mode("overwrite").parquet(processed_filepath)
-            logger.info(f"Data written successfully to {processed_filepath}")
+            df_transformed.write.mode("overwrite").parquet(processed)
+            logger.info(f"Data written successfully to {processed}")
         except Exception as e:
-            logger.error(f"Error writing the data to {processed_filepath}: {str(e)}")
+            logger.error(f"Error writing the data to {processed}: {str(e)}")
             raise e
 
         """Gera a validação apos a gravação do arquivo no miniO com Great Expectations."""
 
         expectation_json = "/opt/great_expectations/gx/expectations/orders_expectations.json"
-        validation_result = self._validate_with_json(df_transformed, expectation_json, processed_filepath)
+        validation_result = self._validate_with_json(df_transformed, expectation_json, processed)
 
         logger.info(f"Arquivo de validação salvo em: {validation_result}")
 
@@ -109,7 +120,8 @@ class Transformer:
         Raises:
             Exception: Se ocorrer erro ao escrever o Parquet.
         """
-        df = self.spark.read.format("parquet").load(file_path)
+        raw = self.raw_path(file_path)
+        df = self.spark.read.format("parquet").load(raw)
 
         df_casted = (
             df.withColumn("payment_id", col("payment_id").cast(StringType()))
@@ -128,19 +140,20 @@ class Transformer:
                 .filter(col("amount").isNotNull() & (col("amount") > 0))  
                 .filter(col("paid_at").isNotNull() & (col("paid_at") <= current_timestamp()))
         )
+        df_transformed = df_transformed.repartition(1)
 
-        processed_filepath = file_path.replace("raw", "processed")
+        processed = self.processed_path(file_path)
         try:
-            df_transformed.write.mode("overwrite").parquet(processed_filepath)
-            logger.info(f"Data written successfully to {processed_filepath}")
+            df_transformed.write.mode("overwrite").parquet(processed)
+            logger.info(f"Data written successfully to {processed}")
         except Exception as e:
-            logger.error(f"Error writing the data to {processed_filepath}: {str(e)}")
+            logger.error(f"Error writing the data to {processed}: {str(e)}")
             raise e
 
         """Gera a validação apos a gravação do arquivo no miniO com Great Expectations."""
 
         expectation_json = "/opt/great_expectations/gx/expectations/payments_expectations.json"
-        validation_result = self._validate_with_json(df_transformed, expectation_json, processed_filepath)
+        validation_result = self._validate_with_json(df_transformed, expectation_json, processed)
 
         logger.info(f"Arquivo de validação salvo em: {validation_result}")
 
@@ -162,7 +175,8 @@ class Transformer:
         Raises:
             Exception: Se ocorrer erro ao escrever o Parquet.
         """
-        df = self.spark.read.format("parquet").load(file_path)
+        raw = self.raw_path(file_path)
+        df = self.spark.read.format("parquet").load(raw)
 
         df_casted = (
             df.withColumn("product_id", col("product_id").cast(StringType()))
@@ -179,18 +193,19 @@ class Transformer:
                 .filter(col("price").isNotNull() & (col("price") > 0))  
                 .filter(col("stock").isNotNull() & (col("stock") >= 0))
         )
+        df_transformed = df_transformed.repartition(1)
 
-        processed_filepath = file_path.replace("raw", "processed")
+        processed = self.processed_path(file_path)
         try:
-            df_transformed.write.mode("overwrite").parquet(processed_filepath)
-            logger.info(f"Data written successfully to {processed_filepath}")
+            df_transformed.write.mode("overwrite").parquet(processed)
+            logger.info(f"Data written successfully to {processed}")
         except Exception as e:
-            logger.error(f"Error writing the data to {processed_filepath}: {str(e)}")
+            logger.error(f"Error writing the data to {processed}")
             raise e
 
         """Gera a validação apos a gravação do arquivo no miniO com Great Expectations."""
         expectation_json = "/opt/great_expectations/gx/expectations/products_expectations.json"
-        validation_result = self._validate_with_json(df_transformed, expectation_json, processed_filepath)
+        validation_result = self._validate_with_json(df_transformed, expectation_json, processed)
         logger.info(f"Arquivo de validação salvo em: {validation_result}")
 
     def users(self, file_path: str):
@@ -211,7 +226,8 @@ class Transformer:
         Raises:
             Exception: Se ocorrer erro ao escrever o Parquet.
         """
-        df = self.spark.read.format("parquet").load(file_path)
+        raw = self.raw_path(file_path)
+        df = self.spark.read.format("parquet").load(raw)
 
         df_casted = (
             df.withColumn("user_id", col("user_id").cast(StringType()))
@@ -231,18 +247,19 @@ class Transformer:
                 .withColumn("city", trim(col("city")))
                 .withColumn("state", trim(col("state")))
         )
+        df_transformed = df_transformed.repartition(1)
 
-        processed_filepath = file_path.replace("raw", "processed")
+        processed = self.processed_path(file_path)
         try:
-            df_transformed.write.mode("overwrite").parquet(processed_filepath)
-            logger.info(f"Data written successfully to {processed_filepath}")
+            df_transformed.write.mode("overwrite").parquet(processed)
+            logger.info(f"Data written successfully to {processed}")
         except Exception as e:
-            logger.error(f"Error writing the data to {processed_filepath}: {str(e)}")
+            logger.error(f"Error writing the data to {processed}: {str(e)}")
             raise e
 
         """Gera a validação apos a gravação do arquivo no miniO com Great Expectations."""
         
         expectation_json = "/opt/great_expectations/gx/expectations/users_expectations.json"
-        validation_result = self._validate_with_json(df_transformed, expectation_json, processed_filepath)
+        validation_result = self._validate_with_json(df_transformed, expectation_json, processed)
 
         logger.info(f"Arquivo de validação salvo em: {validation_result}")
