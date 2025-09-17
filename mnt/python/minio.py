@@ -45,8 +45,6 @@ class MinioUtils:
         logger.info(f"Upload concluído: s3://{bucket_name}/{key}")
 
     def list_raw_objects(self) -> List[str]:
-     # year, month, day = self.today.strftime("%Y"), self.today.strftime("%m"), self.today.strftime("%d")
-
       response = self.s3_client.list_objects_v2(Bucket="raw", Prefix="")
       files = [
           obj['Key'] for obj in response.get('Contents', [])
@@ -59,7 +57,7 @@ class MinioUtils:
       if not files:
           logger.warning("Nenhum arquivo do dia de hoje foi encontrado no bucket 'raw'.")
 
-      return files[0]
+      return files
 
     def list_processed_objects(self) -> List[str]:
       response = self.s3_client.list_objects_v2(Bucket="processed", Prefix="")
@@ -74,7 +72,7 @@ class MinioUtils:
       if not files:
           logger.warning("Nenhum arquivo do dia de hoje foi encontrado no bucket 'processed'.")
 
-      return files[0]
+      return files
 
     def object_validation(self, table):
       file_path = f"{table}/year={self.year}/month={self.month}/day={self.day}/*.json"
