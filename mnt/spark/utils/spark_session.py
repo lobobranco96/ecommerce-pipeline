@@ -33,6 +33,11 @@ def create_spark_session():
             .appName("Minio Integration with PySpark") \
             .config(conf=conf) \
             .getOrCreate()
+
+        hadoop_conf = spark._jsc.hadoopConfiguration()
+        hadoop_conf.set("fs.s3a.fast.upload", "true")
+        hadoop_conf.set("mapreduce.fileoutputcommitter.algorithm.version", "2")
+        spark.conf.set("spark.sql.shuffle.partitions", "1")
         
         logger.info("Spark Session criada com sucesso")
         return spark

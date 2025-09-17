@@ -180,19 +180,30 @@ Pipeline ETL para ingestão, transformação, validação e carga em Postgres us
 ---
 
 ## Como Rodar
+1. Clone este repositório
+```bash
+git clone https://github.com/lobobranco96/ecommerce-pipeline.git
+cd ecommerce-pipeline
+```
 
-1. iniciar os containers com o makefile:
+2. Iniciar os containers:
+  - Se tiver o makefile instalado
 ```bash
 make up
 ```
+  ou 
+```bash
+docker compose -f services/datalake_dwh.yaml up -d
+docker compose -f services/orchestration.yaml up -d
+docker compose -f services/processing.yaml up -d
+docker compose -f services/observability.yaml up -d
+```
 
-2. Acesse o Airflow webserver
+3. Acesse o Airflow webserver
   - http://localhost:8080
 
-3. Monitorar metricas:
+4. Monitorar metricas:
 - Grafana → http://localhost:3000
-- Metabase → http://localhost:3001
-
 
 
 ## Em construção
