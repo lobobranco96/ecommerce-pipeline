@@ -38,7 +38,7 @@ class Transformer:
         return self.s3_prefix + self.raw + file_path
 
     def processed_path(self, file_path):
-        return self.s3_prefix + self.processed + file_path
+        return self.s3_prefix + self.processed + file_path.replace(".parquet", "")
 
     def orders(self, file_path: str):
         """
