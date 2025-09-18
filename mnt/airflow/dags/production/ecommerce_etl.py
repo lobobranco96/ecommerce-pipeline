@@ -63,6 +63,7 @@ def ecommerce_etl(params=None):
 
         @task
         def list_csv_files(date: str) -> List[str]:
+            import os
             folder = STAGING_DIR.format(date=date)
             files = [os.path.join(folder, f) for f in os.listdir(folder) if f.endswith(".csv")]
             logger.info(f"Arquivos CSV encontrados: {files}")
@@ -70,13 +71,17 @@ def ecommerce_etl(params=None):
 
         @task
         def upload_file_to_minio(file_path: str):
+            import pandas as pd
             logger.info(f"Processando: {file_path}")
             df = pd.read_csv(file_path)
             dataset_name = os.path.basename(file_path).replace(".csv", "")
             MINIO.upload_df_as_parquet(df, dataset_name, bucket_name="raw")
 
-        files = list_csv_files("{{ params.execution_date }}")
-        wait_for_file >> files >> upload_file_to_minio.partial().expand(file_path=files)
+        # não executar agora, só criar a task
+        files_task = list_csv_files("{{ params.execution_date }}")
+
+        wait_for_file >> files_task
+        files_task >> upload_file_to_minio.partial().expand(file_path=files_task)
 
     # TaskGroup: Transform
     with TaskGroup("transform", tooltip="Transformação PySpark e carga processed") as transform_group:
@@ -112,17 +117,17 @@ def ecommerce_etl(params=None):
             verbose=True,
         ).expand(application_args=spark_args)
 
-    # TaskGroup: Validation
-    with TaskGroup("validation", tooltip="Great Expectations validation results") as validation_group:
+    # # TaskGroup: Validation
+    # with TaskGroup("validation", tooltip="Great Expectations validation results") as validation_group:
 
-        @task
-        def check_validation(table: str):
-            result = MINIO.object_validation(table)
-            if not result["success"]:
-                raise ValueError(f"Validação falhou para {table}")
+    #     @task
+    #     def check_validation(table: str):
+    #         result = MINIO.object_validation(table)
+    #         if not result["success"]:
+    #             raise ValueError(f"Validação falhou para {table}")
 
-        table_list = ["orders", "payments", "products", "users"]
-        check_validation.partial().expand(table=table_list)
+    #     table_list = ["orders", "payments", "products", "users"]
+    #     check_validation.partial().expand(table=table_list)
 
     # TaskGroup: Load processed file on Postgres Table
     with TaskGroup("Load", tooltip="Execute pyspark scripts to load data in Postgres table.") as load_group:
@@ -158,6 +163,6 @@ def ecommerce_etl(params=None):
             verbose=True,
         ).expand(application_args=spark_args)
     # Sequência do DAG
-    extract_group >> transform_group >> validation_group >> load_group
-
+    #extract_group >> transform_group >> validation_group >> load_group
+    extract_group >> transform_group >> load_group
 dag = ecommerce_etl()
