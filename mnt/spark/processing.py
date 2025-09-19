@@ -24,7 +24,7 @@ if __name__ == "__main__":
     logging.info(f"Dataset: {dataset_name} | Path: {dataset_path}")
     
     logging.info("Iniciando a transformação.")
-    transformer = Transformer(spark, validate_spark_df)
+    transformer = Transformer(spark)
 
     # Chama dinamicamente o método certo (orders, payments, etc)
     if hasattr(transformer, dataset_name):
