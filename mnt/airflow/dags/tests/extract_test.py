@@ -28,15 +28,21 @@ S3_CLIENT = boto3.client(
     region_name='us-east-1'
 )
 MINIO = MinioUtils(S3_CLIENT)
-
 STAGING_DIR = "/opt/airflow/include/{date}"
+
+
+def upload(file_path: str, dataset_name: str) -> str:
+    logger.info(f"Lendo o diretorio: {file_path}")
+    df = pd.read_csv(file_path)
+    logger.info(f"Carregando no bucket: raw")
+    return MINIO.upload_df_as_parquet(df, dataset_name, bucket_name="raw")
+
 
 default_args = {
     "owner": "lobobranco",
     "retries": 1,
     "retry_delay": timedelta(minutes=2),
 }
-
 @dag(
     schedule=None,
     start_date=datetime.now() - timedelta(days=1),
@@ -45,58 +51,57 @@ default_args = {
     tags=["etl", "minio", "ingestion", "csv", "pyspark", "postgres"],
     params={"execution_date": datetime.today().strftime('%Y-%m-%d')}
 )
-def ecommerce_etl(params=None):
-
-    # TaskGroup: Extract
-    with TaskGroup("extract", tooltip="Extração e upload CSV -> MinIO") as extract_group:
-
-        wait_for_file = FileSensor(
-            task_id="wait_for_file",
-            filepath="/opt/airflow/include/{{ params.execution_date }}",
-            fs_conn_id="fs_default",
-            poke_interval=60,
-            timeout=60 * 60,
-            mode="reschedule",
-        )
-
-        @task
-        def list_csv_files(date: str) -> List[str]:
-            folder = STAGING_DIR.format(date=date)
-            files = [os.path.join(folder, f) for f in os.listdir(folder) if f.endswith(".csv")]
-            logger.info(f"Arquivos CSV encontrados: {files}")
-            return files
-
-        @task
-        def upload_orders(file_path: str):
-            logger.info(f"Processando: {file_path}")
-            df = pd.read_csv(file_path)
-            dataset_name = os.path.basename(file_path).replace(".csv", "")
-            MINIO.upload_df_as_parquet(df, dataset_name, bucket_name="raw")
-
-        @task
-        def upload_payments(file_path: str):
-            logger.info(f"Processando: {file_path}")
-            df = pd.read_csv(file_path)
-            dataset_name = os.path.basename(file_path).replace(".csv", "")
-            MINIO.upload_df_as_parquet(df, dataset_name, bucket_name="raw")
-
-        @task
-        def upload_products(file_path: str):
-            logger.info(f"Processando: {file_path}")
-            df = pd.read_csv(file_path)
-            dataset_name = os.path.basename(file_path).replace(".csv", "")
-            MINIO.upload_df_as_parquet(df, dataset_name, bucket_name="raw")
-
-        @task
-        def upload_users(file_path: str):
-            logger.info(f"Processando: {file_path}")
-            df = pd.read_csv(file_path)
-            dataset_name = os.path.basename(file_path).replace(".csv", "")
-            MINIO.upload_df_as_parquet(df, dataset_name, bucket_name="raw")
+def extract_test(params=None):
 
 
-        # não executar agora, só criar a task
-        files_task = list_csv_files("{{ params.execution_date }}")
+    wait_for_file = FileSensor(
+        task_id="wait_for_file",
+        filepath="/opt/airflow/include/{{ params.execution_date }}",
+        fs_conn_id="fs_default",
+        poke_interval=60,
+        timeout=60 * 60,
+        mode="reschedule",
+    )
 
-        wait_for_file >> files_task
-        files_task >> upload_file_to_minio.partial().expand(file_path=files_task)
+    @task
+    def list_staging(date: str) -> dict:
+        folder = STAGING_DIR.format(date=date)
+        files = [os.path.join(folder, f) for f in os.listdir(folder) if f.endswith(".csv")]
+        logger.info(f"Arquivos CSV encontrados: {files}")
+        # Retornando como dicionário para mapear tipo de arquivo
+        if len(files) < 4:
+          raise ValueError("Arquivos insuficientes para o processamento.")
+        else:
+          return {
+              "orders": files[0],
+              "payments": files[1],
+              "products": files[2],
+              "users": files[3]
+          }
+
+    @task
+    def upload_orders_from_include(files_dict: dict):
+        upload(files_dict["orders"], "orders")
+
+    @task
+    def upload_payments_from_include(files_dict: dict):
+        upload(files_dict["payments"], "payments")
+
+    @task
+    def upload_products_from_include(files_dict: dict):
+        upload(files_dict["products"], "products")
+
+    @task
+    def upload_users_from_include(files_dict: dict):
+        upload(files_dict["users"], "users")
+
+
+    files_task = list_staging("{{ params.execution_date }}")
+
+    orders_task = upload_orders_from_include(files_task)
+    payments_task = upload_payments_from_include(files_task)
+    products_task = upload_products_from_include(files_task)
+    users_task = upload_users_from_include(files_task)
+
+    wait_for_file >> files_task
+    files_task >> [orders_task, payments_task, products_task, users_task]
