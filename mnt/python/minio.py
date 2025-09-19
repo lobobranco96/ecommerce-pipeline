@@ -17,7 +17,7 @@ class MinioUtils:
         self.day = today.strftime("%d")
 
 
-    def upload_df_as_parquet(self, df, dataset_name, bucket_name, partition_cols=None):
+    def upload_df_as_parquet(self, df, dataset_name, bucket_name):
         # Converter Pandas para Arrow Table com schema otimizado
         table = pa.Table.from_pandas(df, preserve_index=False)
 
