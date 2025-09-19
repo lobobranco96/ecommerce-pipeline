@@ -63,7 +63,6 @@ def ecommerce_etl(params=None):
 
         @task
         def list_csv_files(date: str) -> List[str]:
-            import os
             folder = STAGING_DIR.format(date=date)
             files = [os.path.join(folder, f) for f in os.listdir(folder) if f.endswith(".csv")]
             logger.info(f"Arquivos CSV encontrados: {files}")
@@ -71,7 +70,6 @@ def ecommerce_etl(params=None):
 
         @task
         def upload_file_to_minio(file_path: str):
-            import pandas as pd
             logger.info(f"Processando: {file_path}")
             df = pd.read_csv(file_path)
             dataset_name = os.path.basename(file_path).replace(".csv", "")
