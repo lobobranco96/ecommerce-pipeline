@@ -19,21 +19,21 @@ ENDPOINT_URL = os.getenv("S3_ENDPOINT")
 ACCESS_KEY = os.getenv("AWS_ACCESS_KEY_ID")
 SECRET_KEY = os.getenv("AWS_SECRET_ACCESS_KEY")
 
-S3_CLIENT = boto3.client(
-    's3',
-    endpoint_url=ENDPOINT_URL,
-    aws_access_key_id=ACCESS_KEY,
-    aws_secret_access_key=SECRET_KEY,
-    config=Config(signature_version='s3v4'),
-    region_name='us-east-1'
-)
-MINIO = MinioUtils(S3_CLIENT)
 STAGING_DIR = "/opt/airflow/include/{date}"
 
 def upload(file_path: str, dataset_name: str) -> str:
     logger.info(f"Lendo o diretorio: {file_path}")
     df = pd.read_csv(file_path)
     logger.info(f"Carregando no bucket: raw")
+    S3_CLIENT = boto3.client(
+    's3',
+    endpoint_url=ENDPOINT_URL,
+    aws_access_key_id=ACCESS_KEY,
+    aws_secret_access_key=SECRET_KEY,
+    config=Config(signature_version='s3v4'),
+    region_name='us-east-1'
+    )
+    MINIO = MinioUtils(S3_CLIENT)
     s3_path = MINIO.upload_df_as_parquet(df, dataset_name, bucket_name="raw")
     return s3_path  # Retorna caminho do parquet no MinIO/S3
 
@@ -94,15 +94,6 @@ def etl_pipeline():
     def raw_users(files_dict: dict):
         return upload(files_dict["users"], "users")
 
-    files_task = list_staging("{{ params.execution_date }}")
-
-    orders_upload = raw_orders(files_task)
-    payments_upload = raw_payments(files_task)
-    products_upload = raw_products(files_task)
-    users_upload = raw_users(files_task)
-
-    wait_for_file >> files_task
-    files_task >> [orders_upload, payments_upload, products_upload, users_upload]
 
     # TRANSFORM 
     conf = {
@@ -195,10 +186,41 @@ def etl_pipeline():
         application_args=[users_upload],
     )
 
-    # 
-    orders_upload >> spark_orders >> load_orders
-    payments_upload >> spark_payments >> load_payments
-    products_upload >> spark_products >> load_products
-    users_upload >> spark_users >> load_users
+    # App 
+    files_task = list_staging("{{ params.execution_date }}")
+
+    orders_upload = raw_orders(files_task)
+    payments_upload = raw_payments(files_task)
+    products_upload = raw_products(files_task)
+    users_upload = raw_users(files_task)
+
+    # Sensor → listar arquivos
+    wait_for_file >> files_task
+
+    # Listar arquivos → uploads
+    files_task >> [orders_upload, payments_upload, products_upload, users_upload]
+
+    # Uploads → Spark transform 
+    orders_upload >> spark_orders
+    payments_upload >> spark_payments
+    products_upload >> spark_products
+    users_upload >> spark_users
+
+    # Spark transform → Load 
+    spark_orders >> load_orders
+    spark_payments >> load_payments
+    spark_products >> load_products
+    spark_users >> load_users
+
+
+    #wait_for_file >> files_task
+    #files_task >> [orders_upload, payments_upload, products_upload, users_upload]
+    #[orders_upload, payments_upload, products_upload, users_upload] >> [spark_orders, spark_payments, spark_products, spark_users]
+    #[load_orders, load_payments, load_products, load_users]
+    # Dependências
+    #orders_upload >> spark_orders >> load_orders
+   # payments_upload >> spark_payments >> load_payments
+   # products_upload >> spark_products >> load_products
+    #users_upload >> spark_users >> load_user
 
 etl_pipeline()
