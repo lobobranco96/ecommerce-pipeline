@@ -43,7 +43,7 @@ class MinioUtils:
         )
 
         logger.info(f"Upload concluído: s3://{bucket_name}/{key}")
-        return f"s3://{bucket_name}/{key}"
+        return f"s3a://{bucket_name}/{key}"
 
     def list_raw_objects(self) -> List[str]:
       response = self.s3_client.list_objects_v2(Bucket="raw", Prefix="")
