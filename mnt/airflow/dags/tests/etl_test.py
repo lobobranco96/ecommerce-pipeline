@@ -32,7 +32,8 @@ def upload(file_path: str, dataset_name: str) -> str:
     logger.info(f"Lendo o diretorio: {file_path}")
     df = pd.read_csv(file_path)
     logger.info(f"Carregando no bucket: raw")
-    return MINIO.upload_df_as_parquet(df, dataset_name, bucket_name="raw")
+    s3_path = MINIO.upload_df_as_parquet(df, dataset_name, bucket_name="raw")
+    return s3_path  # Retorna caminho do parquet no MinIO/S3
 
 default_args = {
     "owner": "lobobranco",
@@ -48,7 +49,7 @@ default_args = {
     tags=["etl", "minio", "ingestion", "csv", "pyspark", "postgres"],
     params={"execution_date": datetime.today().strftime('%Y-%m-%d')}
 )
-def etl_pipeline():
+def etl_test():
 
     wait_for_file = FileSensor(
         task_id="wait_for_file",
@@ -77,19 +78,19 @@ def etl_pipeline():
 
     @task
     def upload_orders(files_dict: dict):
-        upload(files_dict["orders"], "orders")
+        return upload(files_dict["orders"], "orders")
 
     @task
     def upload_payments(files_dict: dict):
-        upload(files_dict["payments"], "payments")
+        return upload(files_dict["payments"], "payments")
 
     @task
     def upload_products(files_dict: dict):
-        upload(files_dict["products"], "products")
+        return upload(files_dict["products"], "products")
 
     @task
     def upload_users(files_dict: dict):
-        upload(files_dict["users"], "users")
+        return upload(files_dict["users"], "users")
 
     files_task = list_staging("{{ params.execution_date }}")
 
@@ -115,10 +116,11 @@ def etl_pipeline():
         "spark.hadoop.fs.s3a.secret.key": os.getenv("AWS_SECRET_ACCESS_KEY"),
     }
 
-    orders = f"s3a://{bucket}/orders/year={year}/month={month}/day={day}/orders.parquet"
-    payments = f"s3a://{bucket}/payments/year={year}/month={month}/day={day}/payments.parquet"
-    products = f"s3a://{bucket}/products/year={year}/month={month}/day={day}/products.parquet"
-    users = f"s3a://{bucket}/users/year={year}/month={month}/day={day}/users.parquet"
+    #bucket = "raw"
+    #orders = f"s3a://{bucket}/orders/year={year}/month={month}/day={day}/orders.parquet"
+    #payments = f"s3a://{bucket}/payments/year={year}/month={month}/day={day}/payments.parquet"
+    #products = f"s3a://{bucket}/products/year={year}/month={month}/day={day}/products.parquet"
+    #users = f"s3a://{bucket}/users/year={year}/month={month}/day={day}/users.parquet"
 
     spark_orders = SparkSubmitOperator(
         task_id="transformation_orders",
@@ -126,7 +128,7 @@ def etl_pipeline():
         conn_id="spark_default",
         conf=conf,
         verbose=True,
-        application_args=["--input", orders],
+        application_args=[orders_upload],
     )
 
     spark_payments = SparkSubmitOperator(
@@ -135,7 +137,7 @@ def etl_pipeline():
         conn_id="spark_default",
         conf=conf,
         verbose=True,
-        application_args=["--input", payments],
+        application_args=[payments_upload],
     )
 
     spark_products = SparkSubmitOperator(
@@ -144,7 +146,7 @@ def etl_pipeline():
         conn_id="spark_default",
         conf=conf,
         verbose=True,
-        application_args=["--input", products],
+        application_args=[products_upload],
     )
 
     spark_users = SparkSubmitOperator(
@@ -153,7 +155,7 @@ def etl_pipeline():
         conn_id="spark_default",
         conf=conf,
         verbose=True,
-        application_args=["--input", users],
+        application_args=[users_upload],
     )
 
     orders_upload >> spark_orders
@@ -161,4 +163,4 @@ def etl_pipeline():
     products_upload >> spark_products
     users_upload >> spark_users
 
-etl_pipeline()
+etl_test()
