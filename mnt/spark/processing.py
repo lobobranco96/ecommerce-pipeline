@@ -18,7 +18,7 @@ if __name__ == "__main__":
 
     logging.info("Coletando o nome do dataset à ser processado e transformado.")
     # O caminho do arquivo vem como argumento da DAG
-    dataset_path = sys.argv[1]  
+    dataset_path = sys.argv[1]
     dataset_name = dataset_path.split("/")[-1].split(".")[0]  
 
     logging.info(f"Dataset: {dataset_name} | Path: {dataset_path}")
