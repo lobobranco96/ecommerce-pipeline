@@ -17,7 +17,7 @@ class Transformer:
     limpeza de dados e escreve a saída na camada 'processed'.
     """
 
-    def __init__(self, spark, validate_spark_df):
+    def __init__(self, spark):
         """
         Inicializa o Transformer com uma SparkSession.
 
@@ -26,7 +26,6 @@ class Transformer:
         """
         self.spark = spark
         self.now = datetime.now()
-        self.validate_spark_df = validate_spark_df 
         self.s3_prefix = "s3a://"
         self.raw = "raw/"
         self.processed = "processed/"
@@ -67,12 +66,11 @@ class Transformer:
             df.withColumn("order_id", col("order_id").cast(StringType()))
               .withColumn("user_id", col("user_id").cast(StringType()))
               .withColumn("product_id", col("product_id").cast(StringType()))
-              .withColumn("quantity", col("quantity").cast(DoubleType()))
+              .withColumn("quantity", col("quantity").cast(IntegerType()))
               .withColumn("total_price", col("total_price").cast(DoubleType()))
               .withColumn("order_date", col("order_date").cast(TimestampType()))
               .withColumn("status", col("status").cast(StringType()))
         )
-
         df_transformed = (
             df_casted.dropDuplicates()
                 .withColumn("order_year", year("order_date"))

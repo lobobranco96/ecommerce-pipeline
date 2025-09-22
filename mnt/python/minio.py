@@ -17,7 +17,7 @@ class MinioUtils:
         self.day = today.strftime("%d")
 
 
-    def upload_df_as_parquet(self, df, dataset_name, bucket_name, partition_cols=None):
+    def upload_df_as_parquet(self, df, dataset_name, bucket_name):
         # Converter Pandas para Arrow Table com schema otimizado
         table = pa.Table.from_pandas(df, preserve_index=False)
 
@@ -43,6 +43,7 @@ class MinioUtils:
         )
 
         logger.info(f"Upload concluído: s3://{bucket_name}/{key}")
+        return key
 
     def list_raw_objects(self) -> List[str]:
       response = self.s3_client.list_objects_v2(Bucket="raw", Prefix="")
