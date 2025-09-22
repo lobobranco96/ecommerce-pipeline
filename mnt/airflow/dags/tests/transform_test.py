@@ -72,6 +72,6 @@ def transform_test():
         application_args=["--input", users],
     )
 
-    [spark_orders >> spark_payments >> spark_products >> spark_users]
+    [spark_orders, spark_payments, spark_products, spark_users]
 
 transform_test()
