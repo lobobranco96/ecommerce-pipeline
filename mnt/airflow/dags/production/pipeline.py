@@ -1,14 +1,16 @@
 import os
 from datetime import datetime, timedelta
+import pandas as pd
+import boto3
+from botocore.client import Config
+from python.minio import MinioUtils
+
 from airflow.decorators import dag, task
 from airflow.utils.task_group import TaskGroup
 from airflow.sensors.filesystem import FileSensor
 from airflow.providers.apache.spark.operators.spark_submit import SparkSubmitOperator
 from airflow.utils.log.logging_mixin import LoggingMixin
-import pandas as pd
-import boto3
-from botocore.client import Config
-from python.minio import MinioUtils
+
 
 logger = LoggingMixin().log
 
@@ -146,10 +148,57 @@ def etl_pipeline():
         verbose=True,
         application_args=[users_upload],
     )
+    
+    # LOAD POSTGRES
+    conf_postgres = {
+            "spark.jars": "/opt/spark/jars/aws-java-sdk-bundle-1.12.262.jar,"
+                            "/opt/spark/jars/hadoop-aws-3.3.4.jar,"
+                            "/opt/spark/jars/postgresql-42.7.5.jar",
+        "spark.hadoop.fs.s3a.endpoint": os.getenv("S3_ENDPOINT"),
+        "spark.hadoop.fs.s3a.access.key": os.getenv("AWS_ACCESS_KEY_ID"),
+        "spark.hadoop.fs.s3a.secret.key": os.getenv("AWS_SECRET_ACCESS_KEY"),
+    }
+    
+    load_orders = SparkSubmitOperator(
+        task_id="load_orders",
+        application="/opt/airflow/dags/spark/load.py",
+        conn_id="spark_default",
+        conf=conf_postgres,
+        verbose=True,
+        application_args=[orders_upload],
+    )
 
-    orders_upload >> spark_orders
-    payments_upload >> spark_payments
-    products_upload >> spark_products
-    users_upload >> spark_users
+    load_payments = SparkSubmitOperator(
+        task_id="load_payments",
+        application="/opt/airflow/dags/spark/load.py",
+        conn_id="spark_default",
+        conf=conf_postgres,
+        verbose=True,
+        application_args=[payments_upload],
+    )
+
+    load_products = SparkSubmitOperator(
+        task_id="load_products",
+        application="/opt/airflow/dags/spark/load.py",
+        conn_id="spark_default",
+        conf=conf_postgres,
+        verbose=True,
+        application_args=[products_upload],
+    )
+
+    load_users = SparkSubmitOperator(
+        task_id="load_users",
+        application="/opt/airflow/dags/spark/load.py",
+        conn_id="spark_default",
+        conf=conf_postgres,
+        verbose=True,
+        application_args=[users_upload],
+    )
+
+    # 
+    orders_upload >> spark_orders >> load_orders
+    payments_upload >> spark_payments >> load_payments
+    products_upload >> spark_products >> load_products
+    users_upload >> spark_users >> load_users
 
 etl_pipeline()
