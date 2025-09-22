@@ -37,7 +37,8 @@ class Transformer:
         return self.s3_prefix + self.raw + file_path
 
     def processed_path(self, file_path):
-        return self.s3_prefix + self.processed + file_path.replace(".parquet", "")
+        #return self.s3_prefix + self.processed + file_path.replace(".parquet", "")
+        return file_path.replace("raw", "processed")
 
     def orders(self, file_path: str):
         """
@@ -59,8 +60,7 @@ class Transformer:
             Exception: Se ocorrer erro ao escrever o Parquet.
         """
 
-        raw = self.raw_path(file_path)
-        df = self.spark.read.format("parquet").load(raw)
+        df = self.spark.read.format("parquet").load(file_path)
 
         df_casted = (
             df.withColumn("order_id", col("order_id").cast(StringType()))
@@ -84,7 +84,12 @@ class Transformer:
         )
         df_transformed = df_transformed.repartition(1)
         
-        processed = self.processed_path(file_path)
+        dir_path = file_path.rsplit("/", 1)[0]
+        
+        # processed base bucket
+        processed_bucket = "processed"
+
+        processed = dir_path.replace("raw", processed_bucket)
         try:
             df_transformed.write.mode("overwrite").parquet(processed)
             logger.info(f"Data written successfully to {processed}")
@@ -118,8 +123,8 @@ class Transformer:
         Raises:
             Exception: Se ocorrer erro ao escrever o Parquet.
         """
-        raw = self.raw_path(file_path)
-        df = self.spark.read.format("parquet").load(raw)
+        logging.info(f"esse é o filepath: {file_path}")
+        df = self.spark.read.format("parquet").load(file_path)
 
         df_casted = (
             df.withColumn("payment_id", col("payment_id").cast(StringType()))
@@ -140,7 +145,12 @@ class Transformer:
         )
         df_transformed = df_transformed.repartition(1)
 
-        processed = self.processed_path(file_path)
+        dir_path = file_path.rsplit("/", 1)[0]
+        
+        # processed base bucket
+        processed_bucket = "processed"
+
+        processed = dir_path.replace("raw", processed_bucket)
         try:
             df_transformed.write.mode("overwrite").parquet(processed)
             logger.info(f"Data written successfully to {processed}")
@@ -173,8 +183,7 @@ class Transformer:
         Raises:
             Exception: Se ocorrer erro ao escrever o Parquet.
         """
-        raw = self.raw_path(file_path)
-        df = self.spark.read.format("parquet").load(raw)
+        df = self.spark.read.format("parquet").load(file_path)
 
         df_casted = (
             df.withColumn("product_id", col("product_id").cast(StringType()))
@@ -193,7 +202,12 @@ class Transformer:
         )
         df_transformed = df_transformed.repartition(1)
 
-        processed = self.processed_path(file_path)
+        dir_path = file_path.rsplit("/", 1)[0]
+
+        # processed base bucket
+        processed_bucket = "processed"
+
+        processed = dir_path.replace("raw", processed_bucket)
         try:
             df_transformed.write.mode("overwrite").parquet(processed)
             logger.info(f"Data written successfully to {processed}")
@@ -224,8 +238,7 @@ class Transformer:
         Raises:
             Exception: Se ocorrer erro ao escrever o Parquet.
         """
-        raw = self.raw_path(file_path)
-        df = self.spark.read.format("parquet").load(raw)
+        df = self.spark.read.format("parquet").load(file_path)
 
         df_casted = (
             df.withColumn("user_id", col("user_id").cast(StringType()))
@@ -247,7 +260,12 @@ class Transformer:
         )
         df_transformed = df_transformed.repartition(1)
 
-        processed = self.processed_path(file_path)
+        dir_path = file_path.rsplit("/", 1)[0]
+        
+        # processed base bucket
+        processed_bucket = "processed"
+
+        processed = dir_path.replace("raw", processed_bucket)
         try:
             df_transformed.write.mode("overwrite").parquet(processed)
             logger.info(f"Data written successfully to {processed}")
