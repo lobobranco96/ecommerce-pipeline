@@ -173,7 +173,15 @@ Pipeline ETL para ingestão, transformação, validação e carga em Postgres us
   - Sensores deferrables já implementados; uso de `short_circuit` **planejado** para reduzir ocupação de recursos e melhorar escalabilidade.
 
 ---
-
+## Configuração do docker
+- Para evitar erros como `SIGKILL` devido a falta de memória, configure os recursos do Docker da seguinte forma (especialmente em WSL2):
+- Salvar em Usuarios/"nome_usuario"/.wslconfig
+```ini
+[wsl2]
+memory=9GB       # Memória disponível para o Docker
+processors=4     # Número de CPUs disponíveis para o Docker
+swap=9GB         # Espaço de swap
+```
 ## Configuração de Credenciais
 - As credenciais (MinIO, PostgreSQL, etc.) estão armazenadas em `.env` na pasta `conf/` .credentials.env`.
 

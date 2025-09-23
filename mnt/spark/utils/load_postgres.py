@@ -21,7 +21,12 @@ class PostgresLoader:
     def load_table(self, file_path: str, table_name: str):
         url, postgres_properties = self.postgres_settings()
 
-        df = self.spark.read.parquet(file_path)
+        dir_path = file_path.rsplit("/", 1)[0]
+        # processed base bucket
+        processed_bucket = "processed"
+
+        processed = dir_path.replace("raw", processed_bucket)
+        df = self.spark.read.parquet(processed)
 
         return df.write.jdbc(
             url=url,
