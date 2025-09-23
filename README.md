@@ -120,6 +120,18 @@ Pipeline ETL para ingestão, transformação, validação e carga em Postgres us
 
 ### Visão Geral
   Esta DAG implementa uma pipeline end-to-end para dados de e-commerce. Ela faz ingestão de arquivos CSV, converte para Parquet no MinIO, processa transformações em PySpark, valida a qualidade dos dados (planejado) e carrega no Postgres para análise em ferramentas de BI como Metabase.
+```
+wait_for_file
+      │
+ list_staging
+      │
+ ┌─────────────┬─────────────┬─────────────┬─────────────┐
+orders_upload payments_upload products_upload users_upload
+      │             │             │             │
+spark_orders spark_payments spark_products spark_users
+      │             │             │             │
+load_orders   load_payments   load_products   load_users
+```
   1. **Extract (Ingestão para raw/)**
        - **FileSensor Deferrable**
          - Aguarda arquivos no diretório `include/{execution_date}` sem ocupar slot do worker (`mode="reschedule"`).
@@ -205,4 +217,5 @@ docker compose -f services/observability.yaml up -d
 
 
 ## Em construção
+
 
