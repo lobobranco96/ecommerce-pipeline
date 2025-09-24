@@ -187,6 +187,10 @@ swap=9GB         # Espaço de swap
 ## Configuração de Credenciais
 - As credenciais (MinIO, PostgreSQL, etc.) estão armazenadas em `.credentials.conf` na pasta `conf/` .credentials.env`.
 
+## Configuração do Connections no Airflow Webserver
+![Spark connections](include/spark-default.jpg)
+
+![File Sensor](include/fs_default.jpg)
 ---
 
 ## Como Rodar
