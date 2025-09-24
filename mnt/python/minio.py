@@ -5,12 +5,25 @@ from datetime import datetime
 from typing import List
 import logging 
 import json
+import boto3
+from botocore.client import Config
 
 logger = logging.getLogger(__name__)
 
 class MinioUtils:
-    def __init__(self, s3_client):
-        self.s3_client = s3_client
+    def __init__(self, endpoint_url, access_key, secret_key):
+        self.endpoint_url = endpoint_url
+        self.access_key = access_key
+        self.secret_key = secret_key
+        
+        self.s3_client = boto3.client(
+                's3',
+                endpoint_url=endpoint_url,
+                aws_access_key_id=access_key,
+                aws_secret_access_key=secret_key,
+                config=Config(signature_version='s3v4'),
+                region_name='us-east-1'
+                )
         today = datetime.today()
         self.year = today.strftime("%Y")
         self.month = today.strftime("%m")
