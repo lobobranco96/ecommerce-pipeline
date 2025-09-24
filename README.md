@@ -116,55 +116,57 @@ Objetivos principais:
     - Todos os arquivos são salvos localmente em `include/`
 
 ## Dag 2 - ecommerce_etl: 
-Pipeline ETL para ingestão, transformação, validação e carga em Postgres usando Airflow 3.0, MinIO (S3), PySpark e Great Expectations.  
+Pipeline ETL para ingestão, transformação, validação e carga em Postgres usando Airflow 3.0, MinIO (S3), PySpark e Great Expectations.
 
+### Visão Geral
+  Esta DAG implementa uma pipeline end-to-end para dados de e-commerce. Ela faz ingestão de arquivos CSV, converte para Parquet no MinIO, processa transformações em PySpark, valida a qualidade dos dados (planejado) e carrega no Postgres para análise em ferramentas de BI como Metabase.
+```
+wait_for_file
+      │
+ list_staging
+      │
+ ┌─────────────┬─────────────┬─────────────┬─────────────┐
+orders_upload payments_upload products_upload users_upload
+      │             │             │             │
+spark_orders spark_payments spark_products spark_users
+      │             │             │             │
+load_orders   load_payments   load_products   load_users
+```
   1. **Extract (Ingestão para raw/)**
        - **FileSensor Deferrable**
          - Aguarda arquivos no diretório `include/{execution_date}` sem ocupar slot do worker (`mode="reschedule"`).
-       - **Params no DAG**
-         - Permitem selecionar `execution_date` diretamente pela UI para reprocessamentos rápidos.  
-      - **`list_csv_files(date)`**  
-        - Identifica todos os arquivos CSV no diretório de staging.  
-      - **`upload_file_to_minio`**  
-        - Faz upload dos CSV convertendo para Parquet, utilizando **dynamic task mapping** (`.partial().expand(file_path=files)`) para paralelizar uploads.  
-      - **Boas práticas de Parquet**  
-        - (Snappy, dictionary encoding, page size ajustado) aplicadas no `MinioUtils.upload_df_as_parquet()`.  
-
+         - Permite parametrizar a data diretamente pela UI para reprocessamentos rápidos.
+       - **list_staging(date)**
+         - Identifica todos os arquivos CSV no diretório de staging.
+         - Mapeia automaticamente os arquivos pelos nomes (orders, payments, products, users).
+         - Valida presença de todos os arquivos obrigatórios antes de prosseguir.
+      - **`Upload para MinIO (upload)`**  
+        - Lê cada CSV, converte para Parquet e envia para o bucket raw do MinIO.
+        - Utiliza Dynamic Task Mapping para paralelizar uploads (um task por arquivo).
+        - Cada task retorna o caminho s3:// do Parquet no MinIO/S3.
+      - **Boas Práticas Parquet**
+        - Compressão Snappy, dictionary encoding e page size ajustado aplicadas no upload.
 
   2. **Transform (Processamento com PySpark)**  
-      - **`list_raw_files()`**  
-        - Lista arquivos Parquet no bucket `raw/` via `MinioUtils`.  
-      - **`build_spark_args()`**  
-        - Constrói argumentos individuais para cada arquivo a ser processado.  
-      - **Execução Spark Paralela**  
-        - `SparkSubmitOperator.partial().expand(application_args=[[f] for f in files])` executa transformações PySpark de forma dinâmica sobre cada arquivo no MinIO.  
-        - Configurações S3 (s3a), jars (hadoop-aws, aws-sdk) e credenciais são passadas via `conf` do Spark.  
-      - **Isolamento Natural**  
-        - Cada arquivo é processado individualmente; falhas não interrompem os demais arquivos.  
-
-
-  3. **Validação de Qualidade (Great Expectations)**  
-      - **TaskGroup `validation`**  
-        - Agrupa todas as validações GX num bloco visual do UI.  
-      - **`check_validation`**  
-        - Expandida dinamicamente para cada tabela (`orders`, `payments`, `products`, `users`) usando `.partial().expand(table=table_list)`.  
-      - **`MinioUtils.object_validation()`**  
-        - Lista objetos no bucket usando `list_objects_v2`;  
-        - Lê arquivos JSON de resultados das validações;  
-        - Retorna dicionário `{success: bool, details: {...}}`.  
-      - **Falhas Isoladas**  
-        - Cada tabela é validada separadamente. Se uma falhar, apenas aquela task quebra (não derruba a pipeline inteira).  
+      - **`SparkSubmitOperator (processed_*)`**  
+        - Um job Spark independente por tabela..
+        - Executa o script /opt/airflow/dags/spark/processing.py para transformar dados do bucket raw/ e gravar no bucket processed/.
+        - Configuração do Spark inclui:
+          - Jars aws-java-sdk-bundle e hadoop-aws para integração S3A/MinIO.
+          - Endpoint, access key e secret key via variáveis de ambiente.
+        - Cada tabela é processada isoladamente; falhas não interrompem outras tasks. 
         
-  4. **Carga no Data Warehouse**
-      - **`list_processed_bucket()`**  
-        - Lista arquivos já processados no bucket `processed/`.  
-      - **`build_spark_args()`**  
-        - Prepara argumentos para cada arquivo processado.  
-      - **Execução Spark Paralela**  
-        - `SparkSubmitOperator.partial().expand(application_args=spark_args)` carrega dados de `processed/` para tabelas do Postgres usando PySpark.  
-        - Conexão configurada com o driver PostgreSQL (`postgresql-42.7.5.jar`).  
+  3. **Carga no Data Warehouse Postgres**
+      - **`SparkSubmitOperator (load_*)`**  
+        - Executa /opt/airflow/dags/spark/load.py para carregar dados de processed/ no Postgres.`.  
+        - Usa driver PostgreSQL postgresql-42.7.5.jar incluso no spark.jars.
+        - Conexão via JDBC usando credenciais configuradas nas variáveis do Airflow.
+        - Cada tabela é carregada isoladamente; falhas em uma não derrubam as demais.
       - **Pipeline Completa**  
         - Dados confiáveis pós-validação são carregados em tabelas prontas para consumo no Metabase ou outro BI.  
+### Resumo
+  Esta DAG automatiza o pipeline de dados de e-commerce, garantindo ingestão segura, transformação em PySpark e carga em Postgres para análises.
+  A arquitetura é escalável, paralela e preparada para validação futura.
 
 ## Observabilidade e Operações
   - Métricas do Airflow, Spark e containers coletadas pelo Prometheus; dashboards configurados no Grafana.  
@@ -174,7 +176,7 @@ Pipeline ETL para ingestão, transformação, validação e carga em Postgres us
 
 ---
 ## Configuração do docker
-- Para evitar erros como `SIGKILL` devido a falta de memória, configure os recursos do Docker da seguinte forma (especialmente em WSL2):
+- Para evitar erros como `SIGKILL` devido a falta de memória OU o uso excessivo de memoria no docker, configure os recursos do Docker da seguinte forma (especialmente em WSL2):
 - Salvar em Usuarios/"nome_usuario"/.wslconfig
 ```ini
 [wsl2]
@@ -183,7 +185,7 @@ processors=4     # Número de CPUs disponíveis para o Docker
 swap=9GB         # Espaço de swap
 ```
 ## Configuração de Credenciais
-- As credenciais (MinIO, PostgreSQL, etc.) estão armazenadas em `.env` na pasta `conf/` .credentials.env`.
+- As credenciais (MinIO, PostgreSQL, etc.) estão armazenadas em `.credentials.conf` na pasta `conf/` .credentials.env`.
 
 ---
 
@@ -215,3 +217,5 @@ docker compose -f services/observability.yaml up -d
 
 
 ## Em construção
+
+

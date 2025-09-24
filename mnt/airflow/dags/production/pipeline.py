@@ -194,33 +194,23 @@ def etl_pipeline():
     products_upload = raw_products(files_task)
     users_upload = raw_users(files_task)
 
-    # Sensor → listar arquivos
+    # Listagem arquivos → uploads
+    uploads = [orders_upload, payments_upload, products_upload, users_upload]
+    transformation_tasks = [spark_orders, spark_payments, spark_products, spark_users]
+    load_tasks = [load_orders, load_payments, load_products, load_users]
+
+    # Sensor → listagem arquivos
     wait_for_file >> files_task
 
-    # Listar arquivos → uploads
-    files_task >> [orders_upload, payments_upload, products_upload, users_upload]
+    # Listagem arquivos → uploads
+    files_task >> uploads 
 
-    # Uploads → Spark transform 
-    orders_upload >> spark_orders
-    payments_upload >> spark_payments
-    products_upload >> spark_products
-    users_upload >> spark_users
+    # Uploads → Spark transform
+    for upload, transformation_task in zip(uploads, transformation_tasks):
+        upload >> transformation_task
 
-    # Spark transform → Load 
-    spark_orders >> load_orders
-    spark_payments >> load_payments
-    spark_products >> load_products
-    spark_users >> load_users
-
-
-    #wait_for_file >> files_task
-    #files_task >> [orders_upload, payments_upload, products_upload, users_upload]
-    #[orders_upload, payments_upload, products_upload, users_upload] >> [spark_orders, spark_payments, spark_products, spark_users]
-    #[load_orders, load_payments, load_products, load_users]
-    # Dependências
-    #orders_upload >> spark_orders >> load_orders
-   # payments_upload >> spark_payments >> load_payments
-   # products_upload >> spark_products >> load_products
-    #users_upload >> spark_users >> load_user
+    # Spark transform → Load
+    for transformation_task, load_task in zip(transformation_tasks, load_tasks):
+        transformation_task >> load_task
 
 etl_pipeline()
