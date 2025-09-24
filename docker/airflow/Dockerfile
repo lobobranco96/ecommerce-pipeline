@@ -26,4 +26,4 @@ RUN wget -P /opt/spark/jars https://repo1.maven.org/maven2/org/apache/hadoop/had
 USER airflow
 
 COPY requirements.txt /requirements.txt
-RUN pip install -r /requirements.txt
+RUN pip install --no-cache-dir -r /requirements.txt
