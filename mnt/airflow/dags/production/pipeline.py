@@ -1,7 +1,6 @@
 import os
 from datetime import datetime, timedelta
 import pandas as pd
-import boto3
 from botocore.client import Config
 from python.minio import MinioUtils
 
@@ -25,16 +24,8 @@ def upload(file_path: str, dataset_name: str) -> str:
     logger.info(f"Lendo o diretorio: {file_path}")
     df = pd.read_csv(file_path)
     logger.info(f"Carregando no bucket: raw")
-    S3_CLIENT = boto3.client(
-    's3',
-    endpoint_url=ENDPOINT_URL,
-    aws_access_key_id=ACCESS_KEY,
-    aws_secret_access_key=SECRET_KEY,
-    config=Config(signature_version='s3v4'),
-    region_name='us-east-1'
-    )
-    MINIO = MinioUtils(S3_CLIENT)
-    s3_path = MINIO.upload_df_as_parquet(df, dataset_name, bucket_name="raw")
+    minio = MinioUtils(ENDPOINT_URL, ACCESS_KEY, SECRET_KEY)
+    s3_path = minio.upload_df_as_parquet(df, dataset_name, bucket_name="raw")
     return s3_path  # Retorna caminho do parquet no MinIO/S3
 
 default_args = {
@@ -93,6 +84,13 @@ def etl_pipeline():
     @task
     def raw_users(files_dict: dict):
         return upload(files_dict["users"], "users")
+
+    files_task = list_staging("{{ params.execution_date }}")
+
+    orders_upload = raw_orders(files_task)
+    payments_upload = raw_payments(files_task)
+    products_upload = raw_products(files_task)
+    users_upload = raw_users(files_task)
 
 
     # TRANSFORM 
@@ -186,31 +184,23 @@ def etl_pipeline():
         application_args=[users_upload],
     )
 
-    # App 
-    files_task = list_staging("{{ params.execution_date }}")
-
-    orders_upload = raw_orders(files_task)
-    payments_upload = raw_payments(files_task)
-    products_upload = raw_products(files_task)
-    users_upload = raw_users(files_task)
-
-    # Listagem arquivos → uploads
-    uploads = [orders_upload, payments_upload, products_upload, users_upload]
-    transformation_tasks = [spark_orders, spark_payments, spark_products, spark_users]
-    load_tasks = [load_orders, load_payments, load_products, load_users]
-
-    # Sensor → listagem arquivos
+    # Sensor → listar arquivos
     wait_for_file >> files_task
 
-    # Listagem arquivos → uploads
-    files_task >> uploads 
+    # Listar arquivos → uploads
+    #files_task >> [orders_upload, payments_upload, products_upload, users_upload]
 
-    # Uploads → Spark transform
-    for upload, transformation_task in zip(uploads, transformation_tasks):
-        upload >> transformation_task
+    # Uploads → Spark transform 
+    orders_upload >> spark_orders >> load_orders
+    payments_upload >> spark_payments >> load_payments
+    products_upload >> spark_products >> load_products
+    users_upload >> spark_users >> load_users
 
-    # Spark transform → Load
-    for transformation_task, load_task in zip(transformation_tasks, load_tasks):
-        transformation_task >> load_task
+    # Spark transform → Load 
+    #spark_orders >> load_orders
+   # spark_payments >> load_payments
+    #spark_products >> load_products
+   # spark_users >> load_users
+
 
 etl_pipeline()
