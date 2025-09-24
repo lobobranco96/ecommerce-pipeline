@@ -28,8 +28,8 @@ def create_spark_session():
           .set("spark.driver.memory", "512m")
           .set("spark.executor.instances", "1")
           .set("spark.sql.shuffle.partitions", "8")
-          .set("spark.memory.offHeap.enabled", "true")
-          .set("spark.memory.offHeap.size", "64m")
+        #  .set("spark.memory.offHeap.enabled", "true")
+        #  .set("spark.memory.offHeap.size", "64m")
           .set("spark.hadoop.fs.s3a.impl", "org.apache.hadoop.fs.s3a.S3AFileSystem")
           .set("spark.hadoop.fs.s3a.path.style.access", "true")
           
