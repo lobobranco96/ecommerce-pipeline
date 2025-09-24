@@ -1,9 +1,8 @@
 faker
 apache-airflow==3.0.6
 apache-airflow-providers-apache-spark
-apache-airflow-providers-postgres==5.10.0
+apache-airflow-providers-amazon
 pyspark==3.5.3
 findspark
 python-dotenv
 great_expectations
-boto3
