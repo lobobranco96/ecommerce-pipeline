@@ -13,35 +13,40 @@ from airflow.utils.log.logging_mixin import LoggingMixin
 
 logger = LoggingMixin().log
 
-# Config MinIO
-ENDPOINT_URL = os.getenv("S3_ENDPOINT")
-ACCESS_KEY = os.getenv("AWS_ACCESS_KEY_ID")
-SECRET_KEY = os.getenv("AWS_SECRET_ACCESS_KEY")
-
 STAGING_DIR = "/opt/airflow/include/{date}"
-CONF_TRANSFORM = {
-    "spark.jars": "/opt/spark/jars/aws-java-sdk-bundle-1.12.262.jar,"
-                  "/opt/spark/jars/hadoop-aws-3.3.4.jar",
-    "spark.hadoop.fs.s3a.endpoint": os.getenv("S3_ENDPOINT"),
-    "spark.hadoop.fs.s3a.access.key": os.getenv("AWS_ACCESS_KEY_ID"),
-    "spark.hadoop.fs.s3a.secret.key": os.getenv("AWS_SECRET_ACCESS_KEY"),
-}
+SPARK_PROCESSING_SCRIPT = "/opt/airflow/dags/spark/processing.py"
+SPARK_LOAD_SCRIPT = "/opt/airflow/dags/spark/load.py"
 
-CONF_LOAD = {
-        "spark.jars": "/opt/spark/jars/aws-java-sdk-bundle-1.12.262.jar,"
-                        "/opt/spark/jars/hadoop-aws-3.3.4.jar,"
-                        "/opt/spark/jars/postgresql-42.7.5.jar",
-    "spark.hadoop.fs.s3a.endpoint": os.getenv("S3_ENDPOINT"),
-    "spark.hadoop.fs.s3a.access.key": os.getenv("AWS_ACCESS_KEY_ID"),
-    "spark.hadoop.fs.s3a.secret.key": os.getenv("AWS_SECRET_ACCESS_KEY"),
-}
 def upload(file_path: str, dataset_name: str) -> str:
     logger.info(f"Lendo o diretorio: {file_path}")
     df = pd.read_csv(file_path)
     logger.info(f"Carregando no bucket: raw")
-    minio = MinioUtils(ENDPOINT_URL, ACCESS_KEY, SECRET_KEY)
+    # Config MinIO
+    s3_endpoint = os.getenv("S3_ENDPOINT")
+    access_key = os.getenv("AWS_ACCESS_KEY_ID")
+    secret_key = os.getenv("AWS_SECRET_ACCESS_KEY")
+    
+    minio = MinioUtils(s3_endpoint, access_key, secret_key)
     s3_path = minio.upload_df_as_parquet(df, dataset_name, bucket_name="raw")
     return s3_path  # Retorna caminho do parquet no MinIO/S3
+
+def spark_transform_task(task_id, app_path, args):
+    return SparkSubmitOperator(
+        task_id=task_id,
+        application=app_path,
+        conn_id="spark_default",
+        verbose=True,
+        application_args=[args],
+    )
+
+def spark_load_task(task_id, app_path, args):
+    return SparkSubmitOperator(
+        task_id=task_id,
+        application=app_path,
+        conn_id="spark_default",
+        verbose=True,
+        application_args=[args],
+    )
 
 default_args = {
     "owner": "lobobranco",
@@ -104,91 +109,29 @@ def etl_pipeline():
 
     with TaskGroup("orders") as orders_group:
         extract_orders = raw_orders(files_task)
+        transform_orders = spark_transform_task("transform_orders", SPARK_PROCESSING_SCRIPT, extract_orders)
+        load_orders = spark_load_task("load_orders", SPARK_LOAD_SCRIPT, extract_orders)
         
-        transform_orders = SparkSubmitOperator(
-            task_id="transform_orders",
-            application="/opt/airflow/dags/spark/processing.py",
-            conn_id="spark_default",
-            conf=CONF_TRANSFORM,
-            verbose=True,
-            application_args=[extract_orders],
-        )
-        load_orders = SparkSubmitOperator(
-            task_id="load_orders",
-            application="/opt/airflow/dags/spark/load.py",
-            conn_id="spark_default",
-            conf=CONF_LOAD,
-            verbose=True,
-            application_args=[extract_orders],
-        )
-    
         extract_orders >> transform_orders >> load_orders
 
     with TaskGroup("users") as users_group:
         extract_users = raw_users(files_task)
-        
-        transform_users = SparkSubmitOperator(
-            task_id="transform_users",
-            application="/opt/airflow/dags/spark/processing.py",
-            conn_id="spark_default",
-            conf=CONF_TRANSFORM,
-            verbose=True,
-            application_args=[extract_users],
-        )
-        
-        load_users = SparkSubmitOperator(
-            task_id="load_users",
-            application="/opt/airflow/dags/spark/load.py",
-            conn_id="spark_default",
-            conf=CONF_LOAD,
-            verbose=True,
-            application_args=[extract_users],
-        )
+        transform_users = spark_transform_task("transform_users", SPARK_PROCESSING_SCRIPT, extract_users)
+        load_users = spark_load_task("load_users", SPARK_LOAD_SCRIPT, extract_users)
     
         extract_users >> transform_users >> load_users
 
     with TaskGroup("payments") as payments_group:
         extract_payments = raw_payments(files_task)
-        
-        transform_payments = SparkSubmitOperator(
-            task_id="transform_payments",
-            application="/opt/airflow/dags/spark/processing.py",
-            conn_id="spark_default",
-            conf=CONF_TRANSFORM,
-            verbose=True,
-            application_args=[extract_payments],
-        )
-        load_payments = SparkSubmitOperator(
-            task_id="load_payments",
-            application="/opt/airflow/dags/spark/load.py",
-            conn_id="spark_default",
-            conf=CONF_LOAD,
-            verbose=True,
-            application_args=[extract_payments],
-        )
+        transform_payments = spark_transform_task("transform_payments", SPARK_PROCESSING_SCRIPT, extract_payments)
+        load_payments = spark_load_task("load_payments", SPARK_LOAD_SCRIPT, extract_payments)
     
         extract_payments >> transform_payments >> load_payments
         
     with TaskGroup("products") as products_group:
-        extract_products= raw_products(files_task)
-        
-        transform_products = SparkSubmitOperator(
-        task_id="transform_products",
-        application="/opt/airflow/dags/spark/processing.py",
-        conn_id="spark_default",
-        conf=CONF_TRANSFORM,
-        verbose=True,
-        application_args=[extract_products],
-    )
-        
-        load_products = SparkSubmitOperator(
-            task_id="load_products",
-            application="/opt/airflow/dags/spark/load.py",
-            conn_id="spark_default",
-            conf=CONF_LOAD,
-            verbose=True,
-            application_args=[extract_products],
-        )
+        extract_products = raw_products(files_task)
+        transform_products = spark_transform_task("transform_products", SPARK_PROCESSING_SCRIPT, extract_products)
+        load_products = spark_load_task("load_products", SPARK_LOAD_SCRIPT, extract_products)
     
         extract_products >> transform_products >> load_products
 
@@ -196,4 +139,5 @@ def etl_pipeline():
     files_task >> [orders_group, users_group, payments_group, products_group]
     
 etl_pipeline()
+
 
