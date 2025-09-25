@@ -18,6 +18,17 @@ SPARK_PROCESSING_SCRIPT = "/opt/airflow/dags/spark/processing.py"
 SPARK_LOAD_SCRIPT = "/opt/airflow/dags/spark/load.py"
 
 def upload(file_path: str, dataset_name: str) -> str:
+    """
+    Realiza leitura de arquivo CSV e envia como Parquet para o bucket `raw/` no MinIO.
+
+    Args:
+        file_path (str): Caminho absoluto do arquivo CSV.
+        dataset_name (str): Nome lógico do dataset (ex: 'orders').
+
+    Returns:
+        str: Caminho S3 do arquivo Parquet no MinIO.
+    """
+    
     logger.info(f"Lendo o diretorio: {file_path}")
     df = pd.read_csv(file_path)
     logger.info(f"Carregando no bucket: raw")
@@ -31,6 +42,17 @@ def upload(file_path: str, dataset_name: str) -> str:
     return s3_path  # Retorna caminho do parquet no MinIO/S3
 
 def spark_transform_task(task_id, app_path, args):
+    """
+    Cria um SparkSubmitOperator configurado para executar um script Spark com argumentos.
+
+    Args:
+        task_id (str): ID da task no DAG.
+        app_path (str): Caminho para o script Spark a ser executado.
+        args (str): Argumento a ser passado ao script (geralmente o caminho no S3/MinIO).
+
+    Returns:
+        SparkSubmitOperator: Task configurada para execução via Spark.
+    """
     return SparkSubmitOperator(
         task_id=task_id,
         application=app_path,
@@ -63,7 +85,24 @@ default_args = {
     params={"execution_date": datetime.today().strftime('%Y-%m-%d')}
 )
 def etl_pipeline():
+    """
+    Pipeline ETL para processamento de dados CSV em MinIO com Spark e carga no Postgres.
 
+    Etapas:
+    1. Aguarda arquivos CSV em uma pasta local usando FileSensor (modo reschedule).
+    2. Lê os arquivos CSV e envia para o bucket `raw/` no MinIO em formato Parquet.
+    3. Usa SparkSubmitOperator para transformar os dados e gravar no bucket `processed/`.
+    4. Realiza carga dos dados transformados no PostgreSQL via JDBC.
+
+    Tabelas processadas:
+    - Orders
+    - Payments
+    - Products
+    - Users
+
+    Cada domínio é isolado via TaskGroup, permitindo falhas independentes e reprocessamento granular.
+    """
+    
     wait_for_file = FileSensor(
         task_id="wait_for_file",
         filepath="/opt/airflow/include/{{ params.execution_date }}",
@@ -76,6 +115,19 @@ def etl_pipeline():
     # EXTRACT
     @task
     def list_staging(date: str) -> dict:
+        """
+        Lista e valida os arquivos CSV no diretório de staging para a data informada.
+    
+        Args:
+            date (str): Data no formato YYYY-MM-DD para montar o caminho do staging.
+    
+        Returns:
+            dict: Mapeamento dos datasets com caminhos locais para os arquivos CSV.
+    
+        Raises:
+            ValueError: Se não houver pelo menos 4 arquivos CSV no diretório.
+        """
+    
         folder = STAGING_DIR.format(date=date)
         files = [os.path.join(folder, f) for f in os.listdir(folder) if f.endswith(".csv")]
         logger.info(f"Arquivos CSV encontrados: {files}")
@@ -91,18 +143,54 @@ def etl_pipeline():
 
     @task
     def raw_orders(files_dict: dict):
+        """
+        Realiza upload do arquivo de pedidos (orders) para o MinIO no bucket raw/.
+    
+        Args:
+            files_dict (dict): Dicionário com os caminhos dos arquivos CSV.
+    
+        Returns:
+            str: Caminho S3 do arquivo Parquet gerado.
+        """
         return upload(files_dict["orders"], "orders")
 
     @task
     def raw_payments(files_dict: dict):
+        """
+        Realiza upload do arquivo de pedidos (payments) para o MinIO no bucket raw/.
+    
+        Args:
+            files_dict (dict): Dicionário com os caminhos dos arquivos CSV.
+    
+        Returns:
+            str: Caminho S3 do arquivo Parquet gerado.
+        """
         return upload(files_dict["payments"], "payments")
 
     @task
     def raw_products(files_dict: dict):
+        """
+        Realiza upload do arquivo de pedidos (products) para o MinIO no bucket raw/.
+    
+        Args:
+            files_dict (dict): Dicionário com os caminhos dos arquivos CSV.
+    
+        Returns:
+            str: Caminho S3 do arquivo Parquet gerado.
+        """
         return upload(files_dict["products"], "products")
 
     @task
     def raw_users(files_dict: dict):
+        """
+        Realiza upload do arquivo de pedidos (users) para o MinIO no bucket raw/.
+    
+        Args:
+            files_dict (dict): Dicionário com os caminhos dos arquivos CSV.
+    
+        Returns:
+            str: Caminho S3 do arquivo Parquet gerado.
+        """
         return upload(files_dict["users"], "users")
 
     files_task = list_staging("{{ params.execution_date }}")
@@ -139,5 +227,6 @@ def etl_pipeline():
     files_task >> [orders_group, users_group, payments_group, products_group]
     
 etl_pipeline()
+
 
 
