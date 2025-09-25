@@ -223,3 +223,4 @@ docker compose -f services/observability.yaml up -d
 ## Em construção
 
 
+
