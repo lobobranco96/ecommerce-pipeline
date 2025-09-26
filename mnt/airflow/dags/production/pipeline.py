@@ -53,21 +53,31 @@ def spark_transform_task(task_id, app_path, args):
     Returns:
         SparkSubmitOperator: Task configurada para execução via Spark.
     """
+    conf = {
+        "spark.jars": "/opt/spark/jars/aws-java-sdk-bundle-1.12.262.jar,"
+                      "/opt/spark/jars/hadoop-aws-3.3.4.jar"}
+
     return SparkSubmitOperator(
         task_id=task_id,
         application=app_path,
         conn_id="spark_default",
+        conf=conf,
         verbose=True,
-        application_args=[args],
+        application_args=[args]
     )
 
 def spark_load_task(task_id, app_path, args):
+    conf = {
+            "spark.jars": "/opt/spark/jars/aws-java-sdk-bundle-1.12.262.jar,"
+                            "/opt/spark/jars/hadoop-aws-3.3.4.jar,"
+                            "/opt/spark/jars/postgresql-42.7.5.jar"}
     return SparkSubmitOperator(
         task_id=task_id,
         application=app_path,
         conn_id="spark_default",
+        conf=conf,
         verbose=True,
-        application_args=[args],
+        application_args=[args]
     )
 
 default_args = {
