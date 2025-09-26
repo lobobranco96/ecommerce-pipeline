@@ -7,6 +7,9 @@ from pyspark.sql import SparkSession
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 logger = logging.getLogger(__name__)
 
+S3_ENDPOINT = os.getenv("S3_ENDPOINT")
+ACCESS_KEY = os.getenv("AWS_ACCESS_KEY_ID")
+SECRET_KEY = os.getenv("AWS_SECRET_ACCESS_KEY")
 
 def create_spark_session():
     """
@@ -20,7 +23,6 @@ def create_spark_session():
     """
     try:
         logger.info("Iniciando a configuração da Spark Session")
-        
         conf = (
           pyspark.SparkConf()
           .set("spark.master", "spark://spark-master:7077")
@@ -31,13 +33,9 @@ def create_spark_session():
           .set("spark.sql.shuffle.partitions", "8")
           .set("spark.hadoop.fs.s3a.impl", "org.apache.hadoop.fs.s3a.S3AFileSystem")
           .set("spark.hadoop.fs.s3a.path.style.access", "true")
-          .set("spark.hadoop.fs.s3a.endpoint", os.getenv("S3_ENDPOINT"))
-          .set("spark.hadoop.fs.s3a.access.key", os.getenv("AWS_ACCESS_KEY_ID"))
-          .set("spark.hadoop.fs.s3a.secret.key", os.getenv("AWS_SECRET_ACCESS_KEY"))
-          .set("spark.jars", "/opt/spark/jars/aws-java-sdk-bundle-1.12.262.jar,"
-                        "/opt/spark/jars/hadoop-aws-3.3.4.jar,"
-                        "/opt/spark/jars/postgresql-42.7.5.jar"
-              )
+          .set("spark.hadoop.fs.s3a.endpoint", S3_ENDPOINT)
+          .set("spark.hadoop.fs.s3a.access.key", ACCESS_KEY)
+          .set("spark.hadoop.fs.s3a.secret.key", SECRET_KEY)
           )
         
         spark = SparkSession.builder \
