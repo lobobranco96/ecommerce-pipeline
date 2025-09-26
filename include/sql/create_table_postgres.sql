@@ -2,8 +2,8 @@ CREATE TABLE orders (
     order_id     VARCHAR PRIMARY KEY,
     user_id      VARCHAR NOT NULL,
     product_id   VARCHAR NOT NULL,
-    quantity     INTEGER CHECK (quantity > 0),
-    total_price  NUMERIC(10,2) CHECK (total_price > 0),
+    quantity     INTEGER,
+    total_price  NUMERIC(10,2),
     order_date   TIMESTAMP,
     status       VARCHAR,
     order_year   INTEGER,
@@ -16,7 +16,7 @@ CREATE TABLE payments (
     payment_id      VARCHAR PRIMARY KEY,
     order_id        VARCHAR NOT NULL,
     payment_method  VARCHAR,
-    amount          NUMERIC(10,2) CHECK (amount > 0),
+    amount          NUMERIC(10,2),
     paid_at         TIMESTAMP,
     paid_year       INTEGER,
     paid_month      INTEGER,
@@ -27,8 +27,8 @@ CREATE TABLE products (
     product_id VARCHAR PRIMARY KEY,
     name       VARCHAR,
     category   VARCHAR,
-    price      NUMERIC(10,2) CHECK (price > 0),
-    stock      INTEGER CHECK (stock >= 0)
+    price      NUMERIC(10,2),
+    stock      INTEGER CHECK
 );
 
 CREATE TABLE users (
